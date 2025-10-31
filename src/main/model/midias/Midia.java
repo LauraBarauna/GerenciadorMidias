@@ -2,6 +2,7 @@ package main.model.midias;
 
 import main.excecoes.LocalDoArquivoInvalido;
 import main.excecoes.NomeInvalido;
+import main.excecoes.autores.ListagemDeAutoresInvalida;
 
 public abstract class Midia {
     protected int id;
@@ -21,7 +22,7 @@ public abstract class Midia {
         setCategoria(categoria);
     }
 
-    public String exibirAtributos() {
+    public String exibirAtributos() throws ListagemDeAutoresInvalida {
         String atributos = "";
         atributos += "Id: " + getId() + "\n" +
                     "Local do arquivo: " + getLocal() + "\n" +
