@@ -1,4 +1,4 @@
-package main.model.midias.filme;
+package main.model.idioma;
 
 public class Idioma {
     private String idioma;

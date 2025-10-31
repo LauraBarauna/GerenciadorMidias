@@ -21,6 +21,17 @@ public abstract class Midia {
         setCategoria(categoria);
     }
 
+    public String exibirAtributos() {
+        String atributos = "";
+        atributos += "Id: " + getId() + "\n" +
+                    "Local do arquivo: " + getLocal() + "\n" +
+                    "Tamanho do arquivo: " + getTamanhoEmDisco() + "\n" +
+                    "Título: " + getTitulo() + "\n" +
+                    "Duração: " + getDuracao() + "\n" +
+                    "Categoria: " + getCategoria() + "\n";
+        return atributos;
+    }
+
     public int getId() {
         return id;
     }
