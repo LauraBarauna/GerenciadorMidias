@@ -18,7 +18,7 @@ public class Livro extends Midia {
         this.autores = new ArrayList<>();
     }
 
-    public void incluirAutor(Pessoa autor) {
+    public void incluirAutor(Pessoa autor) throws AutorDuplicadoException {
         if (this.autores.contains(autor)) {
             throw new AutorDuplicadoException(autor.getNome(), super.getTitulo());
         }
