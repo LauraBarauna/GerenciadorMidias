@@ -1,6 +1,9 @@
 package main.model.midias;
 
-public abstract class Midia {
+import java.io.Serializable;
+
+public abstract class Midia implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected int id;
     private String local;
     private double tamanhoEmDisco;

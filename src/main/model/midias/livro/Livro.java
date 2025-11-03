@@ -6,10 +6,12 @@ import main.model.midias.Categoria;
 import main.model.midias.Midia;
 import main.model.pessoa.Pessoa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Livro extends Midia {
+public class Livro extends Midia implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Pessoa> autores;
 
     public Livro(int id, String local, double tamanhoEmDisco,

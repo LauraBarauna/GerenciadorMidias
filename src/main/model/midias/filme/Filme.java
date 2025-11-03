@@ -1,15 +1,18 @@
 package main.model.midias.filme;
 
+import java.io.Serializable;
+
 import main.model.idioma.Idioma;
 import main.model.midias.Categoria;
 import main.model.midias.Midia;
 
-public class Filme extends Midia {
+public class Filme extends Midia implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Idioma idioma;
 
     public Filme(int id, String local, double tamanhoEmDisco,
-                 String titulo, int duracao,Categoria categoria, Idioma idioma) throws NomeInvalido, LocalDoArquivoInvalido {
+                 String titulo, int duracao,Categoria categoria, Idioma idioma) {
         super(id, local, tamanhoEmDisco, titulo, duracao, categoria);
         setIdioma(idioma);
     }
