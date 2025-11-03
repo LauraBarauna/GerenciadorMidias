@@ -8,7 +8,8 @@ public class Filme extends Midia {
 
     private Idioma idioma;
 
-    public Filme(int id, String local, double tamanhoEmDisco, String titulo, int duracao,Categoria categoria, Idioma idioma) {
+    public Filme(int id, String local, double tamanhoEmDisco,
+                 String titulo, int duracao,Categoria categoria, Idioma idioma) throws NomeInvalido, LocalDoArquivoInvalido {
         super(id, local, tamanhoEmDisco, titulo, duracao, categoria);
         setIdioma(idioma);
     }
@@ -16,7 +17,7 @@ public class Filme extends Midia {
     @Override
     public String exibirAtributos() {
         String atributos = "";
-        atributos += "Idioma: " + getIdioma() + "\n";
+        atributos += "Idioma: " + getIdioma().exibirIdioma() + "\n";
         return atributos;
     }
 

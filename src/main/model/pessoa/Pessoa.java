@@ -1,11 +1,9 @@
 package main.model.pessoa;
 
-import main.excecoes.NomeInvalido;
-
 public class Pessoa {
     private String nome;
 
-    public Pessoa(String nome){
+    public Pessoa(String nome) {
         setNome(nome);
     }
 
@@ -13,9 +11,9 @@ public class Pessoa {
         return nome;
     }
 
-    public void setNome(String nome) throws NomeInvalido {
+    public void setNome(String nome) throws IllegalArgumentException {
         if (nome == null || nome.isBlank()) {
-            throw new NomeInvalido("Nome não pode ser vazio ou nulo.");
+            throw new IllegalArgumentException("Nome não pode ser vazio ou nulo.");
         }
         this.nome = nome;
     }

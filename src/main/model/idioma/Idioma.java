@@ -17,4 +17,8 @@ public class Idioma {
         }
         this.idioma = idioma;
     }
+
+    public String exibirIdioma() {
+        return getIdioma();
+    }
 }

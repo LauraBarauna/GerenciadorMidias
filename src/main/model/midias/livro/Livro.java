@@ -1,7 +1,7 @@
 package main.model.midias.livro;
 
-import main.excecoes.autores.InclusaoDeAutorInvalida;
-import main.excecoes.autores.ListagemDeAutoresInvalida;
+import main.excecoes.autor.AutorDuplicadoException;
+import main.excecoes.autor.AutorNaoEncontradoException;
 import main.model.midias.Categoria;
 import main.model.midias.Midia;
 import main.model.pessoa.Pessoa;
@@ -18,15 +18,14 @@ public class Livro extends Midia {
         this.autores = new ArrayList<>();
     }
 
-    public void incluirAutor(Pessoa autor) throws InclusaoDeAutorInvalida {
+    public void incluirAutor(Pessoa autor) {
         if (this.autores.contains(autor)) {
-            throw new InclusaoDeAutorInvalida("Você não pode adicionar o autor " + autor.getNome()
-            + " porque ele já foi adicionado.");
+            throw new AutorDuplicadoException(autor.getNome(), super.getTitulo());
         }
         this.autores.add(autor);
     }
 
-    public Pessoa getAutor(String nomeAutor) throws ListagemDeAutoresInvalida {
+    public Pessoa getAutor(String nomeAutor) {
         Pessoa autor = null;
 
         for (Pessoa a : getAutores()) {
@@ -36,26 +35,26 @@ public class Livro extends Midia {
         }
 
         if (autor == null) {
-            throw new ListagemDeAutoresInvalida("O livro " + super.getTitulo() + " não possúi o autor " + nomeAutor);
+            throw new AutorNaoEncontradoException(nomeAutor);
         }
 
         return autor;
     }
 
-    public void removerAutor(String nomeAutor) throws ListagemDeAutoresInvalida {
+    public void removerAutor(String nomeAutor) {
         Pessoa autorRemover = getAutor(nomeAutor);
         getAutores().remove(autorRemover);
     }
 
-    public List<Pessoa> getAutores() throws ListagemDeAutoresInvalida {
+    public List<Pessoa> getAutores() {
         if (this.autores.isEmpty()) {
-            throw new ListagemDeAutoresInvalida("O livro " + super.getTitulo() + " não possuí autores.");
+            throw new RuntimeException("O livro " + super.getTitulo() + " não possuí autores.");
         }
         return this.autores;
     }
 
     @Override
-    public String exibirAtributos() throws ListagemDeAutoresInvalida {
+    public String exibirAtributos()   {
         String atributos = "";
         atributos += "Autores: " + getAutores() + "\n";
         return atributos;

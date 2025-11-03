@@ -1,9 +1,5 @@
 package main.model.midias;
 
-import main.excecoes.LocalDoArquivoInvalido;
-import main.excecoes.NomeInvalido;
-import main.excecoes.autores.ListagemDeAutoresInvalida;
-
 public abstract class Midia {
     protected int id;
     private String local;
@@ -13,7 +9,8 @@ public abstract class Midia {
     protected Categoria categoria;
 
 
-    public Midia(int id, String local, double tamanhoEmDisco, String titulo, int duracao, Categoria categoria) {
+    public Midia(int id, String local, double tamanhoEmDisco,
+                 String titulo, int duracao, Categoria categoria) {
         setId(id);
         setLocal(local);
         setTamanhoEmDisco(tamanhoEmDisco);
@@ -22,7 +19,7 @@ public abstract class Midia {
         setCategoria(categoria);
     }
 
-    public String exibirAtributos() throws ListagemDeAutoresInvalida {
+    public String exibirAtributos() {
         String atributos = "";
         atributos += "Id: " + getId() + "\n" +
                     "Local do arquivo: " + getLocal() + "\n" +
@@ -64,9 +61,9 @@ public abstract class Midia {
         this.id = id;
     }
 
-    public void setLocal(String local) throws LocalDoArquivoInvalido {
+    public void setLocal(String local) {
         if(local == null || local.isBlank()) {
-            throw new LocalDoArquivoInvalido("Local do arquivo não pode ser nulo ou vazio.");
+            throw new IllegalArgumentException("Local do arquivo não pode ser nulo ou vazio.");
         }
         this.local = local;
     }
@@ -78,9 +75,9 @@ public abstract class Midia {
         this.tamanhoEmDisco = tamanhoEmDisco;
     }
 
-    public void setTitulo(String titulo) throws NomeInvalido {
+    public void setTitulo(String titulo)  {
         if (titulo == null  || titulo.isBlank()) {
-            throw new NomeInvalido("Título não pode ser vazio ou nulo");
+            throw new IllegalArgumentException("Título não pode ser vazio ou nulo");
         }
         this.titulo = titulo;
     }
