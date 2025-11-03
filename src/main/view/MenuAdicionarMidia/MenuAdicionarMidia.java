@@ -1,6 +1,7 @@
 package main.view.MenuAdicionarMidia;
 
 import main.controller.midiaController.MidiaController;
+import main.view.TelaPrincipal.TelaPrincipal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,11 +15,12 @@ public class MenuAdicionarMidia {
     private JLabel lbTitulo;
     private JButton btnContinuar;
 
-    public MenuAdicionarMidia() {
+    public MenuAdicionarMidia(TelaPrincipal telaPrincipal) {
         btnContinuar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    telaPrincipal.mostarTela("categoria");
                     midiaController = new MidiaController();
                 }
                 catch (RuntimeException ex) {
@@ -31,5 +33,9 @@ public class MenuAdicionarMidia {
 
     public JPanel getPainelPrincipal() {
         return painelPrincipal;
+    }
+
+    public MidiaController getMidiaController() {
+        return midiaController;
     }
 }
