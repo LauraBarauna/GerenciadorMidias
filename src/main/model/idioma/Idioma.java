@@ -21,4 +21,9 @@ public class Idioma {
     public String exibirIdioma() {
         return getIdioma();
     }
+    
+    @Override
+    public String toString() {
+        return idioma;
+    }
 }
