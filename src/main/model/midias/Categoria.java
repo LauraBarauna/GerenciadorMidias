@@ -17,4 +17,9 @@ public class Categoria {
         }
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+       return getCategoria();
+    }
 }

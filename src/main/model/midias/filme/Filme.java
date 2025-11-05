@@ -9,7 +9,7 @@ public class Filme extends Midia {
     private Idioma idioma;
 
     public Filme(int id, String local, double tamanhoEmDisco,
-                 String titulo, int duracao,Categoria categoria, Idioma idioma) throws NomeInvalido, LocalDoArquivoInvalido {
+                 String titulo, int duracao,Categoria categoria, Idioma idioma)  {
         super(id, local, tamanhoEmDisco, titulo, duracao, categoria);
         setIdioma(idioma);
     }
