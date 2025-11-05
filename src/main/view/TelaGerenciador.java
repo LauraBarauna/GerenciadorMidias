@@ -1,5 +1,6 @@
 package main.view;
 
+import main.view.categoria.TelaCategoria;
 import main.view.midias.TelaMidia;
 
 import javax.swing.*;
@@ -12,10 +13,13 @@ public class TelaGerenciador {
     private List<JComboBox> boxes;
 
     private TelaMidia telaMidia;
+    private TelaCategoria telaCategoria;
 
     public TelaGerenciador() {
         this.telaMidia = new TelaMidia(adicionarAcoes());
-        this.telaPrincipal = new TelaPrincipal(telaMidia);
+        this.telaCategoria = new TelaCategoria(adicionarAcoes());
+
+        this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria);
     }
 
     private List<String> adicionarAcoes() {

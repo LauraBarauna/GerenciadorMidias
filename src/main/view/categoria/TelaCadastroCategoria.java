@@ -1,4 +1,4 @@
-package main.view;
+package main.view.categoria;
 
 import javax.swing.*;
 

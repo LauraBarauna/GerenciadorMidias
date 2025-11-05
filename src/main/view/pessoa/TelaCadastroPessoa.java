@@ -1,4 +1,4 @@
-package main.view;
+package main.view.pessoa;
 
 import javax.swing.*;
 

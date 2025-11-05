@@ -1,5 +1,6 @@
 package main.view;
 
+import main.view.categoria.TelaCategoria;
 import main.view.midias.TelaMidia;
 
 import javax.swing.*;
@@ -19,9 +20,11 @@ public class TelaPrincipal extends JFrame {
     private JPanel inicio;
 
     private TelaMidia telaMidia;
+    private TelaCategoria telaCategoria;
 
-    public TelaPrincipal(TelaMidia telaMidia) {
+    public TelaPrincipal(TelaMidia telaMidia, TelaCategoria telaCategoria) {
         this.telaMidia = telaMidia;
+        this.telaCategoria = telaCategoria;
         configurarTela();
         adicionarLayouts();
 
@@ -53,13 +56,12 @@ public class TelaPrincipal extends JFrame {
                 int index = menu.getSelectedIndex();
                 String aba = menu.getTitleAt(index).toUpperCase();
 
-
                 switch (aba) {
                     case "MÍDIAS":
-                        atualizarMidia(telaMidia);
+                        atualizarTelaMidia(telaMidia);
                         break;
-                    case "CATEGORIA":
-
+                    case "CATEGORIAS":
+                        atualizarTelaCategoria(telaCategoria);
                         break;
                     case "IDIOMA":
                         break;
@@ -70,11 +72,18 @@ public class TelaPrincipal extends JFrame {
         });
     }
 
-    public void atualizarMidia(TelaMidia telaMidia) {
+    public void atualizarTelaMidia(TelaMidia telaMidia) {
         midias.removeAll();
         midias.add(telaMidia.getjPanelPrincipal());
         midias.revalidate();
         midias.repaint();
+    }
+
+    private void atualizarTelaCategoria(TelaCategoria telaCategoria) {
+        categorias.removeAll();
+        categorias.add(telaCategoria.getjPanelPrincipal());
+        categorias.revalidate();
+        categorias.repaint();
     }
 
     public static void main(String[] args) {

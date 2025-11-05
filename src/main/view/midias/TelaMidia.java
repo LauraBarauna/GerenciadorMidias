@@ -26,10 +26,6 @@ public class TelaMidia {
         return jPanelPrincipal;
     }
 
-    public JComboBox<String> getComboBoxMidia() {
-        return acoesMidia;
-    }
-
     private void carregarComboBoxMidias(List<String> acoes) {
         for (String a : acoes) {
             if (acoesMidia == null) {
@@ -48,6 +44,7 @@ public class TelaMidia {
                 jPanelAcaoMidia.add(cadastro.getjPanelPrincipal());
                 jPanelAcaoMidia.revalidate();
                 jPanelAcaoMidia.repaint();
+                break;
         }
     }
 }
