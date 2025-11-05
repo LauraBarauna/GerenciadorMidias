@@ -1,119 +1,84 @@
 package main.view;
 
+import main.view.midias.TelaMidia;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import java.util.Arrays;
-import java.util.List;
+public class TelaPrincipal extends JFrame {
+    private JPanel jPanelPrincipal;
 
-public class TelaPrincipal {
     private JTabbedPane menu;
 
     private JPanel midias;
     private JPanel categorias;
     private JPanel idiomas;
-
-    private JComboBox<String> acoesMidias;
-    private JComboBox<String> acoesCategoria;
-    private JComboBox<String> acoesIdioma;
-    private JComboBox<String> acoesPessoas;
-
-    private List<JComboBox> boxes;
-
-    private JPanel jPanelAcaoMidia;
-    private JPanel jPanelPrincipal;
-    private JPanel jPanelAcaoCategoria;
-    private JPanel jPanelAcaoIdioma;
     private JPanel pessoa;
-    private JPanel jPanelAcaoPessoa;
+    private JPanel inicio;
 
-    private TelaCadastroMidia cadastroMidia;
-    private TelaCadastroCategoria cadastroCategoria;
+    private TelaMidia telaMidia;
 
-    public TelaPrincipal() {
-        cadastroMidia = new TelaCadastroMidia();
-        cadastroCategoria = new TelaCadastroCategoria();
+    public TelaPrincipal(TelaMidia telaMidia) {
+        this.telaMidia = telaMidia;
+        configurarTela();
+        adicionarLayouts();
 
-        boxes = Arrays.asList(acoesMidias, acoesCategoria, acoesIdioma, acoesPessoas);
-
-        jPanelAcaoMidia.setLayout(new CardLayout());
-        jPanelAcaoCategoria.setLayout(new CardLayout());
-
-        carregarComboBoxMidias();
-        listenerComboBoxMidias();
-        listenerComboBoxCategorias();
+        selecionarMenu();
     }
 
-    public void carregarComboBoxMidias() {
-        List<String> acoes = Arrays.asList(
-                "Adicionar",
-                "Listar Todos",
-                "Listar um",
-                "Atualizar",
-                "Remover"
-        );
-        for (JComboBox box : boxes) {
-            for (String a : acoes) {
-                box.addItem(a);
-            }
-        }
+    public void adicionarLayouts() {
+        this.midias.setLayout(new CardLayout());
+        this.categorias.setLayout(new CardLayout());
+        this.idiomas.setLayout(new CardLayout());
+        this.pessoa.setLayout(new CardLayout());
     }
 
-    public void listenerComboBoxMidias() {
-        acoesMidias.addActionListener(new ActionListener() {
+    public void configurarTela() {
+        setTitle("Gerenciador de Midias");
+        setContentPane(this.jPanelPrincipal);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    public void selecionarMenu() {
+        menu.addChangeListener(new ChangeListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
-                atualizarPainelMidias();
+            public void stateChanged(ChangeEvent e) {
+                int index = menu.getSelectedIndex();
+                String aba = menu.getTitleAt(index).toUpperCase();
+
+
+                switch (aba) {
+                    case "MÍDIAS":
+                        atualizarMidia(telaMidia);
+                        break;
+                    case "CATEGORIA":
+
+                        break;
+                    case "IDIOMA":
+                        break;
+                    case "PESSOA":
+                        break;
+                }
             }
         });
     }
 
-    public void listenerComboBoxCategorias() {
-        acoesCategoria.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atualizarPainelCategorias();
-            }
-        });
-    }
-
-    private void atualizarPainelMidias() {
-        String acaoSelecionada = acoesMidias.getSelectedItem().toString().toUpperCase();
-
-        switch (acaoSelecionada) {
-            case "ADICIONAR":
-                jPanelAcaoMidia.removeAll();
-                jPanelAcaoMidia.add(cadastroMidia.getjPanelPrincipal());
-                jPanelAcaoMidia.revalidate();
-                jPanelAcaoMidia.repaint();
-        }
-
-    }
-
-    private void atualizarPainelCategorias() {
-        String acaoSelecionada = acoesMidias.getSelectedItem().toString().toUpperCase();
-
-        switch (acaoSelecionada) {
-            case "ADICIONAR":
-                jPanelAcaoCategoria.removeAll();
-                jPanelAcaoCategoria.add(cadastroCategoria.getjPanelPrincipal());
-                jPanelAcaoCategoria.revalidate();
-                jPanelAcaoCategoria.repaint();
-        }
+    public void atualizarMidia(TelaMidia telaMidia) {
+        midias.removeAll();
+        midias.add(telaMidia.getjPanelPrincipal());
+        midias.revalidate();
+        midias.repaint();
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("TelaPrincipal");
-        TelaPrincipal tela = new TelaPrincipal();
-        frame.setContentPane(tela.jPanelPrincipal);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        new TelaGerenciador();
     }
 
 }
