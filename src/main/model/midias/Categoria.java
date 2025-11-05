@@ -1,6 +1,9 @@
 package main.model.midias;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String categoria;
 
     public Categoria(String categoria) {
@@ -17,9 +20,9 @@ public class Categoria {
         }
         this.categoria = categoria;
     }
-
+    
     @Override
     public String toString() {
-       return getCategoria();
+        return categoria;
     }
 }

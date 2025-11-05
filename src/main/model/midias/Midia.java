@@ -1,6 +1,9 @@
 package main.model.midias;
 
-public abstract class Midia {
+import java.io.Serializable;
+
+public abstract class Midia implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected int id;
     private String local;
     private double tamanhoEmDisco;
@@ -9,8 +12,7 @@ public abstract class Midia {
     protected Categoria categoria;
 
 
-    public Midia(int id, String local, double tamanhoEmDisco,
-                 String titulo, int duracao, Categoria categoria) {
+    public Midia(int id, String local, double tamanhoEmDisco, String titulo, int duracao, Categoria categoria) {
         setId(id);
         setLocal(local);
         setTamanhoEmDisco(tamanhoEmDisco);
@@ -56,14 +58,14 @@ public abstract class Midia {
 
     public void setId(int id) throws IllegalArgumentException {
         if (id <= 0) {
-            throw new IllegalArgumentException("Id não pode ser igual ou menor que 0");
+            throw new IllegalArgumentException("Id não pode ser igual ou menor que 0.");
         }
         this.id = id;
     }
 
     public void setLocal(String local) {
         if(local == null || local.isBlank()) {
-            throw new IllegalArgumentException("Local do arquivo não pode ser nulo ou vazio.");
+            throw new IllegalArgumentException("Local do arquivo não pode ser vazio.");
         }
         this.local = local;
     }
@@ -77,14 +79,14 @@ public abstract class Midia {
 
     public void setTitulo(String titulo)  {
         if (titulo == null  || titulo.isBlank()) {
-            throw new IllegalArgumentException("Título não pode ser vazio ou nulo");
+            throw new IllegalArgumentException("Título não pode ser vazio.");
         }
         this.titulo = titulo;
     }
 
     public void setCategoria(Categoria categoria) throws IllegalArgumentException {
         if (categoria == null) {
-            throw new IllegalArgumentException("Categoria não pode ser nulo");
+            throw new IllegalArgumentException("Categoria não pode ser vazio.");
         }
         this.categoria = categoria;
     }
