@@ -60,7 +60,7 @@ public class GerenciadorMidia {
         File diretorio = new File(DIRETORIO_DADOS);
         
         if (!diretorio.exists() || !diretorio.isDirectory()) {
-            System.out.println("Diretório de dados não encontrado. Iniciando com lista vazia.");
+            System.out.println("Diretório de dados não encontrado.");
             return;
         }
         
@@ -77,7 +77,7 @@ public class GerenciadorMidia {
                     FileInputStream fis = new FileInputStream(arquivo);
                     ObjectInputStream ois = new ObjectInputStream(fis);
                     Midia midia = (Midia) ois.readObject();
-                    midias.add(midia);
+                    incluirMidia(midia);
                     ois.close();
                     
                 } catch (FileNotFoundException e) {
@@ -245,16 +245,19 @@ public class GerenciadorMidia {
             }
         }
         return midiasFiltradas;
+        //lançar as exceções
     }
     public List<Midia> ordenarPorTitulo() {
         List<Midia> midiasOrdenadas = new ArrayList<>(midias);
         midiasOrdenadas.sort(Comparator.comparing(Midia::getTitulo, String.CASE_INSENSITIVE_ORDER));
         return midiasOrdenadas;
+        //verif forma mais simples
     }
     public List<Midia> ordenarPorDuracao() {
         List<Midia> midiasOrdenadas = new ArrayList<>(midias);
         midiasOrdenadas.sort(Comparator.comparingInt(Midia::getDuracao));
         return midiasOrdenadas;
+      //verif forma mais simples
     }
     public List<Midia> listarTodasMidias() {
         return new ArrayList<>(midias);
