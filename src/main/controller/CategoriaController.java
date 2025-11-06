@@ -59,7 +59,7 @@ public class CategoriaController {
         );
 
         if (categorias == null) {
-            throw new RuntimeException("A lista das categorias de " + tipoCategoria + " não possuí nenhuma categoria cadastrada.");
+            return null;
         }
 
         for (Categoria c : categorias) {

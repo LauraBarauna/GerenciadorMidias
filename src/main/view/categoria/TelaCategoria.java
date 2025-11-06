@@ -6,6 +6,8 @@ import main.gerenciador.GerenciadorCategoria;
 import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TelaCategoria {
@@ -16,10 +18,12 @@ public class TelaCategoria {
     private CategoriaController controller;
 
     private TelaCadastroCategoria cadastro;
+    private TelaListarCategoria listarCategoria;
 
     public TelaCategoria(List<String> acoes, GerenciadorCategoria gerenciador) {
         this.controller = new CategoriaController(gerenciador);
         this.cadastro = new TelaCadastroCategoria(this.controller);
+        this.listarCategoria = new TelaListarCategoria(this.controller);
 
         adicionarLayout();
         adicionarAcoes(acoes);
@@ -40,16 +44,28 @@ public class TelaCategoria {
     }
 
     private void trocarTela() {
-        String acao = this.acoesCategoria.getSelectedItem().toString().toUpperCase();
+        acoesCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String acao = acoesCategoria.getSelectedItem().toString().toUpperCase();
+                switch (acao) {
+                    case "ADICIONAR":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(cadastro.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
+                        break;
+                    case "LISTAR TODOS":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(listarCategoria.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
+                        break;
+                }
+            }
+        });
 
-        switch (acao) {
-            case "ADICIONAR":
-                jPanelAcaoCategoria.removeAll();
-                jPanelAcaoCategoria.add(cadastro.getjPanelPrincipal());
-                jPanelAcaoCategoria.revalidate();
-                jPanelAcaoCategoria.repaint();
-                break;
-        }
+
 
     }
 
