@@ -58,6 +58,26 @@ public class GerenciadorCategoria {
         return categoriaEncontrada;
     }
 
+    public List<Categoria> encontrarCategorias (char tipo) {
+        char tipoUpper = Character.toUpperCase(tipo);
+        List<Categoria> categoriasEncontrada;
+
+        switch (tipoUpper) {
+            case 'F':
+                categoriasEncontrada = getCategoriasFilme();
+                break;
+            case 'M':
+                categoriasEncontrada = getCategoriasMusica();
+                break;
+            case 'L':
+                categoriasEncontrada = getCategoriasLivro();
+                break;
+            default:
+                return null;
+        }
+        return categoriasEncontrada;
+    }
+
     public boolean removerCategoriaPorTipo(String categoria, char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         boolean deuCerto;
@@ -142,21 +162,21 @@ public class GerenciadorCategoria {
         return true;
     }
 
-    public List<Categoria> getCategoriasFilme() {
+    private List<Categoria> getCategoriasFilme() {
         if (this.categoriasFilme.isEmpty()) {
             return null;
         }
         return categoriasFilme;
     }
 
-    public List<Categoria> getCategoriasMusica() {
+    private List<Categoria> getCategoriasMusica() {
         if (this.categoriasMusica.isEmpty()) {
             return null;
         }
         return categoriasMusica;
     }
 
-    public List<Categoria> getCategoriasLivro() {
+    private List<Categoria> getCategoriasLivro() {
         if (this.categoriasLivro.isEmpty()) {
             return null;
         }
