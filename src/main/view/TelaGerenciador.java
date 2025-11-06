@@ -1,5 +1,6 @@
 package main.view;
 
+import main.gerenciador.GerenciadorCategoria;
 import main.view.categoria.TelaCategoria;
 import main.view.midias.TelaMidia;
 
@@ -15,9 +16,9 @@ public class TelaGerenciador {
     private TelaMidia telaMidia;
     private TelaCategoria telaCategoria;
 
-    public TelaGerenciador() {
+    public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria) {
         this.telaMidia = new TelaMidia(adicionarAcoes());
-        this.telaCategoria = new TelaCategoria(adicionarAcoes());
+        this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
 
         this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria);
     }

@@ -1,5 +1,7 @@
 package main.view;
 
+import main.gerenciador.GerenciadorCategoria;
+import main.gerenciador.GerenciadorMidia;
 import main.view.categoria.TelaCategoria;
 import main.view.midias.TelaMidia;
 
@@ -87,7 +89,8 @@ public class TelaPrincipal extends JFrame {
     }
 
     public static void main(String[] args) {
-        new TelaGerenciador();
+        GerenciadorCategoria gC = new GerenciadorCategoria();
+        new TelaGerenciador(gC);
     }
 
 }

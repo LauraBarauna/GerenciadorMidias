@@ -52,7 +52,8 @@ public class CategoriaController {
         }
     }
 
-    public void listarCategorias (String tipoCategoria) throws RuntimeException {
+    public String listarCategorias (String tipoCategoria) throws RuntimeException {
+        String categoria = "";
         List<Categoria> categorias = getGerenciador().encontrarCategorias(
                 Character.toUpperCase(tipoCategoria.charAt(0))
         );
@@ -60,6 +61,11 @@ public class CategoriaController {
         if (categorias == null) {
             throw new RuntimeException("A lista das categorias de " + tipoCategoria + " não possuí nenhuma categoria cadastrada.");
         }
+
+        for (Categoria c : categorias) {
+            categoria += c + "\n";
+        }
+        return categoria;
     }
 
     public GerenciadorCategoria getGerenciador() {

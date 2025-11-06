@@ -1,5 +1,8 @@
 package main.view.categoria;
 
+import main.controller.CategoriaController;
+import main.gerenciador.GerenciadorCategoria;
+
 import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +13,14 @@ public class TelaCategoria {
     private JComboBox<String> acoesCategoria;
     private JPanel jPanelAcaoCategoria;
 
+    private CategoriaController controller;
+
     private TelaCadastroCategoria cadastro;
 
-    public TelaCategoria(List<String> acoes) {
-        this.cadastro = new TelaCadastroCategoria();
+    public TelaCategoria(List<String> acoes, GerenciadorCategoria gerenciador) {
+        this.controller = new CategoriaController(gerenciador);
+        this.cadastro = new TelaCadastroCategoria(this.controller);
+
         adicionarLayout();
         adicionarAcoes(acoes);
         trocarTela();
