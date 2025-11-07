@@ -1,8 +1,10 @@
 package main.view;
 
 import main.gerenciador.GerenciadorCategoria;
+import main.gerenciador.GerenciadorIdioma;
 import main.gerenciador.GerenciadorMidia;
 import main.view.categoria.TelaCategoria;
+import main.view.idioma.TelaIdioma;
 import main.view.midias.TelaMidia;
 
 import javax.swing.*;
@@ -23,10 +25,12 @@ public class TelaPrincipal extends JFrame {
 
     private TelaMidia telaMidia;
     private TelaCategoria telaCategoria;
+    private TelaIdioma telaIdioma;
 
-    public TelaPrincipal(TelaMidia telaMidia, TelaCategoria telaCategoria) {
+    public TelaPrincipal(TelaMidia telaMidia, TelaCategoria telaCategoria, TelaIdioma telaIdioma) {
         this.telaMidia = telaMidia;
         this.telaCategoria = telaCategoria;
+        this.telaIdioma = telaIdioma;
         configurarTela();
         adicionarLayouts();
 
@@ -65,7 +69,8 @@ public class TelaPrincipal extends JFrame {
                     case "CATEGORIAS":
                         atualizarTelaCategoria(telaCategoria);
                         break;
-                    case "IDIOMA":
+                    case "IDIOMAS":
+                        atualizarTelaIdioma(telaIdioma);
                         break;
                     case "PESSOA":
                         break;
@@ -88,9 +93,17 @@ public class TelaPrincipal extends JFrame {
         categorias.repaint();
     }
 
+    private void atualizarTelaIdioma(TelaIdioma telaIdioma) {
+        idiomas.removeAll();
+        idiomas.add(telaIdioma.getjPanelPrincipal());
+        idiomas.revalidate();
+        idiomas.repaint();
+    }
+
     public static void main(String[] args) {
         GerenciadorCategoria gC = new GerenciadorCategoria();
-        new TelaGerenciador(gC);
+        GerenciadorIdioma gI = new GerenciadorIdioma();
+        new TelaGerenciador(gC, gI);
     }
 
 }

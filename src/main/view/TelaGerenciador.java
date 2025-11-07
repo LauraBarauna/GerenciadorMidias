@@ -1,7 +1,9 @@
 package main.view;
 
 import main.gerenciador.GerenciadorCategoria;
+import main.gerenciador.GerenciadorIdioma;
 import main.view.categoria.TelaCategoria;
+import main.view.idioma.TelaIdioma;
 import main.view.midias.TelaMidia;
 
 import javax.swing.*;
@@ -15,12 +17,14 @@ public class TelaGerenciador {
 
     private TelaMidia telaMidia;
     private TelaCategoria telaCategoria;
+    private TelaIdioma telaIdioma;
 
-    public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria) {
+    public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria, GerenciadorIdioma gerenciadorIdioma) {
         this.telaMidia = new TelaMidia(adicionarAcoesMidia());
         this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
+        this.telaIdioma = new TelaIdioma(adicionarAcoes(),gerenciadorIdioma);
 
-        this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria);
+        this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria, telaIdioma);
     }
 
     private List<String> adicionarAcoesMidia() {
