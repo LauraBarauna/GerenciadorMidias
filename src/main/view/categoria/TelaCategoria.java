@@ -19,11 +19,13 @@ public class TelaCategoria {
 
     private TelaCadastroCategoria cadastro;
     private TelaListarCategoria listarCategoria;
+    private TelaRemoverCategoria remover;
 
     public TelaCategoria(List<String> acoes, GerenciadorCategoria gerenciador) {
         this.controller = new CategoriaController(gerenciador);
         this.cadastro = new TelaCadastroCategoria(this.controller);
         this.listarCategoria = new TelaListarCategoria(this.controller);
+        this.remover = new TelaRemoverCategoria(this.controller);
 
         adicionarLayout();
         adicionarAcoes(acoes);
@@ -55,12 +57,17 @@ public class TelaCategoria {
                         jPanelAcaoCategoria.revalidate();
                         jPanelAcaoCategoria.repaint();
                         break;
-                    case "LISTAR TODOS":
+                    case "LISTAR":
                         jPanelAcaoCategoria.removeAll();
                         jPanelAcaoCategoria.add(listarCategoria.getjPanelPrincipal());
                         jPanelAcaoCategoria.revalidate();
                         jPanelAcaoCategoria.repaint();
                         break;
+                    case "REMOVER":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(remover.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
                 }
             }
         });

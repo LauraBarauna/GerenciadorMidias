@@ -6,6 +6,7 @@ import main.excecoes.categoria.CategoriaNaoEncontradaException;
 import main.gerenciador.GerenciadorCategoria;
 import main.model.midias.Categoria;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaController {
@@ -52,20 +53,13 @@ public class CategoriaController {
         }
     }
 
-    public String listarCategorias (String tipoCategoria) throws RuntimeException {
-        String categoria = "";
-        List<Categoria> categorias = getGerenciador().encontrarCategorias(
-                Character.toUpperCase(tipoCategoria.charAt(0))
-        );
+    public List<String> listarCategorias (String tipoCategoria) throws RuntimeException {
+        List<String> categorias = new ArrayList<>();
 
-        if (categorias == null) {
-            return null;
+        for (Categoria c : gerenciador.encontrarCategorias(Character.toUpperCase(tipoCategoria.charAt(0)))) {
+            categorias.add(c.getCategoria());
         }
-
-        for (Categoria c : categorias) {
-            categoria += c + "\n";
-        }
-        return categoria;
+        return categorias;
     }
 
     public GerenciadorCategoria getGerenciador() {

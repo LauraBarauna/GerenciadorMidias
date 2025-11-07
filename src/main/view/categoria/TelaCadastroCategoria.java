@@ -34,7 +34,7 @@ public class TelaCadastroCategoria {
                 try {
                     controller.adicionarCategoria(textFieldNome.getText(), comboBoxTipo.getSelectedItem().toString());
                     JOptionPane.showMessageDialog(null, "Categoria adicionada com sucesso.");
-                } catch (CategoriaException ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
 

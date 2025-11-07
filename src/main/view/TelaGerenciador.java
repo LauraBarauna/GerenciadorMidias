@@ -18,7 +18,7 @@ public class TelaGerenciador {
 
     public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria) {
         this.telaMidia = new TelaMidia(adicionarAcoes());
-        this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
+        this.telaCategoria = new TelaCategoria(adicionarAcoesCategoria(),gerenciadorCategoria);
 
         this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria);
     }
@@ -29,6 +29,14 @@ public class TelaGerenciador {
                 "Listar Todos",
                 "Listar um",
                 "Atualizar",
+                "Remover"
+        );
+    }
+
+    private List<String> adicionarAcoesCategoria() {
+        return Arrays.asList(
+                "Adicionar",
+                "Listar",
                 "Remover"
         );
     }

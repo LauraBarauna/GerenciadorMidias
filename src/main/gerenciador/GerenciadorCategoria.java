@@ -163,23 +163,14 @@ public class GerenciadorCategoria {
     }
 
     private List<Categoria> getCategoriasFilme() {
-        if (this.categoriasFilme.isEmpty()) {
-            return null;
-        }
         return categoriasFilme;
     }
 
     private List<Categoria> getCategoriasMusica() {
-        if (this.categoriasMusica.isEmpty()) {
-            return null;
-        }
         return categoriasMusica;
     }
 
     private List<Categoria> getCategoriasLivro() {
-        if (this.categoriasLivro.isEmpty()) {
-            return null;
-        }
         return categoriasLivro;
     }
 }

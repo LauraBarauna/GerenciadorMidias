@@ -1,8 +1,6 @@
 package main.view.categoria;
 
 import main.controller.CategoriaController;
-import main.excecoes.categoria.CategoriaException;
-import main.model.midias.Categoria;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,44 +9,40 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaListarCategoria {
+public class TelaRemoverCategoria {
+    private JPanel jPanelPrincipal;
+    private JComboBox comboBox1;
+    private JPanel jPanelCategorias;
+    private JScrollPane jPanelScroll;
 
     private CategoriaController controller;
 
-    private JPanel jPanelPrincipal;
-    private JComboBox tipoMidia;
-    private JPanel jPanelCategorias;
-
-    public TelaListarCategoria(CategoriaController controller) {
+    public TelaRemoverCategoria(CategoriaController controller) {
+        this.jPanelCategorias.setLayout(new BoxLayout(jPanelCategorias, BoxLayout.Y_AXIS));
         this.controller = controller;
-        jPanelCategorias.setLayout(new BoxLayout(jPanelCategorias, BoxLayout.Y_AXIS));
-        jPanelCategorias.setAlignmentX(Component.CENTER_ALIGNMENT);
         pegarTipoMidia();
     }
 
     private void pegarTipoMidia() {
-        tipoMidia.addActionListener(new ActionListener() {
+        comboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tipo = tipoMidia.getSelectedItem().toString();
-                listarCategorias(tipo);
-                pegarTipoMidia();
+                String tipo = comboBox1.getSelectedItem().toString();
+                atualizarList(tipo);
             }
         });
     }
 
-    public void listarCategorias(String tipo) {
-        List<String> categorias = new ArrayList<>();
-        categorias = controller.listarCategorias(tipo);
-
+    private void atualizarList(String tipo) {
         jPanelCategorias.removeAll();
+
+        List<String> categorias = controller.listarCategorias(tipo);
 
         if (!categorias.isEmpty()) {
             for (String c : categorias) {
                 JPanel linha = new JPanel(new BorderLayout());
                 linha.setLayout(new BoxLayout(linha, BoxLayout.X_AXIS));
-                JLabel nome = new JLabel(c, JLabel.LEFT);
-
+                JLabel nome = new JLabel(c, JLabel.CENTER);
                 JButton btnRemover = new JButton("Remover");
 
                 btnRemover.addActionListener(new ActionListener() {
@@ -56,7 +50,7 @@ public class TelaListarCategoria {
                     public void actionPerformed(ActionEvent e) {
                         controller.removerCategoria(c, tipo);
                         JOptionPane.showMessageDialog(jPanelPrincipal, "Categoria "  + c +" removida com sucesso!");
-                        listarCategorias(tipo);
+                        atualizarList(tipo);
                     }
                 });
 
@@ -71,12 +65,11 @@ public class TelaListarCategoria {
             JPanel linha = new JPanel(new BorderLayout());
             JLabel semCategoria = new JLabel(tipo + " não tem nenhuma categoria cadastrada!", JLabel.CENTER);
             linha.add(semCategoria, BorderLayout.CENTER);
-            linha.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             jPanelCategorias.add(linha);
             jPanelCategorias.revalidate();
             jPanelCategorias.repaint();
         }
-
 
     }
 
