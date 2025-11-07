@@ -1,8 +1,13 @@
 package main.view.categoria;
 
+import main.controller.CategoriaController;
+import main.gerenciador.GerenciadorCategoria;
+
 import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TelaCategoria {
@@ -10,10 +15,18 @@ public class TelaCategoria {
     private JComboBox<String> acoesCategoria;
     private JPanel jPanelAcaoCategoria;
 
-    private TelaCadastroCategoria cadastro;
+    private CategoriaController controller;
 
-    public TelaCategoria(List<String> acoes) {
-        this.cadastro = new TelaCadastroCategoria();
+    private TelaCadastroCategoria cadastro;
+    private TelaListarCategoria listarCategoria;
+    private TelaRemoverCategoria remover;
+
+    public TelaCategoria(List<String> acoes, GerenciadorCategoria gerenciador) {
+        this.controller = new CategoriaController(gerenciador);
+        this.cadastro = new TelaCadastroCategoria(this.controller);
+        this.listarCategoria = new TelaListarCategoria(this.controller);
+        this.remover = new TelaRemoverCategoria(this.controller);
+
         adicionarLayout();
         adicionarAcoes(acoes);
         trocarTela();
@@ -33,16 +46,33 @@ public class TelaCategoria {
     }
 
     private void trocarTela() {
-        String acao = this.acoesCategoria.getSelectedItem().toString().toUpperCase();
+        acoesCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String acao = acoesCategoria.getSelectedItem().toString().toUpperCase();
+                switch (acao) {
+                    case "ADICIONAR":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(cadastro.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
+                        break;
+                    case "LISTAR":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(listarCategoria.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
+                        break;
+                    case "REMOVER":
+                        jPanelAcaoCategoria.removeAll();
+                        jPanelAcaoCategoria.add(remover.getjPanelPrincipal());
+                        jPanelAcaoCategoria.revalidate();
+                        jPanelAcaoCategoria.repaint();
+                }
+            }
+        });
 
-        switch (acao) {
-            case "ADICIONAR":
-                jPanelAcaoCategoria.removeAll();
-                jPanelAcaoCategoria.add(cadastro.getjPanelPrincipal());
-                jPanelAcaoCategoria.revalidate();
-                jPanelAcaoCategoria.repaint();
-                break;
-        }
+
 
     }
 
