@@ -18,10 +18,12 @@ public class TelaIdioma {
     private IdiomaController controller;
 
     private TelaCadastroIdioma cadastro;
+    private TelaListarIdioma listar;
 
     public TelaIdioma(List<String> acoes, GerenciadorIdioma gerenciadorIdioma) {
         this.controller = new IdiomaController(gerenciadorIdioma);
         this.cadastro = new TelaCadastroIdioma(this.controller);
+        this.listar = new TelaListarIdioma(this.controller);
         adicionarLayout();
         adicionarAcoesIdioma(acoes);
         trocarTela();
@@ -50,7 +52,11 @@ public class TelaIdioma {
                         jPanelAcoesIdioma.repaint();
                         break;
                     case "LISTAR":
-
+                        listar.atualizarLista();
+                        jPanelAcoesIdioma.removeAll();
+                        jPanelAcoesIdioma.add(listar.getjPanelPrincipal());
+                        jPanelAcoesIdioma.revalidate();
+                        jPanelAcoesIdioma.repaint();
                     break;
                 }
 
