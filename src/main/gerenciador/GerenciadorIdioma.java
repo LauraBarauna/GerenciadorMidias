@@ -55,6 +55,14 @@ public class GerenciadorIdioma {
         return true;
     }
 
+    public boolean removerTodosIdiomas() {
+        if (getIdiomas().isEmpty()) {
+            return false;
+        }
+        this.idiomas.clear();
+        return true;
+    }
+
     public List<Idioma> getIdiomas() {
         return this.idiomas;
     }
