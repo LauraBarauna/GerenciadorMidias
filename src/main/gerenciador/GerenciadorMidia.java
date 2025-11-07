@@ -248,16 +248,14 @@ public class GerenciadorMidia {
         //lançar as exceções
     }
     public List<Midia> ordenarPorTitulo() {
-        List<Midia> midiasOrdenadas = new ArrayList<>(midias);
-        midiasOrdenadas.sort(Comparator.comparing(Midia::getTitulo, String.CASE_INSENSITIVE_ORDER));
-        return midiasOrdenadas;
-        //verif forma mais simples
+        var lista = new ArrayList<>(midias);
+        lista.sort((m1, m2) -> m1.getTitulo().compareToIgnoreCase(m2.getTitulo()));
+        return lista;
     }
     public List<Midia> ordenarPorDuracao() {
-        List<Midia> midiasOrdenadas = new ArrayList<>(midias);
-        midiasOrdenadas.sort(Comparator.comparingInt(Midia::getDuracao));
-        return midiasOrdenadas;
-      //verif forma mais simples
+        var lista = new ArrayList<>(midias);
+        lista.sort((m1, m2) -> Integer.compare(m1.getDuracao(), m2.getDuracao()));
+        return lista;
     }
     public List<Midia> listarTodasMidias() {
         return new ArrayList<>(midias);
