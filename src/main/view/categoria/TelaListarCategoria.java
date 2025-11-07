@@ -1,14 +1,12 @@
 package main.view.categoria;
 
 import main.controller.CategoriaController;
-import main.excecoes.categoria.CategoriaException;
 import main.model.midias.Categoria;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TelaListarCategoria {
@@ -18,12 +16,63 @@ public class TelaListarCategoria {
     private JPanel jPanelPrincipal;
     private JComboBox tipoMidia;
     private JPanel jPanelCategorias;
+    private JButton btnRemoverTudo;
 
     public TelaListarCategoria(CategoriaController controller) {
         this.controller = controller;
         jPanelCategorias.setLayout(new BoxLayout(jPanelCategorias, BoxLayout.Y_AXIS));
         jPanelCategorias.setAlignmentX(Component.CENTER_ALIGNMENT);
         pegarTipoMidia();
+        removerTudo();
+
+
+        String tipoSelecionado = (String) tipoMidia.getSelectedItem();
+        if (tipoSelecionado != null) {
+            listarCategorias(tipoSelecionado);
+        }
+
+    }
+
+    public void removerTudo() {
+        btnRemoverTudo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipoSelecionado = (String) tipoMidia.getSelectedItem();
+
+                List<Categoria> categoria = controller.listarCategorias(tipoSelecionado);
+
+                if (!categoria.isEmpty()) {
+                    int opcao = Integer.parseInt(JOptionPane.showInputDialog(
+                            "Tem certeza que quer remover tudo?\n" +
+                                    "1 - Sim\n" +
+                                    "2 - Não\n"
+                    ));
+
+                    switch (opcao) {
+                        case 1:
+                            controller.removerTudo(tipoSelecionado);
+                            listarCategorias(tipoSelecionado);
+                            break;
+                        case 2:
+                            listarCategorias(tipoSelecionado);
+                            break;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Você não tem nada para remover");
+                    listarCategorias(tipoSelecionado);
+                }
+
+
+
+            }
+        });
+    }
+
+    public void atualizarLista() {
+        String tipo = (String) tipoMidia.getSelectedItem();
+        if (tipo != null) {
+            listarCategorias(tipo);
+        }
     }
 
     private void pegarTipoMidia() {
@@ -38,8 +87,7 @@ public class TelaListarCategoria {
     }
 
     public void listarCategorias(String tipo) {
-        List<String> categorias = new ArrayList<>();
-        categorias = controller.listarCategorias(tipo);
+        List<String> categorias = controller.listarCategoriasString(tipo);
 
         jPanelCategorias.removeAll();
 
@@ -55,16 +103,21 @@ public class TelaListarCategoria {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         controller.removerCategoria(c, tipo);
-                        JOptionPane.showMessageDialog(jPanelPrincipal, "Categoria "  + c +" removida com sucesso!");
+                        JOptionPane.showMessageDialog(jPanelPrincipal, "Categoria " + c + " removida com sucesso!");
                         listarCategorias(tipo);
                     }
                 });
 
-                linha.add(nome, BorderLayout.CENTER);
-                linha.add(btnRemover, BorderLayout.EAST);
-                linha.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                linha.add(nome);
+
+                linha.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
+                linha.add(btnRemover);
+
+
+                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // borda pequena
                 jPanelCategorias.add(linha);
             }
+
             jPanelCategorias.revalidate();
             jPanelCategorias.repaint();
         } else {

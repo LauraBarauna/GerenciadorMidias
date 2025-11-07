@@ -1,7 +1,6 @@
 package main.controller;
 
 import main.excecoes.categoria.CategoriaDuplicadaException;
-import main.excecoes.categoria.CategoriaInvalidaException;
 import main.excecoes.categoria.CategoriaNaoEncontradaException;
 import main.gerenciador.GerenciadorCategoria;
 import main.model.midias.Categoria;
@@ -44,6 +43,15 @@ public class CategoriaController {
         }
     }
 
+    public void removerTudo(String tipoCategoria) throws RuntimeException {
+        boolean removeuTudo = getGerenciador().removerTudoCategoria(
+                Character.toUpperCase(tipoCategoria.charAt(0)));
+
+        if (!removeuTudo) {
+            throw new RuntimeException("Tipo de mídia não existe");
+        }
+    }
+
     public void atualziarCategoria (String nomeCategoria, Categoria categoriaNova, String tipoCategoria) throws CategoriaNaoEncontradaException {
         boolean atualizou = getGerenciador().atualizarCategoriaPorTipo(nomeCategoria,
                 Character.toUpperCase(tipoCategoria.charAt(0)),
@@ -53,12 +61,17 @@ public class CategoriaController {
         }
     }
 
-    public List<String> listarCategorias (String tipoCategoria) throws RuntimeException {
+    public List<String> listarCategoriasString(String tipoCategoria) throws RuntimeException {
         List<String> categorias = new ArrayList<>();
 
         for (Categoria c : gerenciador.encontrarCategorias(Character.toUpperCase(tipoCategoria.charAt(0)))) {
             categorias.add(c.getCategoria());
         }
+        return categorias;
+    }
+
+    public List<Categoria> listarCategorias(String tipoCategoria) throws RuntimeException {
+        List<Categoria> categorias = getGerenciador().encontrarCategorias(Character.toUpperCase(tipoCategoria.charAt(0)));
         return categorias;
     }
 

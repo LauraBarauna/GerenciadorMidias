@@ -17,13 +17,13 @@ public class TelaGerenciador {
     private TelaCategoria telaCategoria;
 
     public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria) {
-        this.telaMidia = new TelaMidia(adicionarAcoes());
-        this.telaCategoria = new TelaCategoria(adicionarAcoesCategoria(),gerenciadorCategoria);
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia());
+        this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
 
         this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria);
     }
 
-    private List<String> adicionarAcoes() {
+    private List<String> adicionarAcoesMidia() {
         return Arrays.asList(
                 "Adicionar",
                 "Listar Todos",
@@ -33,11 +33,10 @@ public class TelaGerenciador {
         );
     }
 
-    private List<String> adicionarAcoesCategoria() {
+    private List<String> adicionarAcoes() {
         return Arrays.asList(
                 "Adicionar",
-                "Listar",
-                "Remover"
+                "Listar"
         );
     }
 

@@ -6,6 +6,8 @@ import main.excecoes.categoria.CategoriaException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaCadastroCategoria {
 
@@ -21,6 +23,20 @@ public class TelaCadastroCategoria {
     public TelaCadastroCategoria(CategoriaController controller) {
         this.controller = controller;
         adicionarCategoria();
+        adicionarCategoriaEnter();
+
+
+    }
+
+    public void adicionarCategoriaEnter() {
+        textFieldNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    btnAdicionar.doClick(); // simula o clique no botão
+                }
+            }
+        });
     }
 
     public void adicionarCategoria() {

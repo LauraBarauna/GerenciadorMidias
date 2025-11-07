@@ -117,6 +117,25 @@ public class GerenciadorCategoria {
         return deuCerto;
     }
 
+    public boolean removerTudoCategoria(char tipo) {
+        char tipoUpper = Character.toUpperCase(tipo);
+
+        switch (tipoUpper) {
+            case 'F':
+                removerTudo(this.categoriasFilme);
+                break;
+            case 'M':
+                removerTudo(this.categoriasMusica);
+                break;
+            case 'L':
+                removerTudo(this.categoriasLivro);
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
     private boolean criarCategoria(List<Categoria> categorias, Categoria categoria, String tipo)  {
         if (categorias.contains(categoria)) {
             return false;
@@ -160,6 +179,10 @@ public class GerenciadorCategoria {
 
         categorias.remove(categoriaRemover);
         return true;
+    }
+
+    private void removerTudo(List<Categoria> categorias) {
+        categorias.removeAll(categorias);
     }
 
     private List<Categoria> getCategoriasFilme() {
