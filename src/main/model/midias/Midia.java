@@ -11,7 +11,6 @@ public abstract class Midia implements Serializable {
     protected int duracao;
     protected Categoria categoria;
 
-
     public Midia(int id, String local, double tamanhoEmDisco, String titulo, int duracao, Categoria categoria) {
         setId(id);
         setLocal(local);

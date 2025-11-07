@@ -3,7 +3,6 @@ package main.view.categoria;
 import main.controller.CategoriaController;
 import main.gerenciador.GerenciadorCategoria;
 
-import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
