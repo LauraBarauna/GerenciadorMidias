@@ -16,7 +16,7 @@ public class PessoaController {
     }
 
     public void cadastrarPessoa(String nome) throws PessoaDuplicadaException {
-        if (nome != null && !nome.isBlank()) {
+        if (nome == null && nome.isBlank()) {
             throw new IllegalArgumentException("Campo nome deve ser preenchido.");
         }
         boolean adicionou = pessoa.adicionarPessoa(new Pessoa(nome));
