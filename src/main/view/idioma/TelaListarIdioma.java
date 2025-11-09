@@ -2,13 +2,11 @@ package main.view.idioma;
 
 import main.controller.IdiomaController;
 import main.model.idioma.Idioma;
-import main.model.midias.Categoria;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TelaListarIdioma {

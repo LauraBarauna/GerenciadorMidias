@@ -17,10 +17,12 @@ public class TelaPessoa {
     private PessoaController controller;
 
     private TelaCadastroPessoa cadastro;
+    private TelaListarPessoa listar;
 
     public TelaPessoa(List<String> acoes, GerenciadorPessoa gerenciador) {
         this.controller = new PessoaController(gerenciador);
         this.cadastro = new TelaCadastroPessoa(controller);
+        this.listar = new TelaListarPessoa(controller);
         adicionarLayout();
         adicionarAcoes(acoes);
         trocarTela();
@@ -39,6 +41,12 @@ public class TelaPessoa {
                         jPanelAcoesPessoa.repaint();
                         break;
                     case "LISTAR":
+                        listar.atualizarLista();
+                        jPanelAcoesPessoa.removeAll();
+                        jPanelAcoesPessoa.add(listar.getjPanelPrincipal());
+                        jPanelAcoesPessoa.revalidate();
+                        jPanelAcoesPessoa.repaint();
+                        break;
                 }
 
             }

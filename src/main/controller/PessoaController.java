@@ -26,7 +26,7 @@ public class PessoaController {
     }
 
     public void removerPessoa(String nome) throws PessoaNaoEncontradaException {
-        if (nome != null && !nome.isBlank()) {
+        if (nome == null && nome.isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
         }
         boolean removido = pessoa.removerPessoa(nome);
