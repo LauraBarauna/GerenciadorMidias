@@ -1,5 +1,8 @@
 package main.view.midias;
 
+import main.controller.CategoriaController;
+import main.gerenciador.GerenciadorCategoria;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -11,8 +14,11 @@ public class TelaMidia {
 
     private TelaCadastroMidia cadastro;
 
-    public TelaMidia(List<String> acoes) {
-        this.cadastro = new TelaCadastroMidia();
+    private CategoriaController categoriaController;
+
+    public TelaMidia(List<String> acoes, GerenciadorCategoria gerenciadorCategoria) {
+        this.categoriaController = new CategoriaController(gerenciadorCategoria);
+        this.cadastro = new TelaCadastroMidia(categoriaController);
         carregarComboBoxMidias(acoes);
         adicionarLayouts();
         atualizarPainel();
@@ -46,5 +52,9 @@ public class TelaMidia {
                 jPanelAcaoMidia.repaint();
                 break;
         }
+    }
+
+    public TelaCadastroMidia getCadastro() {
+        return cadastro;
     }
 }

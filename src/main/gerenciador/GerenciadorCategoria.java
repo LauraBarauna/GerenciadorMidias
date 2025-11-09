@@ -58,6 +58,26 @@ public class GerenciadorCategoria {
         return categoriaEncontrada;
     }
 
+    public List<Categoria> encontrarCategoriasPorExtensao(String extensao) {
+        List<Categoria> categorias = new ArrayList<>();
+        switch (extensao.toUpperCase()) {
+            case "MP4":
+            case "MKV":
+                categorias = getCategoriasFilme();
+            break;
+            case "MP3":
+                categorias = getCategoriasMusica();
+            break;
+            case "PDF":
+            case "PUB":
+                categorias = getCategoriasLivro();
+                break;
+            default:
+                return null;
+        }
+        return categorias;
+    }
+
     public List<Categoria> encontrarCategorias (char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         List<Categoria> categoriasEncontrada;

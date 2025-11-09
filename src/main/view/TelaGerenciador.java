@@ -20,7 +20,7 @@ public class TelaGerenciador {
     private TelaIdioma telaIdioma;
 
     public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria, GerenciadorIdioma gerenciadorIdioma) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia());
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), gerenciadorCategoria);
         this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
         this.telaIdioma = new TelaIdioma(adicionarAcoes(),gerenciadorIdioma);
 

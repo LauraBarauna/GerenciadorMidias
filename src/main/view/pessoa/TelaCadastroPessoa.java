@@ -7,4 +7,11 @@ public class TelaCadastroPessoa {
     private JPanel jPanelPrincipal;
     private JButton btnAdicionar;
     private JLabel nome;
+
+
+
+
+    public JPanel getPanelPrincipal() {
+        return jPanelPrincipal;
+    }
 }

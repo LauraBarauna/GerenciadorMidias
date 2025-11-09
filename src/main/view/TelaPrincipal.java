@@ -64,6 +64,12 @@ public class TelaPrincipal extends JFrame {
 
                 switch (aba) {
                     case "MÍDIAS":
+                        String extensao = telaMidia.getCadastro().getExtensaoArquivo();
+
+                        if (extensao != null) {
+                            telaMidia.getCadastro().listarCategorias(extensao);
+                        }
+
                         atualizarTelaMidia(telaMidia);
                         break;
                     case "CATEGORIAS":

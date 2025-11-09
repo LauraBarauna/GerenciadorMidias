@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.excecoes.categoria.CategoriaDuplicadaException;
 import main.excecoes.categoria.CategoriaNaoEncontradaException;
 import main.gerenciador.GerenciadorCategoria;
@@ -61,18 +62,37 @@ public class CategoriaController {
         }
     }
 
-    public List<String> listarCategoriasString(String tipoCategoria) throws RuntimeException {
+    public List<String> listarCategoriasString(String tipoCategoria)  {
         List<String> categorias = new ArrayList<>();
 
-        for (Categoria c : gerenciador.encontrarCategorias(Character.toUpperCase(tipoCategoria.charAt(0)))) {
+        for (Categoria c : gerenciador.encontrarCategorias(
+                Character.toUpperCase(tipoCategoria.charAt(0))
+        )) {
             categorias.add(c.getCategoria());
         }
         return categorias;
     }
 
-    public List<Categoria> listarCategorias(String tipoCategoria) throws RuntimeException {
-        List<Categoria> categorias = getGerenciador().encontrarCategorias(Character.toUpperCase(tipoCategoria.charAt(0)));
-        return categorias;
+    public List<String> listarCategoriasExtensaoString(String extensao) throws ExtensaoInvalidaException {
+        List<Categoria> categorias = gerenciador.encontrarCategoriasPorExtensao(extensao);
+
+        if (categorias == null) {
+            throw new ExtensaoInvalidaException(extensao);
+        }
+
+        List<String> categoriasString = new ArrayList<>();
+
+
+        for (Categoria c : categorias) {
+            categoriasString.add(c.getCategoria());
+        }
+        return categoriasString;
+    }
+
+    public List<Categoria> listarCategorias(String tipoCategoria)  {
+        return getGerenciador().encontrarCategorias(
+                Character.toUpperCase(tipoCategoria.charAt(0))
+        );
     }
 
     public GerenciadorCategoria getGerenciador() {
