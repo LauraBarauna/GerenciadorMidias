@@ -11,8 +11,8 @@ import java.util.List;
 public class PessoaController {
     private GerenciadorPessoa pessoa;
 
-    public PessoaController(GerenciadorPessoa pessoa) {
-        this.pessoa = pessoa;
+    public PessoaController() {
+        this.pessoa = new GerenciadorPessoa();
     }
 
     public void cadastrarPessoa(String nome) throws PessoaDuplicadaException {

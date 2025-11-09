@@ -11,8 +11,8 @@ import java.util.List;
 public class IdiomaController {
     private GerenciadorIdioma gerenciador;
 
-    public IdiomaController(GerenciadorIdioma gerenciador) {
-        this.gerenciador = gerenciador;
+    public IdiomaController() {
+        this.gerenciador = new GerenciadorIdioma();
     }
 
     public void cadastrarIdioma(String nome) {

@@ -3,7 +3,7 @@ package main.view.principal;
 import main.gerenciador.GerenciadorCategoria;
 import main.gerenciador.GerenciadorIdioma;
 import main.gerenciador.GerenciadorPessoa;
-import main.gerenciador.TelaGerenciador;
+import main.gerenciador.GerenciadorTela;
 import main.view.categoria.principal.TelaCategoria;
 import main.view.idioma.principal.TelaIdioma;
 import main.view.midias.TelaMidia;
@@ -116,13 +116,6 @@ public class TelaPrincipal extends JFrame {
         pessoa.add(telaPessoa.getJPanelPrincipal());
         pessoa.revalidate();
         pessoa.repaint();
-    }
-
-    public static void main(String[] args) {
-        GerenciadorCategoria gC = new GerenciadorCategoria();
-        GerenciadorIdioma gI = new GerenciadorIdioma();
-        GerenciadorPessoa gP = new GerenciadorPessoa();
-        new TelaGerenciador(gC, gI, gP);
     }
 
 }

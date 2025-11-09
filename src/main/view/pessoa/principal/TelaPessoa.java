@@ -16,13 +16,10 @@ public class TelaPessoa {
     private JComboBox<String> acoesPessoas;
     private JPanel jPanelAcoesPessoa;
 
-    private PessoaController controller;
-
     private TelaCadastroPessoa cadastro;
     private TelaListarPessoa listar;
 
-    public TelaPessoa(List<String> acoes, GerenciadorPessoa gerenciador) {
-        this.controller = new PessoaController(gerenciador);
+    public TelaPessoa(List<String> acoes, PessoaController controller) {
         this.cadastro = new TelaCadastroPessoa(controller);
         this.listar = new TelaListarPessoa(controller);
         adicionarLayout();

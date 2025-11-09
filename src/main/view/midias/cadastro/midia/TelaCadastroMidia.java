@@ -1,4 +1,4 @@
-package main.view.midias;
+package main.view.midias.cadastro.midia;
 
 import main.controller.CategoriaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;

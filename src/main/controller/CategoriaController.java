@@ -12,8 +12,8 @@ import java.util.List;
 public class CategoriaController {
     private GerenciadorCategoria gerenciador;
 
-    public CategoriaController(GerenciadorCategoria gerenciador) {
-        this.gerenciador = gerenciador;
+    public CategoriaController() {
+        this.gerenciador = new GerenciadorCategoria();
     }
 
     public void adicionarCategoria (String nomeCategoria, String tipoCategoria) throws CategoriaDuplicadaException {

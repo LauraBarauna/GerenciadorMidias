@@ -17,15 +17,12 @@ public class TelaIdioma {
     private JPanel jPanelPrincipal;
     private JPanel jPanelAcoesIdioma;
 
-    private IdiomaController controller;
-
     private TelaCadastroIdioma cadastro;
     private TelaListarIdioma listar;
 
-    public TelaIdioma(List<String> acoes, GerenciadorIdioma gerenciadorIdioma) {
-        this.controller = new IdiomaController(gerenciadorIdioma);
-        this.cadastro = new TelaCadastroIdioma(this.controller);
-        this.listar = new TelaListarIdioma(this.controller);
+    public TelaIdioma(List<String> acoes, IdiomaController controller) {
+        this.cadastro = new TelaCadastroIdioma(controller);
+        this.listar = new TelaListarIdioma(controller);
         adicionarLayout();
         adicionarAcoesIdioma(acoes);
         trocarTela();

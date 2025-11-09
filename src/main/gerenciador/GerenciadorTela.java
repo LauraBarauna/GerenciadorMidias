@@ -1,5 +1,8 @@
 package main.gerenciador;
 
+import main.controller.CategoriaController;
+import main.controller.IdiomaController;
+import main.controller.PessoaController;
 import main.view.categoria.principal.TelaCategoria;
 import main.view.idioma.principal.TelaIdioma;
 import main.view.midias.TelaMidia;
@@ -10,7 +13,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class TelaGerenciador {
+public class GerenciadorTela {
     private TelaPrincipal telaPrincipal;
 
     private List<JComboBox> boxes;
@@ -20,12 +23,12 @@ public class TelaGerenciador {
     private TelaIdioma telaIdioma;
     private TelaPessoa telaPessoa;
 
-    public TelaGerenciador(GerenciadorCategoria gerenciadorCategoria, GerenciadorIdioma gerenciadorIdioma,
-                           GerenciadorPessoa gerenciadorPessoa) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), gerenciadorCategoria);
-        this.telaCategoria = new TelaCategoria(adicionarAcoes(),gerenciadorCategoria);
-        this.telaIdioma = new TelaIdioma(adicionarAcoes(),gerenciadorIdioma);
-        this.telaPessoa = new TelaPessoa(adicionarAcoes(), gerenciadorPessoa);
+    public GerenciadorTela(CategoriaController categoriaController, IdiomaController idiomaController,
+                           PessoaController pessoaController) {
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController);
+        this.telaCategoria = new TelaCategoria(adicionarAcoes(), categoriaController);
+        this.telaIdioma = new TelaIdioma(adicionarAcoes(),idiomaController);
+        this.telaPessoa = new TelaPessoa(adicionarAcoes(), pessoaController);
 
         this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria, telaIdioma, telaPessoa);
     }
