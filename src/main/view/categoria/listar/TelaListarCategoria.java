@@ -1,4 +1,4 @@
-package main.view.categoria;
+package main.view.categoria.listar;
 
 import main.controller.CategoriaController;
 import main.model.midias.Categoria;

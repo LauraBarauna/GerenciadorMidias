@@ -1,4 +1,4 @@
-package main.view.idioma;
+package main.view.idioma.listar;
 
 import main.controller.IdiomaController;
 import main.model.idioma.Idioma;

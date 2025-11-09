@@ -1,7 +1,9 @@
-package main.view.categoria;
+package main.view.categoria.principal;
 
 import main.controller.CategoriaController;
 import main.gerenciador.GerenciadorCategoria;
+import main.view.categoria.cadastro.TelaCadastroCategoria;
+import main.view.categoria.listar.TelaListarCategoria;
 
 import javax.swing.*;
 import java.awt.*;

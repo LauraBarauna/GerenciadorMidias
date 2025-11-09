@@ -1,7 +1,6 @@
-package main.view.categoria;
+package main.view.categoria.cadastro;
 
 import main.controller.CategoriaController;
-import main.excecoes.categoria.CategoriaException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

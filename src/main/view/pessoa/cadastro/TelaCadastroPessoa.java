@@ -1,7 +1,6 @@
-package main.view.pessoa;
+package main.view.pessoa.cadastro;
 
 import main.controller.PessoaController;
-import main.excecoes.pessoa.PessoaException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,7 +1,9 @@
-package main.view.pessoa;
+package main.view.pessoa.principal;
 
 import main.controller.PessoaController;
 import main.gerenciador.GerenciadorPessoa;
+import main.view.pessoa.cadastro.TelaCadastroPessoa;
+import main.view.pessoa.listar.TelaListarPessoa;
 
 import javax.swing.*;
 import java.awt.*;

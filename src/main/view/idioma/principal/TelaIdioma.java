@@ -1,7 +1,9 @@
-package main.view.idioma;
+package main.view.idioma.principal;
 
 import main.controller.IdiomaController;
 import main.gerenciador.GerenciadorIdioma;
+import main.view.idioma.cadastro.TelaCadastroIdioma;
+import main.view.idioma.listar.TelaListarIdioma;
 
 import javax.swing.*;
 import java.awt.*;

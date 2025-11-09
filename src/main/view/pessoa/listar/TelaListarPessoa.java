@@ -1,4 +1,4 @@
-package main.view.pessoa;
+package main.view.pessoa.listar;
 
 import main.controller.PessoaController;
 

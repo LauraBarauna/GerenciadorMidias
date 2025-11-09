@@ -1,13 +1,13 @@
-package main.view;
+package main.view.principal;
 
 import main.gerenciador.GerenciadorCategoria;
 import main.gerenciador.GerenciadorIdioma;
-import main.gerenciador.GerenciadorMidia;
 import main.gerenciador.GerenciadorPessoa;
-import main.view.categoria.TelaCategoria;
-import main.view.idioma.TelaIdioma;
+import main.gerenciador.TelaGerenciador;
+import main.view.categoria.principal.TelaCategoria;
+import main.view.idioma.principal.TelaIdioma;
 import main.view.midias.TelaMidia;
-import main.view.pessoa.TelaPessoa;
+import main.view.pessoa.principal.TelaPessoa;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

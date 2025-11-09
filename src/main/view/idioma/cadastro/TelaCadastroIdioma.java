@@ -1,4 +1,4 @@
-package main.view.idioma;
+package main.view.idioma.cadastro;
 
 import main.controller.IdiomaController;
 
