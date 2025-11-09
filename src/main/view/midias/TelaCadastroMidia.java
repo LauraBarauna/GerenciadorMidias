@@ -58,8 +58,13 @@ public class TelaCadastroMidia {
 
         try {
             List<String> categorias = categoriaController.listarCategoriasExtensaoString(extensao);
-            for (String categoria : categorias) {
-                comboBoxCategoria.addItem(categoria);
+
+            if (categorias.isEmpty()) {
+                comboBoxCategoria.addItem("Não existe nenhuma categoria para a extensão " + extensao + ". Adicione uma no menu Categoria.");
+            } else {
+                for (String categoria : categorias) {
+                    comboBoxCategoria.addItem(categoria);
+                }
             }
         } catch (ExtensaoInvalidaException e) {
             JOptionPane.showMessageDialog(jPanelPrincipal, e.getMessage());
