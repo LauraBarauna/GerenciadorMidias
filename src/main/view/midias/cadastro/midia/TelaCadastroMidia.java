@@ -104,12 +104,18 @@ public class TelaCadastroMidia {
     }
 
     private void avancarTela() {
-        System.out.println("oi");
+        if (extensaoArquivo == null) {
+            JOptionPane.showMessageDialog(jPanelPrincipal, "Selecione um arquivo primeiro!");
+            return;
+        }
         switch (this.extensaoArquivo.toUpperCase()) {
             case "MP4":
             case "MKV":
-                System.out.println("FIlme");
+                filme.atualizarListaIdioma();
+
                 layout.show(jPanelPrincipal, "filme");
+                jPanelPrincipal.revalidate();
+                jPanelPrincipal.repaint();
                 break;
         }
     }
