@@ -21,13 +21,13 @@ public class TelaCadastroFilme {
         adicionarListaIdiomas(idiomas);
     }
 
-    private void adicionarListaIdiomas(List<String> idiomas) {
-        if (!idiomas.isEmpty()) {
-            for (String idioma : idiomas) {
-                idiomas.add(idioma);
+    private void adicionarListaIdiomas(List<String> idiomasList) {
+        if (!idiomasList.isEmpty()) {
+            for (String idioma : idiomasList) {
+                idiomas.addItem(idioma);
             }
         } else {
-            idiomas.add("Não existe nenhum idioma cadastrado. Cadastre um no menu de Idioma acima.");
+            idiomas.addItem("Não existe nenhum idioma cadastrado. Cadastre um no menu de Idioma acima.");
         }
     }
 

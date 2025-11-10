@@ -13,15 +13,17 @@ import java.util.List;
 
 public class TelaCadastroMidia {
     private JPanel jPanelPrincipal;
+    private JPanel jPanelMidia;
 
-    private JLabel titulo;
+
     private JTextField textFieldTitulo;
 
-    private JLabel caminho;
     private JTextField textFieldCaminho;
     private JButton btnBuscar;
-
+    private JLabel titulo;
+    private JLabel caminho;
     private JLabel categoria;
+
     private JComboBox comboBoxCategoria;
 
     private JButton btnAdicionar;
@@ -33,11 +35,19 @@ public class TelaCadastroMidia {
 
     private TelaCadastroFilme filme;
 
+    private CardLayout layout;
+
     public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController) {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
-        //jPanelPrincipal.setLayout(new CardLayout());
+
+        layout = new CardLayout();
+        jPanelPrincipal.setLayout(layout);
+
+        jPanelPrincipal.add(jPanelMidia, "midia");
+        jPanelPrincipal.add(filme.getjPanelPrincipal(), "filme");
+
         continuar();
     }
 
@@ -89,16 +99,18 @@ public class TelaCadastroMidia {
 
     }
 
+    public void telaMidia() {
+        layout.show(jPanelPrincipal, "midia");
+    }
+
     private void avancarTela() {
+        System.out.println("oi");
         switch (this.extensaoArquivo.toUpperCase()) {
             case "MP4":
             case "MKV":
-                jPanelPrincipal.removeAll();
-                jPanelPrincipal.add(filme.getjPanelPrincipal());
-                jPanelPrincipal.revalidate();
-                jPanelPrincipal.repaint();
+                System.out.println("FIlme");
+                layout.show(jPanelPrincipal, "filme");
                 break;
-
         }
     }
 
@@ -108,5 +120,9 @@ public class TelaCadastroMidia {
 
     public String getExtensaoArquivo() {
         return extensaoArquivo;
+    }
+
+    public JPanel getjPanelMidia() {
+        return jPanelMidia;
     }
 }
