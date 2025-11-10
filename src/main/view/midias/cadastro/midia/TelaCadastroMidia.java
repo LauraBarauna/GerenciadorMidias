@@ -15,7 +15,6 @@ public class TelaCadastroMidia {
     private JPanel jPanelPrincipal;
     private JPanel jPanelMidia;
 
-
     private JTextField textFieldTitulo;
 
     private JTextField textFieldCaminho;
@@ -30,6 +29,8 @@ public class TelaCadastroMidia {
 
     private String caminhoArquivo;
     private String extensaoArquivo;
+    private String tituloArquivo;
+    private String categoriaArquivo;
 
     private CategoriaController categoriaController;
 
@@ -55,7 +56,19 @@ public class TelaCadastroMidia {
         btnAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                avancarTela();
+                String semCategoria = comboBoxCategoria.getSelectedItem().toString().substring(0, 3);
+                tituloArquivo = textFieldTitulo.getText();
+
+                if (caminhoArquivo == null || caminhoArquivo.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Um arquivo precisa ser selecionado.");
+                } else if (semCategoria.equalsIgnoreCase("não") || semCategoria.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Uma categoria precisa ser selecionada.");
+                } else if (tituloArquivo.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Campo título precisa ser preenchido.");
+                } else {
+                    categoriaArquivo = comboBoxCategoria.getSelectedItem().toString();
+                    avancarTela();
+                }
             }
         });
     }
@@ -87,7 +100,7 @@ public class TelaCadastroMidia {
             List<String> categorias = categoriaController.listarCategoriasExtensaoString(extensao);
 
             if (categorias.isEmpty()) {
-                comboBoxCategoria.addItem("Não existe nenhuma categoria para a extensão " + extensao + ". Adicione uma no menu Categoria.");
+                comboBoxCategoria.addItem("Não existe nenhuma categoria para a extensão ." + extensao + ". Adicione uma no menu Categoria.");
             } else {
                 for (String categoria : categorias) {
                     comboBoxCategoria.addItem(categoria);
@@ -100,18 +113,29 @@ public class TelaCadastroMidia {
     }
 
     public void telaMidia() {
+        comboBoxCategoria.addItem("Importe um arquivo para ver as categorias.");
         layout.show(jPanelPrincipal, "midia");
     }
 
     private void avancarTela() {
-        System.out.println("oi");
         switch (this.extensaoArquivo.toUpperCase()) {
             case "MP4":
             case "MKV":
-                System.out.println("FIlme");
                 layout.show(jPanelPrincipal, "filme");
                 break;
         }
+    }
+
+    public String getCategoriaArquivo() {
+        return categoriaArquivo;
+    }
+
+    public String getTituloArquivo() {
+        return tituloArquivo;
+    }
+
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
     }
 
     public JPanel getjPanelPrincipal() {
