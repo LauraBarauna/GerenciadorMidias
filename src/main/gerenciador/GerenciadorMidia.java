@@ -2,19 +2,23 @@ package main.gerenciador;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
+import java.util.OptionalInt;
 import main.model.midias.Midia;
-import main.model.midias.filme.Filme;
-import main.model.midias.livro.Livro;
-import main.model.midias.musica.Musica;
 
+/**
+ * Gerenciador responsável por manipular a lista de mídias em memória e persistir/carregar cada mídia em um arquivo auxiliar (.tpoo) individual,
+ * simulando um sistema de persistência descentralizado ('nuvem').
+ */
 public class GerenciadorMidia {
+
     private static final String DIRETORIO_DADOS = "dados_midias";
     private static final String EXTENSAO_ARQUIVO = ".tpoo";
+    
     private List<Midia> midias;
 
     public GerenciadorMidia() {
@@ -23,216 +27,169 @@ public class GerenciadorMidia {
         carregarDados();
     }
 
+    /**
+     * Verifica e cria o diretório onde os arquivos .tpoo serão salvos.
+     */
     private void criarDiretorioDados() {
         File diretorio = new File(DIRETORIO_DADOS);
         if (!diretorio.exists()) {
             if (diretorio.mkdir()) {
-                System.out.println("Diretório de dados criado: " + DIRETORIO_DADOS);
+                System.out.println("LOG: Diretório de persistência criado: " + DIRETORIO_DADOS);
             }
         }
     }
 
+    /**
+     * Gera o nome completo do arquivo .tpoo para uma dada ID.
+     */
     private String gerarNomeArquivo(int id) {
         return DIRETORIO_DADOS + File.separator + "midia_" + id + EXTENSAO_ARQUIVO;
     }
+    
+    /**
+     * Gera o próximo ID disponível, garantindo que o nome do arquivo seja único.
+     */
+    private int proximoIdDisponivel() {
+        OptionalInt maxId = this.midias.stream()
+                                       .mapToInt(Midia::getId)
+                                       .max();
+        return maxId.orElse(0) + 1;
+    }
 
+    /**
+     * Salva uma ÚNICA mídia no seu arquivo .tpoo individual.
+     * Sobrescreve o arquivo se ele já existir (essencial para o 'atualizarMidia').
+     */
     private void salvarMidia(Midia midia) {
+        if (midia.getId() <= 0) {
+             midia.setId(proximoIdDisponivel());
+        }
+
         String nomeArquivo = gerarNomeArquivo(midia.getId());
         
-        try {
-            File arquivo = new File(nomeArquivo);
-            FileOutputStream fos = new FileOutputStream(arquivo);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            
+        // FileOutputStream: Abrir o arquivo para escrita
+        // ObjectOutputStream: Serializa o objeto (converte em bytes)
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeArquivo))) {
             oos.writeObject(midia);
-            
-            oos.close();
-            
-            System.out.println("Mídia salva: " + nomeArquivo);
-            
+            System.out.println("LOG: Mídia ID " + midia.getId() + " salva/atualizada em " + nomeArquivo);
         } catch (IOException e) {
-            System.err.println("Falha ao salvar mídia ID " + midia.getId() + ": " + e.getMessage());
+            System.err.println("ERRO: Falha ao salvar mídia ID " + midia.getId() + ": " + e.getMessage());
         }
     }
 
-    public void carregarDados() {
-        midias.clear();
+    /**
+     * Carrega TODAS as mídias do diretório, lendo cada arquivo .tpoo.
+     */
+    private void carregarDados() {
         File diretorio = new File(DIRETORIO_DADOS);
-        
-        if (!diretorio.exists() || !diretorio.isDirectory()) {
-            System.out.println("Diretório de dados não encontrado.");
-            return;
-        }
-        
-        File[] arquivos = diretorio.listFiles();
-        
-        if (arquivos == null || arquivos.length == 0) {
-            System.out.println("Nenhum arquivo de mídia encontrado.");
-            return;
-        }
-        
-        for (File arquivo : arquivos) {
-            if (arquivo.isFile() && arquivo.getName().endsWith(EXTENSAO_ARQUIVO)) {
-                try {
-                    FileInputStream fis = new FileInputStream(arquivo);
-                    ObjectInputStream ois = new ObjectInputStream(fis);
+        // Filtra para pegar apenas arquivos com a extensão .tpoo
+        File[] arquivos = diretorio.listFiles((dir, name) -> name.endsWith(EXTENSAO_ARQUIVO));
+        this.midias.clear();
+
+        if (arquivos != null) {
+            for (File arquivo : arquivos) {
+                // FileInputStream: Abrir o arquivo para leitura
+                // ObjectInputStream: Desserializa o objeto (converte bytes em objeto Java)
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
                     Midia midia = (Midia) ois.readObject();
-                    incluirMidia(midia);
-                    ois.close();
-                    
+                    this.midias.add(midia);
                 } catch (FileNotFoundException e) {
-                    System.err.println("Arquivo não encontrado: " + arquivo.getName());
-                } catch (IOException e) {
-                    System.err.println("Erro ao ler arquivo " + arquivo.getName() + ": " + e.getMessage());
-                } catch (ClassNotFoundException e) {
-                    System.err.println("Classe não encontrada ao ler " + arquivo.getName() + ": " + e.getMessage());
+                } catch (IOException | ClassNotFoundException e) {
+                    System.err.println("ERRO: Falha ao carregar arquivo " + arquivo.getName() + " (Corrompido?): " + e.getMessage());
                 }
             }
         }
-        
-        System.out.println("Dados carregados. Total: " + midias.size() + " mídias.");
+        System.out.println("LOG: " + this.midias.size() + " mídias carregadas da persistência.");
     }
-    
-    public void incluirMidia(Midia midia) {
+
+    /**
+     * Insere uma nova mídia na lista e persiste no seu arquivo individual.
+     * @param midia O objeto Midia a ser incluído.
+     * @return true se a inclusão foi bem-sucedida.
+     */
+    public boolean incluirMidia(Midia midia) {
         if (midia == null) {
-            throw new IllegalArgumentException("Mídia não pode ser nula.");
+        	return false;
         }
-        for (Midia m : midias) {
-            if (m.getId() == midia.getId()) {
-                throw new IllegalArgumentException("Já existe uma mídia com o ID: " + midia.getId());
-            }
-        }
-        
-        midias.add(midia);
+        midia.setId(proximoIdDisponivel()); 
+        this.midias.add(midia);
         salvarMidia(midia);
+        return true;
     }
+
+    /**
+     * Remove uma mídia do sistema E deleta o arquivo .tpoo correspondente (Requisito).
+     * @param localArquivo O caminho de arquivo da mídia (chave única para busca).
+     * @return true se a remoção foi bem-sucedida, false caso contrário.
+     */
     public boolean removerMidia(String localArquivo) {
         if (localArquivo == null || localArquivo.isBlank()) {
+        	return false;
+        }
+        Midia midiaRemover = this.midias.stream()
+                .filter(m -> m.getLocal().equalsIgnoreCase(localArquivo))
+                .findFirst()
+                .orElse(null);
+
+        if (midiaRemover == null) {
             return false;
         }
-        Midia midiaRemover = null;
-        for (Midia midia : midias) {
-            if (midia.getLocal().equalsIgnoreCase(localArquivo)) {
-                midiaRemover = midia;
-                break;
+        String nomeArquivo = gerarNomeArquivo(midiaRemover.getId());
+        Path caminhoArquivo = Paths.get(nomeArquivo);
+        
+        try {
+            boolean arquivoDeletado = Files.deleteIfExists(caminhoArquivo);
+            if (arquivoDeletado) {
+                System.out.println("LOG: Arquivo " + nomeArquivo + " deletado com sucesso.");
             }
+        } catch (IOException e) {
+            System.err.println("ERRO: Falha ao deletar arquivo " + nomeArquivo + ". Remoção da lista cancelada.");
+            return false;
         }
-        if (midiaRemover != null) {
-            midias.remove(midiaRemover);
-            excluirArquivoMidia(midiaRemover.getId());
-            return true;
+        this.midias.remove(midiaRemover);
+        return true;
+    }
+    
+    /**
+     * Atualiza um objeto Midia existente e sobrescreve seu arquivo .tpoo (Deletando a versão anterior).
+     * @param midiaAtualizada O objeto Midia com os novos dados.
+     * @return true se a atualização foi bem-sucedida.
+     */
+    public boolean atualizarMidia(Midia midiaAtualizada) {
+        if (midiaAtualizada == null || midiaAtualizada.getId() <= 0) return false;
+        for (int i = 0; i < this.midias.size(); i++) {
+            if (this.midias.get(i).getId() == midiaAtualizada.getId()) {
+                this.midias.set(i, midiaAtualizada);
+                salvarMidia(midiaAtualizada);
+                return true;
+            }
         }
         return false;
     }
-    private void excluirArquivoMidia(int id) {
-        File arquivo = new File(gerarNomeArquivo(id));
-        if (arquivo.exists()) {
-            if (arquivo.delete()) {
-                System.out.println("Arquivo excluído: " + arquivo.getName());
-            } else {
-                System.err.println("Falha ao excluir arquivo: " + arquivo.getName());
-            }
-        }
-    }
-    public boolean moverMidia(String localAntigo, String localNovo) {
-        if (localAntigo == null || localAntigo.isBlank() || localNovo == null || localNovo.isBlank()) {
-            return false;
-        }
-        Midia midia = null;
-        for (Midia m : midias) {
-            if (m.getLocal().equalsIgnoreCase(localAntigo)) {
-                midia = m;
-                break;
-            }
-        }
-        if (midia == null) {
-            return false;
-        }
-        try {
-            File arquivoOrigem = new File(localAntigo);
-            File arquivoDestino = new File(localNovo);
-            
-            if (!arquivoOrigem.exists()) {
-                System.err.println("Arquivo não existe: " + localAntigo);
-                return false;
-            }
-            Files.move(arquivoOrigem.toPath(), arquivoDestino.toPath(), 
-                StandardCopyOption.REPLACE_EXISTING);
-            midia.setLocal(localNovo);
-            salvarMidia(midia);
-            return true;
-            
-        } catch (IOException e) {
-            System.err.println("Erro ao mover arquivo: " + e.getMessage());
-            return false;
-        }
-    }
-    public boolean renomearArquivo(String localAntigo, String novoNome) {
-        if (localAntigo == null || localAntigo.isBlank() || novoNome == null || novoNome.isBlank()) {
-            return false;
-        }
-        Midia midia = null;
-        for (Midia m : midias) {
-            if (m.getLocal().equalsIgnoreCase(localAntigo)) {
-                midia = m;
-                break;
-            }
-        }
-        if (midia == null) {
-            return false;
+
+    /**
+     * Busca uma mídia pelo título (chave única). Usa loop for para clareza.
+     * @param titulo O título da mídia a ser buscada.
+     * @return O objeto Midia encontrado ou null.
+     */
+    public Midia buscarMidiaPorTitulo(String titulo) {
+        if (titulo == null || titulo.isBlank()) {
+            return null;
         }
         
-        try {
-            File arquivoOrigem = new File(localAntigo);
-            
-            if (!arquivoOrigem.exists()) {
-                System.err.println("Arquivo não existe: " + localAntigo);
-                return false;
+        for (Midia midia : this.midias) {
+            if (midia.getTitulo().equalsIgnoreCase(titulo)) {
+                return midia;
             }
-            String diretorio = arquivoOrigem.getParent();
-            String novoLocal = diretorio + File.separator + novoNome;
-            File arquivoDestino = new File(novoLocal);
-            if (arquivoOrigem.renameTo(arquivoDestino)) {
-                midia.setLocal(novoLocal);
-                salvarMidia(midia);
-                return true;
-            }
-            return false;
-            
-        } catch (Exception e) {
-            System.err.println("Erro ao renomear arquivo: " + e.getMessage());
-            return false;
         }
+        return null;
     }
-    public List<Midia> listarPorFormato(String formato) {
-        List<Midia> midiasFiltradas = new ArrayList<>();
-        
-        if (formato == null || formato.isBlank()) {
-            return new ArrayList<>(midias);
-        }
-        String formatoUpper = formato.toUpperCase();
-        for (Midia midia : midias) {
-            switch (formatoUpper) {
-                case "FILME":
-                    if (midia instanceof Filme) {
-                        midiasFiltradas.add(midia);
-                    }
-                    break;
-                case "MUSICA":
-                case "MÚSICA":
-                    if (midia instanceof Musica) {
-                        midiasFiltradas.add(midia);
-                    }
-                    break;
-                case "LIVRO":
-                    if (midia instanceof Livro) {
-                        midiasFiltradas.add(midia);
-                    }
-                    break;
-            }
-        }
-        return midiasFiltradas;
-    }
+    
+    /**
+     * Lista todas as mídias filtrando por uma categoria específica. Usa o loop for para clareza (lógica simplificada).
+     * @param categoria Nome da categoria (e.g., "Filme", "Musica", "Livro").
+     * @return Uma lista de objetos Midia que pertencem à categoria.
+     */
     public List<Midia> listarPorCategoria(String categoria) {
         List<Midia> midiasFiltradas = new ArrayList<>();
         
@@ -245,21 +202,30 @@ public class GerenciadorMidia {
             }
         }
         return midiasFiltradas;
-        //lançar as exceções
     }
-    public List<Midia> ordenarPorTitulo() {
-        List<Midia> midiasOrdenadas = new ArrayList<>(midias);
-        midiasOrdenadas.sort(Comparator.comparing(Midia::getTitulo, String.CASE_INSENSITIVE_ORDER));
-        return midiasOrdenadas;
-        //verif forma mais simples
-    }
-    public List<Midia> ordenarPorDuracao() {
-        List<Midia> midiasOrdenadas = new ArrayList<>(midias);
-        midiasOrdenadas.sort(Comparator.comparingInt(Midia::getDuracao));
-        return midiasOrdenadas;
-      //verif forma mais simples
-    }
+
+    /**
+     * Retorna uma lista de todas as mídias (cópia).
+     */
     public List<Midia> listarTodasMidias() {
-        return new ArrayList<>(midias);
+        return new ArrayList<>(this.midias);
+    }
+    
+    /**
+     * Ordena as mídias pelo Título, ignorando maiúsculas/minúsculas.
+     */
+    public List<Midia> ordenarPorTitulo() {
+        var lista = new ArrayList<>(midias);
+        lista.sort((m1, m2) -> m1.getTitulo().compareToIgnoreCase(m2.getTitulo()));
+        return lista;
+    }
+    
+    /**
+     * Ordena as mídias pela Duração.
+     */
+    public List<Midia> ordenarPorDuracao() {
+        var lista = new ArrayList<>(midias);
+        lista.sort((m1, m2) -> Integer.compare(m1.getDuracao(), m2.getDuracao()));
+        return lista;
     }
 }

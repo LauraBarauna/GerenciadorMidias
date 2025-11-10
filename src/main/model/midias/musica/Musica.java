@@ -1,11 +1,14 @@
 package main.model.midias.musica;
 
+import java.io.Serializable;
+
 import main.model.midias.Categoria;
 import main.model.midias.Midia;
 import main.model.pessoa.Pessoa;
 
-public class Musica extends Midia {
-    private Pessoa artista;
+public class Musica extends Midia implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private Pessoa artista;
 
     public Musica(int id, String local, double tamanhoEmDisco, 
                   String titulo, int duracao, Categoria categoria, Pessoa artista) {
