@@ -6,6 +6,8 @@ import main.view.midias.cadastro.midia.TelaCadastroMidia;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TelaMidia {
@@ -42,14 +44,22 @@ public class TelaMidia {
     private void atualizarPainel() {
         String acaoSelecionada = acoesMidia.getSelectedItem().toString().toUpperCase();
 
-        switch (acaoSelecionada) {
-            case "ADICIONAR":
-                jPanelAcaoMidia.removeAll();
-                jPanelAcaoMidia.add(cadastro.getjPanelPrincipal());
-                jPanelAcaoMidia.revalidate();
-                jPanelAcaoMidia.repaint();
-                break;
-        }
+        acoesMidia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (acaoSelecionada) {
+                    case "ADICIONAR":
+                        cadastro.telaMidia();
+                        jPanelAcaoMidia.removeAll();
+                        jPanelAcaoMidia.add(cadastro.getjPanelPrincipal());
+                        jPanelAcaoMidia.revalidate();
+                        jPanelAcaoMidia.repaint();
+                        break;
+                }
+            }
+        });
+
+
     }
 
     public TelaCadastroMidia getCadastro() {
