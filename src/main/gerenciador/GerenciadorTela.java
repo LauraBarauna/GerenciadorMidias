@@ -5,7 +5,7 @@ import main.controller.IdiomaController;
 import main.controller.PessoaController;
 import main.view.categoria.principal.TelaCategoria;
 import main.view.idioma.principal.TelaIdioma;
-import main.view.midias.TelaMidia;
+import main.view.midias.principal.TelaMidia;
 import main.view.pessoa.principal.TelaPessoa;
 import main.view.principal.TelaPrincipal;
 
@@ -25,7 +25,7 @@ public class GerenciadorTela {
 
     public GerenciadorTela(CategoriaController categoriaController, IdiomaController idiomaController,
                            PessoaController pessoaController) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController);
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController);
         this.telaCategoria = new TelaCategoria(adicionarAcoes(), categoriaController);
         this.telaIdioma = new TelaIdioma(adicionarAcoes(),idiomaController);
         this.telaPessoa = new TelaPessoa(adicionarAcoes(), pessoaController);

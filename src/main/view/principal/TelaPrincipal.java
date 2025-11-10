@@ -1,12 +1,8 @@
 package main.view.principal;
 
-import main.gerenciador.GerenciadorCategoria;
-import main.gerenciador.GerenciadorIdioma;
-import main.gerenciador.GerenciadorPessoa;
-import main.gerenciador.GerenciadorTela;
 import main.view.categoria.principal.TelaCategoria;
 import main.view.idioma.principal.TelaIdioma;
-import main.view.midias.TelaMidia;
+import main.view.midias.principal.TelaMidia;
 import main.view.pessoa.principal.TelaPessoa;
 
 import javax.swing.*;

@@ -1,9 +1,12 @@
 package main.view.midias.cadastro.midia;
 
 import main.controller.CategoriaController;
+import main.controller.IdiomaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
+import main.view.midias.cadastro.filme.TelaCadastroFilme;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -28,9 +31,23 @@ public class TelaCadastroMidia {
 
     private CategoriaController categoriaController;
 
-    public TelaCadastroMidia(CategoriaController categoriaController) {
+    private TelaCadastroFilme filme;
+
+    public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController) {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
+        this.filme = new TelaCadastroFilme(idiomaController);
+        //jPanelPrincipal.setLayout(new CardLayout());
+        continuar();
+    }
+
+    private void continuar() {
+        btnAdicionar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                avancarTela();
+            }
+        });
     }
 
     private void buscarCaminhoArquivo() {
@@ -70,6 +87,19 @@ public class TelaCadastroMidia {
             JOptionPane.showMessageDialog(jPanelPrincipal, e.getMessage());
         }
 
+    }
+
+    private void avancarTela() {
+        switch (this.extensaoArquivo.toUpperCase()) {
+            case "MP4":
+            case "MKV":
+                jPanelPrincipal.removeAll();
+                jPanelPrincipal.add(filme.getjPanelPrincipal());
+                jPanelPrincipal.revalidate();
+                jPanelPrincipal.repaint();
+                break;
+
+        }
     }
 
     public JPanel getjPanelPrincipal() {
