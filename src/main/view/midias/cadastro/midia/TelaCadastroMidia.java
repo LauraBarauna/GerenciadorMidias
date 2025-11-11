@@ -4,6 +4,7 @@ import main.controller.CategoriaController;
 import main.controller.IdiomaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.view.midias.cadastro.filme.TelaCadastroFilme;
+import main.view.midias.cadastro.livro.TelaCadastroLivro;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +35,7 @@ public class TelaCadastroMidia {
     private CategoriaController categoriaController;
 
     private TelaCadastroFilme filme;
+    private TelaCadastroLivro livro;
 
     private CardLayout layout;
 
@@ -41,12 +43,14 @@ public class TelaCadastroMidia {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
+        this.livro = new TelaCadastroLivro(idiomaController);
 
         layout = new CardLayout();
         jPanelPrincipal.setLayout(layout);
 
         jPanelPrincipal.add(jPanelMidia, "midia");
         jPanelPrincipal.add(filme.getjPanelPrincipal(), "filme");
+        jPanelPrincipal.add(livro.getjPanelPrincipal(), "livro");
 
         continuar();
     }
@@ -114,6 +118,15 @@ public class TelaCadastroMidia {
                 filme.atualizarListaIdioma();
 
                 layout.show(jPanelPrincipal, "filme");
+                jPanelPrincipal.revalidate();
+                jPanelPrincipal.repaint();
+                break;
+
+            case "PDF":
+            case "EPUB":
+                livro.atualizarListaIdioma();
+
+                layout.show(jPanelPrincipal, "livro");
                 jPanelPrincipal.revalidate();
                 jPanelPrincipal.repaint();
                 break;
