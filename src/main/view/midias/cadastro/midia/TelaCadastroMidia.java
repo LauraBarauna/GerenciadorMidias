@@ -46,7 +46,7 @@ public class TelaCadastroMidia {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
-        this.livro = new TelaCadastroLivro(idiomaController);
+        this.livro = new TelaCadastroLivro(pessoaController);
         this.musica = new TelaCadastroMusica(pessoaController);
 
         layout = new CardLayout();
