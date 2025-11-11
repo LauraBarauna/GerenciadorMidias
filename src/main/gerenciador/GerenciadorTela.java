@@ -25,7 +25,7 @@ public class GerenciadorTela {
 
     public GerenciadorTela(CategoriaController categoriaController, IdiomaController idiomaController,
                            PessoaController pessoaController) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController);
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController,pessoaController);
         this.telaCategoria = new TelaCategoria(adicionarAcoes(), categoriaController);
         this.telaIdioma = new TelaIdioma(adicionarAcoes(),idiomaController);
         this.telaPessoa = new TelaPessoa(adicionarAcoes(), pessoaController);

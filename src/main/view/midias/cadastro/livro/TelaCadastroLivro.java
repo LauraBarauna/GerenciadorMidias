@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TelaCadastroLivro {
     private JPanel jPanelPrincipal;
-    private JComboBox<String> idiomas;
+    private JComboBox<String> pessoa;
     private JButton cadastrarLivroButton;
 
     private IdiomaController idiomaController;
@@ -24,10 +24,10 @@ public class TelaCadastroLivro {
     private void adicionarListaIdiomas(List<String> idiomasList) {
         if (!idiomasList.isEmpty()) {
             for (String idioma : idiomasList) {
-                idiomas.addItem(idioma);
+                pessoa.addItem(idioma);
             }
         } else {
-            idiomas.addItem("Não existe nenhum idioma cadastrado. Cadastre um no menu de Idioma acima.");
+            pessoa.addItem("Não existe nenhum idioma cadastrado. Cadastre um no menu de Idioma acima.");
         }
     }
 

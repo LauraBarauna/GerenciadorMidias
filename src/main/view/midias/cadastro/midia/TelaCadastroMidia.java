@@ -2,9 +2,11 @@ package main.view.midias.cadastro.midia;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.PessoaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.view.midias.cadastro.filme.TelaCadastroFilme;
 import main.view.midias.cadastro.livro.TelaCadastroLivro;
+import main.view.midias.cadastro.musica.TelaCadastroMusica;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +17,6 @@ import java.util.List;
 public class TelaCadastroMidia {
     private JPanel jPanelPrincipal;
     private JPanel jPanelMidia;
-
 
     private JTextField textFieldTitulo;
 
@@ -33,17 +34,20 @@ public class TelaCadastroMidia {
     private String extensaoArquivo;
 
     private CategoriaController categoriaController;
+    private PessoaController pessoaController;
 
     private TelaCadastroFilme filme;
     private TelaCadastroLivro livro;
+    private TelaCadastroMusica musica;
 
     private CardLayout layout;
 
-    public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController) {
+    public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController, PessoaController pessoaController) {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
         this.livro = new TelaCadastroLivro(idiomaController);
+        this.musica = new TelaCadastroMusica(pessoaController);
 
         layout = new CardLayout();
         jPanelPrincipal.setLayout(layout);
@@ -51,6 +55,7 @@ public class TelaCadastroMidia {
         jPanelPrincipal.add(jPanelMidia, "midia");
         jPanelPrincipal.add(filme.getjPanelPrincipal(), "filme");
         jPanelPrincipal.add(livro.getjPanelPrincipal(), "livro");
+        jPanelPrincipal.add(musica.getjPanelPrincipal(), "musica");
 
         continuar();
     }
@@ -127,6 +132,14 @@ public class TelaCadastroMidia {
                 livro.atualizarListaIdioma();
 
                 layout.show(jPanelPrincipal, "livro");
+                jPanelPrincipal.revalidate();
+                jPanelPrincipal.repaint();
+                break;
+
+            case "MP3":
+                musica.atualizarListaArtista();
+
+                layout.show(jPanelPrincipal, "musica");
                 jPanelPrincipal.revalidate();
                 jPanelPrincipal.repaint();
                 break;
