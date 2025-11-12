@@ -71,6 +71,7 @@ public class TelaPrincipal extends JFrame {
                         }
 
                         telaMidia.getCadastro().getFilme().atualizarListaIdioma();
+                        telaMidia.getCadastro().getMusica().atualizarListaArtistas();
 
                         atualizarTelaMidia(telaMidia);
                         break;

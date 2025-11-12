@@ -2,8 +2,10 @@ package main.view.midias.cadastro.midia;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.PessoaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.view.midias.cadastro.filme.TelaCadastroFilme;
+import main.view.midias.cadastro.musica.TelaCadastroMusica;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,21 +37,28 @@ public class TelaCadastroMidia {
     private CategoriaController categoriaController;
 
     private TelaCadastroFilme filme;
+    private TelaCadastroMusica musica;
 
     private CardLayout layout;
 
-    public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController) {
+    public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController,
+                             PessoaController pessoaController) {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
+        this.musica = new TelaCadastroMusica(pessoaController);
 
         layout = new CardLayout();
+        adicionarPainel();
+        continuar();
+    }
+
+    private void adicionarPainel() {
         jPanelPrincipal.setLayout(layout);
 
         jPanelPrincipal.add(jPanelMidia, "midia");
         jPanelPrincipal.add(filme.getjPanelPrincipal(), "filme");
-
-        continuar();
+        jPanelPrincipal.add(musica.getjPanelPrincipal(), "musica");
     }
 
     private void continuar() {
@@ -123,6 +132,9 @@ public class TelaCadastroMidia {
             case "MKV":
                 layout.show(jPanelPrincipal, "filme");
                 break;
+            case "MP3":
+                layout.show(jPanelPrincipal, "musica");
+                break;
         }
     }
 
@@ -152,5 +164,9 @@ public class TelaCadastroMidia {
 
     public TelaCadastroFilme getFilme() {
         return filme;
+    }
+
+    public TelaCadastroMusica getMusica() {
+        return musica;
     }
 }
