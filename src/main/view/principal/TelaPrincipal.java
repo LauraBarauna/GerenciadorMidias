@@ -70,6 +70,8 @@ public class TelaPrincipal extends JFrame {
                             telaMidia.getCadastro().listarCategorias(extensao);
                         }
 
+                        telaMidia.getCadastro().getFilme().atualizarListaIdioma();
+
                         atualizarTelaMidia(telaMidia);
                         break;
                     case "CATEGORIAS":

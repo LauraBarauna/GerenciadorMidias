@@ -14,6 +14,7 @@ public class TelaCadastroFilme {
 
     public TelaCadastroFilme(IdiomaController idiomaController) {
         this.idiomaController = idiomaController;
+        atualizarListaIdioma();
     }
 
     public void atualizarListaIdioma() {
@@ -22,6 +23,7 @@ public class TelaCadastroFilme {
     }
 
     private void adicionarListaIdiomas(List<String> idiomasList) {
+        idiomas.removeAllItems();
         if (!idiomasList.isEmpty()) {
             for (String idioma : idiomasList) {
                 idiomas.addItem(idioma);

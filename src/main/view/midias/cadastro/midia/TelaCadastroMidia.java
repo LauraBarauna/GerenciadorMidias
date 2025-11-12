@@ -149,4 +149,8 @@ public class TelaCadastroMidia {
     public JPanel getjPanelMidia() {
         return jPanelMidia;
     }
+
+    public TelaCadastroFilme getFilme() {
+        return filme;
+    }
 }
