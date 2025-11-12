@@ -5,17 +5,30 @@ import main.model.midias.Categoria;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Laura
+ */
 public class GerenciadorCategoria {
+    
     List<Categoria> categoriasFilme;
     List<Categoria> categoriasMusica;
     List<Categoria> categoriasLivro;
 
+    /**
+     * Construtor da classe GerenciadorCategoria. Inicializa as três listas de categorias como ArrayList vazias.
+     */
     public GerenciadorCategoria() {
         this.categoriasFilme = new ArrayList<>();
         this.categoriasMusica = new ArrayList<>();
         this.categoriasLivro = new ArrayList<>();
     }
 
+    /**
+     * Cria uma nova categoria e a adiciona à lista correspondente ao tipo de mídia. Garante que a categoria não seja duplicada dentro de sua respectiva lista.
+     * @param categoria: O objeto Categoria a ser criado.
+     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @return true se a categoria foi criada com sucesso, false se o tipo for inválido ou a categoria for duplicada.
+     */
     public boolean criarCategoriaPorTipo(Categoria categoria, char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         boolean deuCerto;
@@ -36,6 +49,12 @@ public class GerenciadorCategoria {
         return deuCerto;
     }
 
+    /**
+     * Encontra e retorna uma categoria pelo nome dentro da lista do tipo de mídia especificado.
+     * @param categoria: O nome da categoria a ser encontrada.
+     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @return O objeto Categoria encontrado, ou null se não for encontrado ou se o tipo for inválido.
+     */
     public Categoria encontrarCategoriaPorTipo(String categoria, char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
 
@@ -58,6 +77,11 @@ public class GerenciadorCategoria {
         return categoriaEncontrada;
     }
 
+    /**
+     * Retorna a lista completa de categorias para um determinado tipo de mídia.
+     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @return A List<Categoria> do tipo especificado, ou null se o tipo for inválido.
+     */
     public List<Categoria> encontrarCategorias (char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         List<Categoria> categoriasEncontrada;
@@ -78,6 +102,12 @@ public class GerenciadorCategoria {
         return categoriasEncontrada;
     }
 
+    /**
+     * Remove uma categoria pelo nome da lista correspondente ao tipo de mídia.
+     * @param categoria: O nome da categoria a ser removida.
+     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @return true se a categoria foi removida com sucesso, false se não foi encontrada ou se o tipo for inválido.
+     */
     public boolean removerCategoriaPorTipo(String categoria, char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         boolean deuCerto;
@@ -98,6 +128,13 @@ public class GerenciadorCategoria {
         return deuCerto;
     }
 
+    /**
+     * Atualiza o nome de uma categoria. A categoria é encontrada pelo nome antigo e, se encontrada, seu nome é substituído pelo da categoriaNova.
+     * @param categoria: O nome antigo da categoria a ser atualizada.
+     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @param categoriaNova: O objeto Categoria que contém o novo nome.
+     * @return  true se a categoria foi atualizada com sucesso, e false se não foi encontrada ou se o tipo for inválido.
+     */
     public boolean atualizarCategoriaPorTipo(String categoria, char tipo, Categoria categoriaNova) {
         char tipoUpper = Character.toUpperCase(tipo);
         boolean deuCerto;
@@ -117,14 +154,18 @@ public class GerenciadorCategoria {
         return deuCerto;
     }
 
+    /**
+     * Lógica central para adicionar uma categoria a uma lista específica. Verifica duplicidade pelo nome da categoria, ignorando letras maiúsculas/minúsculas.
+     * @param categorias: A lista de categorias onde a nova categoria será adicionada.
+     * @param categoria: O objeto {@code Categoria} a ser adicionado.
+     * @param tipo: O tipo da lista (usado apenas para fins de debug/log, não no código).
+     * @return Se true será adicionada, e false se duplicada.
+     */
     private boolean criarCategoria(List<Categoria> categorias, Categoria categoria, String tipo)  {
-        if (categorias.contains(categoria)) {
-            return false;
-        }
-
+        // Verifica se o nome da categoria já existe, ignorando caixa
         for (Categoria c : categorias) {
             if (c.getCategoria().equalsIgnoreCase(categoria.getCategoria())) {
-                return false;
+                return false; // Categoria duplicada
             }
         }
 
@@ -132,26 +173,46 @@ public class GerenciadorCategoria {
         return true;
     }
 
+    /**
+     * Lógica central para encontrar uma categoria pelo nome em uma lista.
+     * @param categorias A lista de categorias a ser pesquisada.
+     * @param nome O nome da categoria a ser procurada.
+     * @return O objeto Categoria encontrado, ou null se não for encontrado.
+     */
     private Categoria encontrarCategoriaPorNome(List<Categoria> categorias, String nome) {
         Categoria categoriaEncontrada = null;
         for (Categoria categoria : categorias) {
             if (categoria.getCategoria().equalsIgnoreCase(nome)) {
                 categoriaEncontrada = categoria;
+                break;
             }
         }
         return categoriaEncontrada;
     }
 
+    /**
+     * Lógica central para atualizar o nome de uma categoria. Encontra a categoria pelo nome antigo e usa o setCategoria para aplicar o novo nome do objeto na categoriaNova.
+     * @param categorias: A lista de categorias onde a categoria deve ser atualizada.
+     * @param nome: O nome antigo da categoria.
+     * @param categoriaNova: O objeto Categoria contendo um novo nome.
+     * @return Se true será atualizada, se false não encontrada.
+     */
     private boolean atualizarCategoria(List<Categoria> categorias, String nome, Categoria categoriaNova) {
         Categoria categoriaAtualizar = encontrarCategoriaPorNome(categorias, nome);
         if (categoriaAtualizar == null) {
             return false;
         }
-
+        // Se encontrada, atualiza seu nome
         categoriaAtualizar.setCategoria(categoriaNova.getCategoria());
         return true;
     }
 
+    /**
+     * Lógica central para remover uma categoria pelo nome.
+     * @param categorias: A lista de categorias onde a categoria deve ser removida.
+     * @param nome: O nome da categoria a ser removida.
+     * @return Se true é removida, se false não encontrada.
+     */
     private boolean removerCategoria(List<Categoria> categorias, String nome) {
         Categoria categoriaRemover = encontrarCategoriaPorNome(categorias, nome);
         if (categoriaRemover == null) {
@@ -162,14 +223,23 @@ public class GerenciadorCategoria {
         return true;
     }
 
+    /**
+     * @return List<Categoria> para Filmes.
+     */
     private List<Categoria> getCategoriasFilme() {
         return categoriasFilme;
     }
 
+    /**
+     * @return List<Categoria> para Músicas.
+     */
     private List<Categoria> getCategoriasMusica() {
         return categoriasMusica;
     }
 
+    /**
+     * @return List<Categoria> para Livros.
+     */
     private List<Categoria> getCategoriasLivro() {
         return categoriasLivro;
     }
