@@ -5,6 +5,7 @@ import main.controller.IdiomaController;
 import main.controller.PessoaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.view.midias.cadastro.filme.TelaCadastroFilme;
+import main.view.midias.cadastro.livro.TelaCadastroLivro;
 import main.view.midias.cadastro.musica.TelaCadastroMusica;
 
 import javax.swing.*;
@@ -38,6 +39,7 @@ public class TelaCadastroMidia {
 
     private TelaCadastroFilme filme;
     private TelaCadastroMusica musica;
+    private TelaCadastroLivro livro;
 
     private CardLayout layout;
 
@@ -47,6 +49,7 @@ public class TelaCadastroMidia {
         this.categoriaController = categoriaController;
         this.filme = new TelaCadastroFilme(idiomaController);
         this.musica = new TelaCadastroMusica(pessoaController);
+        this.livro = new TelaCadastroLivro(pessoaController);
 
         layout = new CardLayout();
         adicionarPainel();
@@ -59,6 +62,7 @@ public class TelaCadastroMidia {
         jPanelPrincipal.add(jPanelMidia, "midia");
         jPanelPrincipal.add(filme.getjPanelPrincipal(), "filme");
         jPanelPrincipal.add(musica.getjPanelPrincipal(), "musica");
+        jPanelPrincipal.add(livro.getjPanelPrincipal(), "livro");
     }
 
     private void continuar() {
@@ -135,6 +139,9 @@ public class TelaCadastroMidia {
             case "MP3":
                 layout.show(jPanelPrincipal, "musica");
                 break;
+            case "PDF":
+                layout.show(jPanelPrincipal, "livro");
+                break;
         }
     }
 
@@ -168,5 +175,9 @@ public class TelaCadastroMidia {
 
     public TelaCadastroMusica getMusica() {
         return musica;
+    }
+
+    public TelaCadastroLivro getLivro() {
+        return livro;
     }
 }
