@@ -2,6 +2,7 @@ package main.gerenciador;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.view.categoria.principal.TelaCategoria;
 import main.view.idioma.principal.TelaIdioma;
@@ -24,8 +25,8 @@ public class GerenciadorTela {
     private TelaPessoa telaPessoa;
 
     public GerenciadorTela(CategoriaController categoriaController, IdiomaController idiomaController,
-                           PessoaController pessoaController) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController);
+                           PessoaController pessoaController, MidiaController midiaController) {
+        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController, pessoaController, midiaController);
         this.telaCategoria = new TelaCategoria(adicionarAcoes(), categoriaController);
         this.telaIdioma = new TelaIdioma(adicionarAcoes(),idiomaController);
         this.telaPessoa = new TelaPessoa(adicionarAcoes(), pessoaController);

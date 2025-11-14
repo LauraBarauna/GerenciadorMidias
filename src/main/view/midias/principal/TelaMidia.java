@@ -2,6 +2,8 @@ package main.view.midias.principal;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.MidiaController;
+import main.controller.PessoaController;
 import main.view.midias.cadastro.midia.TelaCadastroMidia;
 
 import javax.swing.*;
@@ -17,8 +19,9 @@ public class TelaMidia {
 
     private TelaCadastroMidia cadastro;
 
-    public TelaMidia(List<String> acoes, CategoriaController controller, IdiomaController idiomaController) {
-        this.cadastro = new TelaCadastroMidia(controller, idiomaController);
+    public TelaMidia(List<String> acoes, CategoriaController controller, IdiomaController idiomaController,
+                     PessoaController pessoaController, MidiaController midiaController) {
+        this.cadastro = new TelaCadastroMidia(controller, idiomaController, pessoaController, midiaController);
         carregarComboBoxMidias(acoes);
         adicionarLayouts();
         atualizarPainel();
