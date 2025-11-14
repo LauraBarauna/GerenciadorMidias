@@ -2,6 +2,7 @@ package main.principal;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.gerenciador.GerenciadorTela;
 
@@ -10,6 +11,7 @@ public class Main {
         CategoriaController categoriaController = new CategoriaController();
         IdiomaController idiomaController = new IdiomaController();
         PessoaController pessoaController = new PessoaController();
-        new GerenciadorTela(categoriaController, idiomaController, pessoaController);
+        MidiaController midiaController = new MidiaController();
+        new GerenciadorTela(categoriaController, idiomaController, pessoaController, midiaController);
     }
 }

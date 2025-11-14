@@ -1,5 +1,6 @@
 package main.view.midias.cadastro.livro;
 
+import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.model.pessoa.Pessoa;
 
@@ -14,17 +15,47 @@ public class TelaCadastroLivro {
     private JPanel jPanelPrincipal;
     private JPanel jPanelAutores;
     private JButton cadastrarLivroButton;
+    private JTextField textFieldPaginas;
 
     private List<Pessoa> listaPessoas;
 
     private PessoaController pessoaController;
+    private MidiaController midiaController;
 
-    public TelaCadastroLivro(PessoaController pessoaController) {
+    private String caminhoArquivo;
+    private String extensaoArquivo;
+    private String tituloArquivo;
+    private String categoriaArquivo;
+    private double tamanhoArquivo;
+
+    public TelaCadastroLivro(PessoaController pessoaController, MidiaController midiaController) {
         this.listaPessoas = new ArrayList<>();
         this.pessoaController = pessoaController;
+        this.midiaController = midiaController;
 
         jPanelAutores.setLayout(new BoxLayout(jPanelAutores, BoxLayout.Y_AXIS));
         jPanelAutores.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cadastrarLivro();
+    }
+
+    private void cadastrarLivro() {
+        cadastrarLivroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int qtdPaginas = Integer.parseInt(textFieldPaginas.getText());
+
+                if (qtdPaginas <= 0 ) {
+                    JOptionPane.showMessageDialog(null, "Quantidade de páginas não pode ser menor ou igual a 0.");
+                    return;
+                }
+
+                midiaController.cadastrarLivro(caminhoArquivo, tamanhoArquivo, tituloArquivo,
+                        qtdPaginas, categoriaArquivo);
+
+                JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+
+            }
+        });
     }
 
     public void atualizarLista() {
@@ -96,5 +127,25 @@ public class TelaCadastroLivro {
 
     public List<Pessoa> getListaPessoas() {
         return listaPessoas;
+    }
+
+    public void setTamanhoArquivo(double tamanhoArquivo) {
+        this.tamanhoArquivo = tamanhoArquivo;
+    }
+
+    public void setCategoriaArquivo(String categoriaArquivo) {
+        this.categoriaArquivo = categoriaArquivo;
+    }
+
+    public void setTituloArquivo(String tituloArquivo) {
+        this.tituloArquivo = tituloArquivo;
+    }
+
+    public void setExtensaoArquivo(String extensaoArquivo) {
+        this.extensaoArquivo = extensaoArquivo;
+    }
+
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
     }
 }

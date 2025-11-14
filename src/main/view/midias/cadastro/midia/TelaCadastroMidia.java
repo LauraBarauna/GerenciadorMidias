@@ -2,6 +2,7 @@ package main.view.midias.cadastro.midia;
 
 import main.controller.CategoriaController;
 import main.controller.IdiomaController;
+import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.excecoes.arquivo.ExtensaoInvalidaException;
 import main.view.midias.cadastro.filme.TelaCadastroFilme;
@@ -34,6 +35,7 @@ public class TelaCadastroMidia {
     private String extensaoArquivo;
     private String tituloArquivo;
     private String categoriaArquivo;
+    private double tamanhoArquivo;
 
     private CategoriaController categoriaController;
 
@@ -44,12 +46,12 @@ public class TelaCadastroMidia {
     private CardLayout layout;
 
     public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController,
-                             PessoaController pessoaController) {
+                             PessoaController pessoaController, MidiaController midiaController) {
         buscarCaminhoArquivo();
         this.categoriaController = categoriaController;
-        this.filme = new TelaCadastroFilme(idiomaController);
-        this.musica = new TelaCadastroMusica(pessoaController);
-        this.livro = new TelaCadastroLivro(pessoaController);
+        this.filme = new TelaCadastroFilme(idiomaController, midiaController);
+        this.musica = new TelaCadastroMusica(pessoaController, midiaController);
+        this.livro = new TelaCadastroLivro(pessoaController, midiaController);
 
         layout = new CardLayout();
         adicionarPainel();
@@ -97,6 +99,7 @@ public class TelaCadastroMidia {
 
                 if (resposta == JFileChooser.APPROVE_OPTION) {
                     caminhoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
+                    tamanhoArquivo = fileChooser.getSelectedFile().length();
                     textFieldCaminho.setText(caminhoArquivo);
                     extensaoArquivo = fileChooser.getSelectedFile().getAbsolutePath().toString().substring(caminhoArquivo.length() - 3);
                     listarCategorias(extensaoArquivo);
@@ -134,12 +137,27 @@ public class TelaCadastroMidia {
         switch (this.extensaoArquivo.toUpperCase()) {
             case "MP4":
             case "MKV":
+                getFilme().setCaminhoArquivo(caminhoArquivo);
+                getFilme().setTituloArquivo(tituloArquivo);
+                getFilme().setCategoriaArquivo(categoriaArquivo);
+                getFilme().setTamanhoArquivo(tamanhoArquivo);
+                getFilme().setExtensaoArquivo(extensaoArquivo);
                 layout.show(jPanelPrincipal, "filme");
                 break;
             case "MP3":
+                getMusica().setCaminhoArquivo(caminhoArquivo);
+                getMusica().setTituloArquivo(tituloArquivo);
+                getMusica().setCategoriaArquivo(categoriaArquivo);
+                getMusica().setTamanhoArquivo(tamanhoArquivo);
+                getMusica().setExtensaoArquivo(extensaoArquivo);
                 layout.show(jPanelPrincipal, "musica");
                 break;
             case "PDF":
+                getLivro().setCaminhoArquivo(caminhoArquivo);
+                getLivro().setTituloArquivo(tituloArquivo);
+                getLivro().setCategoriaArquivo(categoriaArquivo);
+                getLivro().setTamanhoArquivo(tamanhoArquivo);
+                getLivro().setExtensaoArquivo(extensaoArquivo);
                 layout.show(jPanelPrincipal, "livro");
                 break;
         }
