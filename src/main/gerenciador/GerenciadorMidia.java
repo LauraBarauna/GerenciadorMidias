@@ -48,7 +48,7 @@ public class GerenciadorMidia {
     private String gerarNomeArquivo(int id) {
         return DIRETORIO_DADOS + File.separator + "midia_" + id + EXTENSAO_ARQUIVO;
     }
-
+    
     /**
      * Calcula o próximo ID disponível e único para uma nova mídia. Garante que o ID gerado será o maior ID existente + 1, evitando problemas ao nomear os arquivos.
      * @return O próximo ID inteiro sequencial disponível.
@@ -56,8 +56,8 @@ public class GerenciadorMidia {
     private int proximoIdDisponivel() {
         // Encontra o maior ID na lista atual + 1. Se a lista estiver vazia, retorna 1.
         OptionalInt maxId = this.midias.stream()
-                .mapToInt(Midia::getId)
-                .max();
+                                       .mapToInt(Midia::getId)
+                                       .max();
         return maxId.orElse(0) + 1;
     }
 
@@ -67,11 +67,11 @@ public class GerenciadorMidia {
      */
     private void salvarMidia(Midia midia) {
         if (midia.getId() <= 0) {
-            midia.setId(proximoIdDisponivel());
+             midia.setId(proximoIdDisponivel());
         }
 
         String nomeArquivo = gerarNomeArquivo(midia.getId());
-
+        
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeArquivo))) {
             oos.writeObject(midia);
             System.out.println("LOG: Mídia ID " + midia.getId() + " salva/atualizada em " + nomeArquivo);
@@ -109,21 +109,10 @@ public class GerenciadorMidia {
      */
     public boolean incluirMidia(Midia midia) {
         if (midia == null) {
-            return false;
+        	return false;
         }
-
-        if (this.midias.contains(midia)) {
-            return false;
-        }
-
-        for (Midia m : this.midias) {
-            if (m.getId() == midia.getId()) {
-                return false;
-            }
-        }
-
         // Atribui um ID antes de salvar para gerar o nome do arquivo.
-        midia.setId(proximoIdDisponivel());
+        midia.setId(proximoIdDisponivel()); 
         this.midias.add(midia);
         salvarMidia(midia);
         return true;
@@ -136,9 +125,9 @@ public class GerenciadorMidia {
      */
     public boolean removerMidia(String localArquivo) {
         if (localArquivo == null || localArquivo.isBlank()) {
-            return false;
+        	return false;
         }
-
+        
         Midia midiaRemover = this.midias.stream()
                 .filter(m -> m.getLocal().equalsIgnoreCase(localArquivo))
                 .findFirst()
@@ -147,7 +136,7 @@ public class GerenciadorMidia {
         if (midiaRemover == null) {
             return false;
         }
-
+        
         String nomeArquivo = gerarNomeArquivo(midiaRemover.getId());
         Path caminhoArquivo = Paths.get(nomeArquivo);
         try {
@@ -162,7 +151,7 @@ public class GerenciadorMidia {
         this.midias.remove(midiaRemover);
         return true;
     }
-
+    
     /**
      * Atualiza um objeto Midia existente e sobrescreve seu arquivo .tpoo. sobrescrito do arquivo elimina a versão anterior, mantendo apenas a mais recente.
      * @param midiaAtualizada: O objeto Midia com os novos dados. Deve possuir um ID válido.
@@ -170,7 +159,7 @@ public class GerenciadorMidia {
      */
     public boolean atualizarMidia(Midia midiaAtualizada) {
         if (midiaAtualizada == null || midiaAtualizada.getId() <= 0) return false;
-
+        
         for (int i = 0; i < this.midias.size(); i++) {
             if (this.midias.get(i).getId() == midiaAtualizada.getId()) {
                 // Substituir o objeto na lista em memória
@@ -199,7 +188,7 @@ public class GerenciadorMidia {
         }
         return null;
     }
-
+    
     /**
      * Lista todas as mídias em memória, filtrando por uma categoria específica. Se o parâmetro categoria for nulo ou vazio, retorna a lista completa.
      * @param categoria: Nome da categoria (e.g., "Filme", "Musica", "Livro").
@@ -207,11 +196,11 @@ public class GerenciadorMidia {
      */
     public List<Midia> listarPorCategoria(String categoria) {
         List<Midia> midiasFiltradas = new ArrayList<>();
-
+        
         if (categoria == null || categoria.isBlank()) {
             return new ArrayList<>(midias);
         }
-
+        
         for (Midia midia : midias) {
             // Compara a categoria da mídia com a categoria buscada (simplificado)
             if (midia.getCategoria().getCategoria().equalsIgnoreCase(categoria)) {
@@ -228,7 +217,7 @@ public class GerenciadorMidia {
     public List<Midia> listarTodasMidias() {
         return new ArrayList<>(this.midias);
     }
-
+    
     /**
      * Ordena a lista de mídias pelo Título em ordem alfabética.
      * * @return Uma nova lista de mídias ordenada pelo Título.
@@ -238,7 +227,7 @@ public class GerenciadorMidia {
         lista.sort((m1, m2) -> m1.getTitulo().compareToIgnoreCase(m2.getTitulo()));
         return lista;
     }
-
+    
     /**
      * Ordena a lista de mídias pela Duração (minutos, segundos ou páginas) em ordem crescente.
      * * @return Uma nova lista de mídias ordenada pela Duração.
