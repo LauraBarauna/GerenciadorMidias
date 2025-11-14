@@ -2,6 +2,7 @@ package main.view.midias.cadastro.filme;
 
 import main.controller.IdiomaController;
 import main.controller.MidiaController;
+import main.excecoes.midia.MidiaException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,10 +43,17 @@ public class TelaCadastroFilme {
                     return;
                 }
 
-                midiaController.cadastrarFilme(caminhoArquivo, tamanhoArquivo, tituloArquivo,
-                        duracao, categoriaArquivo, idiomas.getSelectedItem().toString());
+                try {
+                    midiaController.cadastrarFilme(caminhoArquivo, tamanhoArquivo, tituloArquivo,
+                            duracao, categoriaArquivo, idiomas.getSelectedItem().toString());
+                } catch (MidiaException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                } catch (IllegalArgumentException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                }
 
                 JOptionPane.showMessageDialog(null, "Filme cadastrado com sucesso!");
+
             }
         });
     }

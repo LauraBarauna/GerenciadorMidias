@@ -111,6 +111,17 @@ public class GerenciadorMidia {
         if (midia == null) {
             return false;
         }
+
+        if (this.midias.contains(midia)) {
+            return false;
+        }
+
+        for (Midia m : this.midias) {
+            if (m.getId() == midia.getId()) {
+                return false;
+            }
+        }
+
         // Atribui um ID antes de salvar para gerar o nome do arquivo.
         midia.setId(proximoIdDisponivel());
         this.midias.add(midia);

@@ -2,6 +2,7 @@ package main.view.midias.cadastro.livro;
 
 import main.controller.MidiaController;
 import main.controller.PessoaController;
+import main.excecoes.midia.MidiaException;
 import main.model.pessoa.Pessoa;
 
 import javax.swing.*;
@@ -49,8 +50,15 @@ public class TelaCadastroLivro {
                     return;
                 }
 
-                midiaController.cadastrarLivro(caminhoArquivo, tamanhoArquivo, tituloArquivo,
-                        qtdPaginas, categoriaArquivo);
+                try {
+                    midiaController.cadastrarLivro(caminhoArquivo, tamanhoArquivo, tituloArquivo,
+                            qtdPaginas, categoriaArquivo);
+                } catch (MidiaException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                } catch (IllegalAccessError error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                }
+
 
                 JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 

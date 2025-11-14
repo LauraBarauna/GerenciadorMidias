@@ -2,6 +2,7 @@ package main.view.midias.cadastro.musica;
 
 import main.controller.MidiaController;
 import main.controller.PessoaController;
+import main.excecoes.midia.MidiaException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,8 +48,14 @@ public class TelaCadastroMusica {
                     return;
                 }
 
-                midiaController.cadastrarMusica(caminhoArquivo, tamanhoArquivo,
-                        tituloArquivo, segundos, categoriaArquivo, artistas.getSelectedItem().toString());
+                try {
+                    midiaController.cadastrarMusica(caminhoArquivo, tamanhoArquivo,
+                            tituloArquivo, segundos, categoriaArquivo, artistas.getSelectedItem().toString());
+                } catch (MidiaException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                } catch (IllegalAccessError error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage());
+                }
                 JOptionPane.showMessageDialog(null, "Música cadastrada com sucesso!");
             }
         });

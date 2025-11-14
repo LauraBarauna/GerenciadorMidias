@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.excecoes.midia.MidiaDuplicadaException;
 import main.gerenciador.GerenciadorMidia;
 import main.model.geradorId.GeradorId;
 import main.model.idioma.Idioma;
@@ -20,26 +21,44 @@ public class MidiaController {
         this.geradorId = new GeradorId();
     }
 
-    public void cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao, String categoria) {
+    public void cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao, String categoria) throws MidiaDuplicadaException {
 
-        boolean adicinou = this.gerenciador.incluirMidia(new Livro(geradorId.getId(), local, tamanhoEmDisco,
+        int id = geradorId.getId();
+
+        boolean adicionou = this.gerenciador.incluirMidia(new Livro(id, local, tamanhoEmDisco,
                 titulo, duracao, new Categoria(categoria)));
+
+        if (!adicionou) {
+            throw new MidiaDuplicadaException(id);
+        }
     }
 
 
     public void cadastrarMusica(String local, double tamanhoEmDisco,
-                                String titulo, int duracao, String categoria, String artista) {
+                                String titulo, int duracao, String categoria, String artista) throws MidiaDuplicadaException {
 
-        boolean adicionou = this.gerenciador.incluirMidia(new Musica(geradorId.getId(), local, tamanhoEmDisco,
+        int id = geradorId.getId();
+
+        boolean adicionou = this.gerenciador.incluirMidia(new Musica(id, local, tamanhoEmDisco,
                 titulo, duracao, new Categoria(categoria), new Pessoa(artista)));
+
+        if (!adicionou) {
+            throw new MidiaDuplicadaException(id);
+        }
 
     }
 
     public void cadastrarFilme(String local, double tamanhoEmDisco, String titulo,
-                               int duracao, String categoria, String idioma) {
+                               int duracao, String categoria, String idioma) throws MidiaDuplicadaException {
 
-        boolean adicinou = this.gerenciador.incluirMidia(new Filme(geradorId.getId(), local, tamanhoEmDisco, titulo,
+        int id = geradorId.getId();
+
+        boolean adicionou = this.gerenciador.incluirMidia(new Filme(id, local, tamanhoEmDisco, titulo,
                 duracao, new Categoria(categoria), new Idioma(idioma)));
+
+        if (!adicionou) {
+            throw new MidiaDuplicadaException(id);
+        }
 
     }
 }
