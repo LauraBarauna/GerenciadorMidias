@@ -12,7 +12,7 @@ public class CategoriaDuplicadaException extends CategoriaException {
      * @param nome: O nome da categoria que foi tentada ser duplicada.
      * @param tipoLista: O nome da lista ou contexto onde a duplicidade foi detectada.
      */
-    public CategoriaDuplicadaException(String nome, String tipoLista) {
-        super("Categoria com o nome: " + nome + " já está cadastrada na lista: " + tipoLista + ".");
-    }
+	  public CategoriaDuplicadaException(String nome, String tipoLista) {
+		    super("Categoria " + nome + " já está cadastrada na lista " + tipoLista + ".");
+		  }
 }

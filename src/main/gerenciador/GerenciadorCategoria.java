@@ -82,6 +82,26 @@ public class GerenciadorCategoria {
      * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
      * @return A List<Categoria> do tipo especificado, ou null se o tipo for inválido.
      */
+    public List<Categoria> encontrarCategoriasPorExtensao(String extensao) {
+        List<Categoria> categorias = new ArrayList<>();
+        switch (extensao.toUpperCase()) {
+            case "MP4":
+            case "MKV":
+                categorias = getCategoriasFilme();
+            break;
+            case "MP3":
+                categorias = getCategoriasMusica();
+            break;
+            case "PDF":
+            case "PUB":
+                categorias = getCategoriasLivro();
+                break;
+            default:
+                return null;
+        }
+        return categorias;
+    }
+
     public List<Categoria> encontrarCategorias (char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
         List<Categoria> categoriasEncontrada;
@@ -161,11 +181,33 @@ public class GerenciadorCategoria {
      * @param tipo: O tipo da lista (usado apenas para fins de debug/log, não no código).
      * @return Se true será adicionada, e false se duplicada.
      */
+    public boolean removerTudoCategoria(char tipo) {
+        char tipoUpper = Character.toUpperCase(tipo);
+
+        switch (tipoUpper) {
+            case 'F':
+                removerTudo(this.categoriasFilme);
+                break;
+            case 'M':
+                removerTudo(this.categoriasMusica);
+                break;
+            case 'L':
+                removerTudo(this.categoriasLivro);
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
     private boolean criarCategoria(List<Categoria> categorias, Categoria categoria, String tipo)  {
-        // Verifica se o nome da categoria já existe, ignorando caixa
+        if (categorias.contains(categoria)) {
+            return false;
+        }
+
         for (Categoria c : categorias) {
             if (c.getCategoria().equalsIgnoreCase(categoria.getCategoria())) {
-                return false; // Categoria duplicada
+                return false;
             }
         }
 
@@ -226,6 +268,10 @@ public class GerenciadorCategoria {
     /**
      * @return List<Categoria> para Filmes.
      */
+    private void removerTudo(List<Categoria> categorias) {
+        categorias.removeAll(categorias);
+    }
+
     private List<Categoria> getCategoriasFilme() {
         return categoriasFilme;
     }

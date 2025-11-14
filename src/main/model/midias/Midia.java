@@ -25,6 +25,7 @@ public abstract class Midia implements Serializable {
      * @param duracao: A duração/tamanho da mídia (unidade varia por tipo: minutos, segundos ou páginas).
      * @param categoria: O objeto Categoria da mídia.
      */
+
     public Midia(int id, String local, double tamanhoEmDisco, String titulo, int duracao, Categoria categoria) {
         setId(id);
         setLocal(local);

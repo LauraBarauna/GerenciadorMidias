@@ -1,0 +1,68 @@
+package main.view.pessoa.principal;
+
+import main.controller.PessoaController;
+import main.gerenciador.GerenciadorPessoa;
+import main.view.pessoa.cadastro.TelaCadastroPessoa;
+import main.view.pessoa.listar.TelaListarPessoa;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+public class TelaPessoa {
+    private JPanel jPanelPrincipal;
+    private JComboBox<String> acoesPessoas;
+    private JPanel jPanelAcoesPessoa;
+
+    private TelaCadastroPessoa cadastro;
+    private TelaListarPessoa listar;
+
+    public TelaPessoa(List<String> acoes, PessoaController controller) {
+        this.cadastro = new TelaCadastroPessoa(controller);
+        this.listar = new TelaListarPessoa(controller);
+        adicionarLayout();
+        adicionarAcoes(acoes);
+        trocarTela();
+    }
+
+    private void trocarTela() {
+        this.acoesPessoas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String acao = acoesPessoas.getSelectedItem().toString().toUpperCase();
+
+                switch (acao) {
+                    case "ADICIONAR":
+                        jPanelAcoesPessoa.removeAll();
+                        jPanelAcoesPessoa.add(cadastro.getjPanelPrincipal());
+                        jPanelAcoesPessoa.revalidate();
+                        jPanelAcoesPessoa.repaint();
+                        break;
+                    case "LISTAR":
+                        listar.atualizarLista();
+                        jPanelAcoesPessoa.removeAll();
+                        jPanelAcoesPessoa.add(listar.getjPanelPrincipal());
+                        jPanelAcoesPessoa.revalidate();
+                        jPanelAcoesPessoa.repaint();
+                        break;
+                }
+
+            }
+        });
+    }
+
+    private void adicionarLayout() {
+        this.jPanelAcoesPessoa.setLayout(new CardLayout());
+    }
+
+    private void adicionarAcoes(List<String> acoes) {
+        for (String a : acoes) {
+            acoesPessoas.addItem(a);
+        }
+    }
+
+    public JPanel getJPanelPrincipal() {
+        return jPanelPrincipal;
+    }
+}
