@@ -129,7 +129,11 @@ public class GerenciadorMidia {
         }
 
         Midia midiaRemover = buscarPorId(id);
-        
+
+        if (midiaRemover == null) { // ✅ verificação
+            return false; // mídia não encontrada
+        }
+
         String nomeArquivo = gerarNomeArquivo(midiaRemover.getId());
         Path caminhoArquivo = Paths.get(nomeArquivo);
         try {
@@ -141,6 +145,7 @@ public class GerenciadorMidia {
             System.err.println("ERRO: Falha ao deletar arquivo " + nomeArquivo + ". Remoção da lista cancelada.");
             return false;
         }
+
         this.midias.remove(midiaRemover);
         return true;
     }

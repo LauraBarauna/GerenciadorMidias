@@ -125,7 +125,7 @@ public class TesteGerenciadorMidia {
 
         gm.incluirMidia(m);
 
-        boolean removido = gm.removerMidia("harryPotter.mp4");
+        boolean removido = gm.removerMidia(m.getId()); // usar o ID
         assertTrue(removido);
 
         File pasta = new File("dados_midias");
@@ -142,7 +142,8 @@ public class TesteGerenciadorMidia {
     public void testRemoverMidiaInexistente() {
 
         GerenciadorMidia gm = new GerenciadorMidia();
-        boolean removido = gm.removerMidia("nao_existe.mp4");
+        boolean removido = gm.removerMidia(999); // ID que não existe
+        assertFalse(removido);
 
         assertFalse(removido);
     }
