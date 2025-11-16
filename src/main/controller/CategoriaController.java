@@ -71,11 +71,11 @@ public class CategoriaController {
     }
 
     /**
-     * Atualiza o nome de uma categoria. A categoria é localizada pelo nomeCategoria antigo e seu nome é substituído pelo nome contido em categoriaNova.
-     * @param nomeCategoria: O nome antigo da categoria a ser atualizada.
-     * @param categoriaNova: O objeto Categoria contendo o novo nome.
-     * @param tipoCategoria: O tipo de mídia associado ('F', 'M' ou 'L').
-     * @throws CategoriaNaoEncontradaException Se a categoria original não for encontrada para atualização.
+     * Remove todas as categorias associadas a um determinado tipo de mídia.
+     *
+     * @param tipoCategoria O tipo de mídia cujas categorias devem ser removidas.
+     *                      Deve ser 'F', 'M' ou 'L'.
+     * @throws RuntimeException Se o tipo de mídia fornecido não existir.
      */
     public void removerTudo(String tipoCategoria) throws RuntimeException {
         boolean removeuTudo = getGerenciador().removerTudoCategoria(

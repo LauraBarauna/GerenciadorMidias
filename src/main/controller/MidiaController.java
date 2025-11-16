@@ -11,6 +11,9 @@ import main.model.midias.livro.Livro;
 import main.model.midias.musica.Musica;
 import main.model.pessoa.Pessoa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MidiaController {
 
     private GerenciadorMidia gerenciador;
@@ -21,7 +24,8 @@ public class MidiaController {
         this.geradorId = new GeradorId();
     }
 
-    public void cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao, String categoria) throws MidiaDuplicadaException {
+    public void cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao,
+                               String categoria) throws MidiaDuplicadaException {
 
         int id = geradorId.getId();
 
@@ -60,5 +64,48 @@ public class MidiaController {
             throw new MidiaDuplicadaException(id);
         }
 
+    }
+
+    public List<Midia> listarMidias() {
+       return this.gerenciador.listarTodasMidias();
+    }
+
+    public List<Filme> listarFilmes() {
+        List<Filme> fimes = new ArrayList<>();
+
+        for (Midia midia : this.gerenciador.listarTodasMidias()) {
+            if (midia instanceof Filme) {
+                fimes.add((Filme) midia);
+            }
+        }
+        return fimes;
+    }
+
+    public List<Musica> listarMusicas() {
+        List<Musica> musicas = new ArrayList<>();
+        for (Midia midia : this.gerenciador.listarTodasMidias()) {
+            if (midia instanceof Musica) {
+                musicas.add((Musica) midia);
+            }
+        }
+        return musicas;
+    }
+
+    public List<Livro> listarLivros() {
+        List<Livro> livros = new ArrayList<>();
+        for (Midia midia : this.gerenciador.listarTodasMidias()) {
+            if (midia instanceof Livro) {
+                livros.add((Livro) midia);
+            }
+        }
+        return livros;
+    }
+
+    public void atualizarMidia(Midia midia) throws RuntimeException {
+        boolean atualizou = this.gerenciador.atualizarMidia(midia);
+
+        if (!atualizou) {
+            throw new RuntimeException("Não existe nenhuma midia cadastrada!");
+        }
     }
 }

@@ -28,6 +28,7 @@ public class TelaCadastroFilme {
         this.idiomaController = idiomaController;
         this.midiaController = midiaController;
         atualizarListaIdioma();
+        adicionarFilme();
 
     }
 
