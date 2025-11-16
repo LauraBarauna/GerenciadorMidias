@@ -14,6 +14,10 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class GerenciadorTela {
     private TelaPrincipal telaPrincipal;
 

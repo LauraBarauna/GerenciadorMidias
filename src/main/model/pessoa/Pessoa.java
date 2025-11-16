@@ -1,7 +1,7 @@
 package main.model.pessoa;
 
 /**
- * @author Laura
+ * @author Laura Barauna
  */
 public class Pessoa {
     

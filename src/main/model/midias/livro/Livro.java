@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * * @author Yasmin Darlen Schneider e Laura
+ * * @author Yasmin Darlen Schneider e Laura Barauna
  */
 public class Livro extends Midia implements Serializable {
 

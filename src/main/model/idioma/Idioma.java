@@ -1,8 +1,8 @@
 package main.model.idioma;
 
 /**
- * @author Laura
- */
+ * @author Laura Barauna
+ */ 
 public class Idioma {
     
     private String idioma;

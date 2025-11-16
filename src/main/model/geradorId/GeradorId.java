@@ -1,7 +1,7 @@
 package main.model.geradorId;
 
 /**
- * @author Laura
+ * @author Laura Barauna
  */
 public class GeradorId {
     

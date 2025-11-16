@@ -3,7 +3,7 @@ package main.model.midias;
 import java.io.Serializable;
 
 /**
- * @author Yasmin Darlen Schneider e Laura
+ * @author Yasmin Darlen Schneider e Laura Barauna
  */
 public abstract class Midia implements Serializable {
 

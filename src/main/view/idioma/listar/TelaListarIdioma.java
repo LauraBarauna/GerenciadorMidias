@@ -9,14 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaListarIdioma {
+
     private JPanel jPanelPrincipal;
     private JButton btnRemoverTudo;
     private JPanel jPanelIdiomas;
-
     private IdiomaController cotroller;
 
 
+    /**
+     * Construtor da tela de listagem de idioma. Inicializa o Controller, configura o layout do painel de listagem e anexa o ouvinte de evento (listener) para o botão de remoção em massa.
+     * @param cotroller: A instância do IdiomaController a ser usada.
+     */
     public TelaListarIdioma(IdiomaController cotroller) {
         this.cotroller = cotroller;
         jPanelIdiomas.setLayout(new BoxLayout(jPanelIdiomas, BoxLayout.Y_AXIS));
@@ -24,6 +32,9 @@ public class TelaListarIdioma {
         removerTudo();
     }
 
+    /**
+     * Configura o ActionListener para o botão "Remover Tudo". Obtém a lista de idiomas, solicita confirmação do usuário e, se afirmativo, delega a remoção em massa para o Controller e atualiza a lista.
+     */
     private void removerTudo() {
         btnRemoverTudo.addActionListener(new ActionListener() {
             @Override
@@ -55,11 +66,18 @@ public class TelaListarIdioma {
         });
     }
 
+    /**
+     * Força a atualização completa da lista de idiomas exibida. Delega a busca dos nomes dos idiomas para o Controller e chama o método de renderização.
+     */
     public void atualizarLista() {
         List<String> idiomas = cotroller.listarNomeIdioma();
         listarIdiomas(idiomas);
     }
 
+    /**
+     * Renderiza a lista de idiomas no jPanelIdiomas. Limpa o painel e cria dinamicamente um JPanel (linha) para cada idioma, incluindo um botão de "Remover" com seu respectivo ActionListener.
+     * @param idiomas: A lista de nomes de idiomas a serem exibidos.
+     */
     private void listarIdiomas(List<String> idiomas) {
         jPanelIdiomas.removeAll();
 
@@ -72,8 +90,12 @@ public class TelaListarIdioma {
 
                 btnRemover.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        cotroller.removerIdioma(idioma);
-                        JOptionPane.showMessageDialog(null, "Idioma " + idioma + " removida com sucesso!");
+                        try {
+                            cotroller.removerIdioma(idioma);
+                            JOptionPane.showMessageDialog(null, "Idioma " + idioma + " removida com sucesso!");
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        }
                         atualizarLista();
                     }
                 });
@@ -81,9 +103,7 @@ public class TelaListarIdioma {
                 linha.add(lblIdioma);
                 linha.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
                 linha.add(btnRemover);
-
-                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // borda pequena
-                jPanelIdiomas.add(linha);
+                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             }
             jPanelIdiomas.revalidate();
             jPanelIdiomas.repaint();
@@ -100,6 +120,10 @@ public class TelaListarIdioma {
         }
     }
 
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;
     }
