@@ -72,32 +72,50 @@ public class MidiaController {
        return this.gerenciador.listarTodasMidias();
     }
 
-    public List<Filme> listarFilmes() {
-        List<Filme> fimes = new ArrayList<>();
+    public List<Midia> listarFilmes() {
+        List<Midia> fimes = new ArrayList<>();
 
         for (Midia midia : this.gerenciador.listarTodasMidias()) {
             if (midia instanceof Filme) {
-                fimes.add((Filme) midia);
+                fimes.add(midia);
             }
         }
         return fimes;
     }
 
-    public List<Musica> listarMusicas() {
-        List<Musica> musicas = new ArrayList<>();
+    public List<Midia> listarMusicas() {
+        List<Midia> musicas = new ArrayList<>();
         for (Midia midia : this.gerenciador.listarTodasMidias()) {
             if (midia instanceof Musica) {
-                musicas.add((Musica) midia);
+                musicas.add(midia);
             }
         }
         return musicas;
     }
 
-    public List<Livro> listarLivros() {
-        List<Livro> livros = new ArrayList<>();
+    public List<Midia> listarPorCategoria(String categoria) throws MidiaNaoEncontradaException {
+        List<Midia> midias = this.gerenciador.listarPorCategoria(categoria);
+
+        if (midias.isEmpty()) {
+            throw new MidiaNaoEncontradaException(categoria);
+        }
+
+        return midias;
+    }
+
+    public List<Midia> ordenarPorTitulo() {
+        return this.gerenciador.ordenarPorTitulo();
+    }
+
+    public List<Midia> ordernarPorDuracao() {
+        return this.gerenciador.ordenarPorDuracao();
+    }
+
+    public List<Midia> listarLivros() {
+        List<Midia> livros = new ArrayList<>();
         for (Midia midia : this.gerenciador.listarTodasMidias()) {
             if (midia instanceof Livro) {
-                livros.add((Livro) midia);
+                livros.add(midia);
             }
         }
         return livros;
@@ -107,7 +125,7 @@ public class MidiaController {
         Midia buscou = this.gerenciador.buscarMidiaPorTitulo(titulo);
 
         if (buscou == null) {
-            throw new MidiaNaoEncontradaException(titulo);
+            throw new MidiaNaoEncontradaException(titulo, true);
         }
         return buscou;
     }

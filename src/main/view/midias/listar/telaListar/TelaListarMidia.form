@@ -29,7 +29,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="f536d" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="f536d" class="javax.swing.JTextField" binding="titulo">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -37,13 +37,15 @@
             </constraints>
             <properties/>
           </component>
-          <component id="d48e5" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="d48e5" class="javax.swing.JComboBox" binding="categorias">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <model/>
+            </properties>
           </component>
-          <component id="2c9ce" class="javax.swing.JButton" binding="títuloButton" default-binding="true">
+          <component id="2c9ce" class="javax.swing.JButton" binding="btnOrdenarTitulo">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -51,7 +53,7 @@
               <text value="Título"/>
             </properties>
           </component>
-          <component id="16478" class="javax.swing.JButton" binding="duraçãoButton" default-binding="true">
+          <component id="16478" class="javax.swing.JButton" binding="btnOrdenarDuracao">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -59,7 +61,7 @@
               <text value="Duração"/>
             </properties>
           </component>
-          <component id="b1f08" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
+          <component id="b1f08" class="javax.swing.JButton" binding="btnBuscar">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>

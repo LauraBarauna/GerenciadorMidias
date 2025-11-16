@@ -62,6 +62,7 @@ public class TelaMidia {
                         jPanelAcaoMidia.repaint();
                         break;
                     case "LISTAR":
+                        listar.atualizarListaMidias();
                         jPanelAcaoMidia.removeAll();
                         jPanelAcaoMidia.add(listar.getjPanelPrincipal());
                         jPanelAcaoMidia.revalidate();
