@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Yasmin Darlen Schneider e Laura
  */
-public abstract class Midia implements Serializable {
+public class Midia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     protected int id;
