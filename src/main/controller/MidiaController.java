@@ -112,6 +112,19 @@ public class MidiaController {
         return buscou;
     }
 
+    public Midia buscarMidiaPorId(int id) throws MidiaNaoEncontradaException {
+        Midia buscou = this.gerenciador.buscarPorId(id);
+
+        if (buscou == null) {
+            throw new MidiaNaoEncontradaException(id);
+        }
+        return buscou;
+    }
+
+    public void removerMidia(int id) {
+        boolean removeu = this.gerenciador.removerMidia(id);
+    }
+
     public void atualizarMidia(Midia midia) throws RuntimeException {
         boolean atualizou = this.gerenciador.atualizarMidia(midia);
 

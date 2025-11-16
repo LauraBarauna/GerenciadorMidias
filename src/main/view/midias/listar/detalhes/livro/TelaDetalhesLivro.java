@@ -26,13 +26,13 @@ public class TelaDetalhesLivro {
     private Livro livro;
     private String titulo;
 
-    public TelaDetalhesLivro(MidiaController midiaController, PessoaController pessoaController, String titulo) {
+    public TelaDetalhesLivro(MidiaController midiaController, PessoaController pessoaController, int id) {
         this.pessoaController = pessoaController;
 
         this.autoresSelecionados = new ArrayList<>();
 
         this.titulo = titulo;
-        this.livro = (Livro) midiaController.buscarMidiaPorTitulo(this.titulo);
+        this.livro = (Livro) midiaController.buscarMidiaPorId(id);
         layouts();
         atualizarAutoresSelecionados();
     }

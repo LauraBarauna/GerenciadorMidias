@@ -64,13 +64,17 @@ public class TelaDetalhesMidia {
 
         jPanelTipoMidia.setLayout(new CardLayout());
         salvarAlteracoes();
+        removerMidia();
     }
 
     private void removerMidia() {
         btnRemover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                midiaController.removerMidia(idMidia);
+                JOptionPane.showMessageDialog(janela, "Midia removida com sucesso!");
+                telaListarMidia.atualizarListaMidias();
+                janela.dispose();
             }
         });
     }
@@ -158,7 +162,7 @@ public class TelaDetalhesMidia {
                 jPanelTipoMidia.repaint();
                 break;
             case "Livro":
-                this.telaDetalhesLivro = new TelaDetalhesLivro(midiaController, pessoaController, midia.getTitulo());
+                this.telaDetalhesLivro = new TelaDetalhesLivro(midiaController, pessoaController, midia.getId());
                 jPanelTipoMidia.removeAll();
                 jPanelTipoMidia.add(telaDetalhesLivro.getjPanelPrincipal());
                 jPanelTipoMidia.revalidate();

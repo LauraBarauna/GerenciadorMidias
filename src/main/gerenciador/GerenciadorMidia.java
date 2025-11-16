@@ -123,19 +123,12 @@ public class GerenciadorMidia {
      * * @param localArquivo: O caminho de arquivo da mídia (usado como chave única para busca).
      * @return true se a remoção e a deleção do arquivo foram bem-sucedidas, false caso contrário.
      */
-    public boolean removerMidia(String localArquivo) {
-        if (localArquivo == null || localArquivo.isBlank()) {
-        	return false;
-        }
-        
-        Midia midiaRemover = this.midias.stream()
-                .filter(m -> m.getLocal().equalsIgnoreCase(localArquivo))
-                .findFirst()
-                .orElse(null);
-
-        if (midiaRemover == null) {
+    public boolean removerMidia(int id) {
+        if (id <= 0) {
             return false;
         }
+
+        Midia midiaRemover = buscarPorId(id);
         
         String nomeArquivo = gerarNomeArquivo(midiaRemover.getId());
         Path caminhoArquivo = Paths.get(nomeArquivo);
@@ -183,6 +176,18 @@ public class GerenciadorMidia {
         }
         for (Midia midia : this.midias) {
             if (midia.getTitulo().equalsIgnoreCase(titulo)) {
+                return midia;
+            }
+        }
+        return null;
+    }
+
+    public Midia buscarPorId(int id) {
+        if (id <= 0) {
+            return null;
+        }
+        for (Midia midia : this.midias) {
+            if (midia.getId() == id) {
                 return midia;
             }
         }
