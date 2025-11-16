@@ -32,11 +32,11 @@ public class TelaListarMidia {
     private TelaDetalhesMidia detalhes;
 
     public TelaListarMidia(MidiaController midiaController, PessoaController pessoaController,
-                           CategoriaController categoriaController) {
+                           CategoriaController categoriaController, IdiomaController idiomaController) {
         this.midiaController = midiaController;
         this.pessoaController = pessoaController;
         this.categoriaController = categoriaController;
-        this.detalhes = new TelaDetalhesMidia(midiaController, pessoaController, categoriaController, this);
+        this.detalhes = new TelaDetalhesMidia(midiaController, pessoaController, categoriaController, idiomaController,this);
         jPanelMidias.setLayout(new BoxLayout(jPanelMidias, BoxLayout.Y_AXIS));
         jPanelMidias.setAlignmentX(Component.CENTER_ALIGNMENT);
         selecioarTipoMidia();

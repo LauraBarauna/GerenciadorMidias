@@ -22,16 +22,16 @@ public class TelaDetalhesMusica {
         List<String> artistas = this.pessoaController.listarPessoas();
 
         Musica musica = (Musica) midia;
-        this.artistas.setSelectedItem(musica.getArtista().getNome());
-        listarArtistas(artistas);
+        listarArtistas(artistas, musica);
     }
 
-    private void listarArtistas(List<String> artistas) {
+    private void listarArtistas(List<String> artistas, Musica musica) {
         this.artistas.removeAllItems();
 
         for (String artista : artistas) {
             this.artistas.addItem(artista);
         }
+        this.artistas.setSelectedItem(musica.getArtista().getNome());
     }
 
     public Pessoa getArtista() {

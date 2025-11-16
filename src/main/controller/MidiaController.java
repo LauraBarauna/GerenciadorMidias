@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.excecoes.midia.MidiaDuplicadaException;
+import main.excecoes.midia.MidiaNaoEncontradaException;
 import main.gerenciador.GerenciadorMidia;
 import main.model.geradorId.GeradorId;
 import main.model.idioma.Idioma;
@@ -24,7 +25,7 @@ public class MidiaController {
         this.geradorId = new GeradorId();
     }
 
-    public void cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao,
+    public Livro cadastrarLivro(String local, double tamanhoEmDisco, String titulo, int duracao,
                                String categoria) throws MidiaDuplicadaException {
 
         int id = geradorId.getId();
@@ -35,6 +36,7 @@ public class MidiaController {
         if (!adicionou) {
             throw new MidiaDuplicadaException(id);
         }
+        return (Livro) gerenciador.buscarMidiaPorTitulo(titulo);
     }
 
 
@@ -99,6 +101,15 @@ public class MidiaController {
             }
         }
         return livros;
+    }
+
+    public Midia buscarMidiaPorTitulo(String titulo) throws MidiaNaoEncontradaException {
+        Midia buscou = this.gerenciador.buscarMidiaPorTitulo(titulo);
+
+        if (buscou == null) {
+            throw new MidiaNaoEncontradaException(titulo);
+        }
+        return buscou;
     }
 
     public void atualizarMidia(Midia midia) throws RuntimeException {

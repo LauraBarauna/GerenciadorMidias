@@ -3,6 +3,7 @@ package main.view.midias.cadastro.livro;
 import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.excecoes.midia.MidiaException;
+import main.model.midias.livro.Livro;
 import main.model.pessoa.Pessoa;
 
 import javax.swing.*;
@@ -29,6 +30,8 @@ public class TelaCadastroLivro {
     private String categoriaArquivo;
     private double tamanhoArquivo;
 
+
+
     public TelaCadastroLivro(PessoaController pessoaController, MidiaController midiaController) {
         this.listaPessoas = new ArrayList<>();
         this.pessoaController = pessoaController;
@@ -51,8 +54,13 @@ public class TelaCadastroLivro {
                 }
 
                 try {
-                    midiaController.cadastrarLivro(caminhoArquivo, tamanhoArquivo, tituloArquivo,
+                    Livro livro = midiaController.cadastrarLivro(caminhoArquivo, tamanhoArquivo, tituloArquivo,
                             qtdPaginas, categoriaArquivo);
+
+                    for (Pessoa pessoa : listaPessoas) {
+                        livro.incluirAutor(pessoa);
+                    }
+
                 } catch (MidiaException error) {
                     JOptionPane.showMessageDialog(null, error.getMessage());
                 } catch (IllegalAccessError error) {

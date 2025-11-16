@@ -24,7 +24,7 @@ public class TelaMidia {
     public TelaMidia(List<String> acoes, CategoriaController controller, IdiomaController idiomaController,
                      PessoaController pessoaController, MidiaController midiaController) {
         this.cadastro = new TelaCadastroMidia(controller, idiomaController, pessoaController, midiaController);
-        this.listar = new TelaListarMidia(midiaController, pessoaController, controller);
+        this.listar = new TelaListarMidia(midiaController, pessoaController, controller, idiomaController);
         carregarComboBoxMidias(acoes);
         adicionarLayouts();
         atualizarPainel();
