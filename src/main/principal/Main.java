@@ -6,7 +6,7 @@ import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.gerenciador.GerenciadorTela;
 
-public class Main {
+public class  Main {
     public static void main(String[] args)  {
         CategoriaController categoriaController = new CategoriaController();
         IdiomaController idiomaController = new IdiomaController();

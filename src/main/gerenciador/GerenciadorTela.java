@@ -37,7 +37,7 @@ public class GerenciadorTela {
     private List<String> adicionarAcoesMidia() {
         return Arrays.asList(
                 "Adicionar",
-                "Listar Todos",
+                "Listar",
                 "Listar um",
                 "Atualizar",
                 "Remover"

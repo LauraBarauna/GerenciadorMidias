@@ -5,6 +5,7 @@ import main.controller.IdiomaController;
 import main.controller.MidiaController;
 import main.controller.PessoaController;
 import main.view.midias.cadastro.midia.TelaCadastroMidia;
+import main.view.midias.listar.telaListar.TelaListarMidia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,10 +19,12 @@ public class TelaMidia {
     private JPanel jPanelAcaoMidia;
 
     private TelaCadastroMidia cadastro;
+    private TelaListarMidia listar;
 
     public TelaMidia(List<String> acoes, CategoriaController controller, IdiomaController idiomaController,
                      PessoaController pessoaController, MidiaController midiaController) {
         this.cadastro = new TelaCadastroMidia(controller, idiomaController, pessoaController, midiaController);
+        this.listar = new TelaListarMidia(midiaController, pessoaController, controller, idiomaController);
         carregarComboBoxMidias(acoes);
         adicionarLayouts();
         atualizarPainel();
@@ -45,11 +48,11 @@ public class TelaMidia {
     }
 
     private void atualizarPainel() {
-        String acaoSelecionada = acoesMidia.getSelectedItem().toString().toUpperCase();
 
         acoesMidia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String acaoSelecionada = acoesMidia.getSelectedItem().toString().toUpperCase();
                 switch (acaoSelecionada) {
                     case "ADICIONAR":
                         cadastro.telaMidia();
@@ -58,6 +61,14 @@ public class TelaMidia {
                         jPanelAcaoMidia.revalidate();
                         jPanelAcaoMidia.repaint();
                         break;
+                    case "LISTAR":
+                        listar.atualizarListaMidias();
+                        jPanelAcaoMidia.removeAll();
+                        jPanelAcaoMidia.add(listar.getjPanelPrincipal());
+                        jPanelAcaoMidia.revalidate();
+                        jPanelAcaoMidia.repaint();
+                        break;
+
                 }
             }
         });
