@@ -10,7 +10,9 @@ import java.nio.file.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * * @author Luiz Felipe Batista Serpa de Maria
+ */
 public class TesteGerenciadorMidia {
 
     private static Path tempDirOriginal;

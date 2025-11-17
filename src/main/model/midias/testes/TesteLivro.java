@@ -9,11 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Classe de testes unitários para a classe Livro.
- * Cada teste verifica um comportamento específico esperado.
+ * * @author Luiz Felipe Batista Serpa de Maria
  */
+
 public class TesteLivro {
 
     private Livro livro;

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-
+/**
+ * * @author Luiz Felipe Batista Serpa de Maria
+ */
 public class TesteGerenciadorPessoa {
 
     private GerenciadorPessoa gp;

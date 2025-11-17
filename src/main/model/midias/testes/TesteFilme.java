@@ -7,7 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * * @author Luiz Felipe Batista Serpa de Maria
+ */
 public class TesteFilme {
 
     private Categoria categoria;
