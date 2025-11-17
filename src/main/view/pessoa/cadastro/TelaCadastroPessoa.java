@@ -22,7 +22,7 @@ public class TelaCadastroPessoa {
     
     /**
      * Construtor da tela de cadastro de Pessoa. Inicializa o Controller e configura os ouvintes de eventos (listeners) para o botão de adicionar e para o evento da tecla Enter no campo de texto.
-     * @param controller: A instância do {@code PessoaController} a ser usada.
+     * @param controller: A instância do PessoaController a ser usada.
      */
 
     public TelaCadastroPessoa(PessoaController controller) {
@@ -33,7 +33,6 @@ public class TelaCadastroPessoa {
     
     /**
      * Configura um KeyListener para o campo de texto do nome. Permite que o usuário submeta o formulário (simulando um clique no botão "Adicionar") ao pressionar a tecla ENTER.
-     * </p>
      */
 
     private void enterPessoa() {

@@ -21,8 +21,8 @@ public class TelaPessoa {
     
     /**
      * Construtor da tela principal de Pessoa. Inicializa as sub-telas, configura o layout do painel de ação e preenche o ComboBox de ações.
-     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox (e.g., ["ADICIONAR", "LISTAR"]).
-     * @param controller: A instância do {@code PessoaController} compartilhada entre todas as sub-telas.
+     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox.
+     * @param controller: A instância do PessoaController compartilhada entre todas as sub-telas.
      */
 
     public TelaPessoa(List<String> acoes, PessoaController controller) {

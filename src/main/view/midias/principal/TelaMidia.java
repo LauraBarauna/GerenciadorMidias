@@ -25,7 +25,7 @@ public class TelaMidia {
 
     /**
      * Construtor da tela principal de Mídia. Inicializa a tela de cadastro e recebe todos os controllers necessários para a cadeia de sub-telas.
-     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox (e.g., ["ADICIONAR"]).
+     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox.
      * @param controller: Controller de Categorias.
      * @param idiomaController: Controller de Idiomas.
      * @param pessoaController: Controller de Pessoas (Autores/Artistas).

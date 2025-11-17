@@ -40,7 +40,6 @@ public class TelaListarIdioma {
             @Override
             public void actionPerformed(ActionEvent e) {
                List<Idioma> idiomas = cotroller.listarIdiomas();
-
                if (!idiomas.isEmpty()) {
                    int opcao = Integer.parseInt(JOptionPane.showInputDialog(
                            "Tem certeza que quer remover tudo?\n" +

@@ -26,7 +26,7 @@ public class TelaIdioma {
 
     /**
      * Construtor da tela principal de Idioma. Inicializa as sub-telas, configura o layout do painel de ação e preenche o ComboBox de ações.
-     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox (e.g., ["ADICIONAR", "LISTAR"]).
+     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox.
      * @param controller: A instância do IdiomaController compartilhada entre todas as sub-telas.
      */
     public TelaIdioma(List<String> acoes, IdiomaController controller) {
@@ -55,7 +55,7 @@ public class TelaIdioma {
     }
 
     /**
-     * Configura o {@code ActionListener} para o ComboBox de ações. Este método é responsável por limpar o painel de ação e carregar a sub-tela (Cadastro ou Listagem) correspondente à ação selecionada.
+     * Configura o ActionListener para o ComboBox de ações. Este método é responsável por limpar o painel de ação e carregar a sub-tela (Cadastro ou Listagem) correspondente à ação selecionada.
      */
     private void trocarTela() {
         this.acoesIdioma.addActionListener(new ActionListener() {

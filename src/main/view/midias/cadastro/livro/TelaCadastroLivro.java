@@ -111,7 +111,7 @@ public class TelaCadastroLivro {
                         } else {
                             listaPessoas.add(new Pessoa(a));
                             JOptionPane.showMessageDialog(null, "Pessoa " + a + " adicionada com sucesso!");
-                            System.out.println(listaPessoas); // Debug ou log
+                            System.out.println(listaPessoas);
                         }
 
                     }
@@ -120,7 +120,7 @@ public class TelaCadastroLivro {
                 linha.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
                 linha.add(btnAdd);
 
-                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // borda pequena
+                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // coloca borda pequena
                 jPanelAutores.add(linha);
             }
             jPanelAutores.revalidate();

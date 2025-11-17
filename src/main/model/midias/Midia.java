@@ -15,7 +15,6 @@ public abstract class Midia implements Serializable {
     protected int duracao;
     protected Categoria categoria;
 
-
     /**
      * Construtor da classe Midia. Inicializa e valida todos os atributos comuns a todas as mídias.
      * @param id: O identificador único da mídia.

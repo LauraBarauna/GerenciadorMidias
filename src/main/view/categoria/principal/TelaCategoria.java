@@ -25,7 +25,7 @@ public class TelaCategoria {
 
     /**
      * Construtor da tela principal de Categoria. Inicializa as sub-telas, configura o layout do painel de ação e preenche o ComboBox de ações.
-     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox (e.g., ["ADICIONAR", "LISTAR"]).
+     * @param acoes: A lista de strings que representa as ações a serem exibidas no ComboBox.
      * @param controller: A instância do CategoriaController compartilhada entre todas as sub-telas.
      */
     public TelaCategoria(List<String> acoes, CategoriaController controller) {

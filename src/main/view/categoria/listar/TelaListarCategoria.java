@@ -121,7 +121,7 @@ public class TelaListarCategoria {
                 linha.add(nome);
                 linha.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
                 linha.add(btnRemover);
-                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // borda pequena
+                linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // coloca borda pequena
                 jPanelCategorias.add(linha);
             }
             jPanelCategorias.revalidate();

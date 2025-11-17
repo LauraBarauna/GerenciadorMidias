@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Laura Barauna (Adaptado para Javadoc)
+ * @author Laura Barauna
  */
 
 public class GerenciadorIdioma {

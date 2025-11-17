@@ -23,7 +23,7 @@ public class TelaCadastroIdioma {
 
     /**
      * Construtor da tela de cadastro de idioma. Inicializa o Controller e configura os ouvintes de eventos (listeners) para o botão de adicionar e para o evento da tecla Enter.
-     * @param controller: A instância do {@code IdiomaController} a ser usada.
+     * @param controller: A instância do IdiomaController a ser usada.
      */
     public TelaCadastroIdioma(IdiomaController controller) {
         this.controller = controller;

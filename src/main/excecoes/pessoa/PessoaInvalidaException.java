@@ -2,7 +2,6 @@ package main.excecoes.pessoa;
 
 /**
  * @author Laura Barauna e Yasmin Darlen Schneider
-
  */
 public class PessoaInvalidaException extends PessoaException {
 
