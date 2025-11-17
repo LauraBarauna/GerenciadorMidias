@@ -152,6 +152,7 @@ public class TelaCadastroMidia {
                 getMusica().setExtensaoArquivo(extensaoArquivo);
                 layout.show(jPanelPrincipal, "musica");
                 break;
+            case "PUB":
             case "PDF":
                 getLivro().setCaminhoArquivo(caminhoArquivo);
                 getLivro().setTituloArquivo(tituloArquivo);
