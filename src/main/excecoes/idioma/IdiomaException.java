@@ -10,7 +10,7 @@ public class IdiomaException extends RuntimeException {
 	
 	/**
 	 * Construtor padrão que aceita uma mensagem detalhada sobre o erro ocorrido.
-	 * * @param message: A mensagem de erro que descreve a exceção do Idioma.
+	 * @param message: A mensagem de erro que descreve a exceção do Idioma.
 	 */
 
 	public IdiomaException(String message) {
