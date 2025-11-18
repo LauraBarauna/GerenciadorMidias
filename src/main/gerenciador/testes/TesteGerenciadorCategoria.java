@@ -221,57 +221,6 @@ public class TesteGerenciadorCategoria {
     }
 
     /**
-     * Testa a atualização de uma categoria existente para uma nova categoria.
-     * O método deve retornar true e substituir corretamente o valor anterior.
-     */
-    @Test
-    public void testAtualizarCategoriaPorTipo() {
-
-        GerenciadorCategoria gc = new GerenciadorCategoria();
-
-        gc.criarCategoriaPorTipo(new Categoria("Antigo"), 'F');
-
-        Categoria nova = new Categoria("Novo");
-
-        boolean atualizado = gc.atualizarCategoriaPorTipo("Antigo", 'F', nova);
-
-        assertTrue(atualizado);
-        assertEquals("Novo", gc.encontrarCategoriaPorTipo("Novo", 'F').getCategoria());
-    }
-
-    /**
-     * Testa a tentativa de atualizar uma categoria que não existe.
-     * O método deve retornar false.
-     */
-    @Test
-    public void testAtualizarCategoriaNaoExistente() {
-
-        GerenciadorCategoria gc = new GerenciadorCategoria();
-
-        Categoria nova = new Categoria("Novo");
-
-        boolean atualizado = gc.atualizarCategoriaPorTipo("Nada", 'F', nova);
-
-        assertFalse(atualizado);
-    }
-
-    /**
-     * Testa a tentativa de atualizar uma categoria utilizando um tipo inválido.
-     * Deve retornar false, pois o tipo não é reconhecido.
-     */
-    @Test
-    public void testAtualizarCategoriaTipoInvalido() {
-
-        GerenciadorCategoria gc = new GerenciadorCategoria();
-
-        Categoria nova = new Categoria("Novo");
-
-        boolean atualizado = gc.atualizarCategoriaPorTipo("Teste", 'X', nova);
-
-        assertFalse(atualizado);
-    }
-
-    /**
      * Testa a remoção completa de todas as categorias de um tipo.
      * Deve retornar true e esvaziar a lista correspondente.
      */

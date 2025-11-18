@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaCadastroFilme {
     private JPanel jPanelPrincipal;
     private JComboBox<String> idiomas;
@@ -23,14 +27,25 @@ public class TelaCadastroFilme {
     private String tituloArquivo;
     private String categoriaArquivo;
     private double tamanhoArquivo;
+    
+    /**
+     * Construtor da tela de cadastro de Filme. Inicializa os Controllers, atualiza a lista de idiomas disponíveis no ComboBox
+     * e configura o listener para o botão de cadastro.
+     * @param idiomaController: O Controller de Idiomas para listar os idiomas.
+     * @param midiaController: O Controller de Mídias para realizar o cadastro.
+     */
 
     public TelaCadastroFilme(IdiomaController idiomaController, MidiaController midiaController) {
         this.idiomaController = idiomaController;
         this.midiaController = midiaController;
         atualizarListaIdioma();
         adicionarFilme();
-
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Cadastrar Filme". Realiza a validação da duração, coleta os dados do formulário e os metadados
+     * do arquivo, e delega o cadastro ao MidiaController.
+     */
 
     private void adicionarFilme() {
         cadastrarFilmeButton.addActionListener(new ActionListener() {
@@ -54,15 +69,23 @@ public class TelaCadastroFilme {
                 }
 
                 JOptionPane.showMessageDialog(null, "Filme cadastrado com sucesso!");
-
             }
         });
     }
+    
+    /**
+     * Solicita a lista atualizada de nomes de Idiomas ao Controller e chama o método para preencher o ComboBox.
+     */
 
     public void atualizarListaIdioma() {
         List<String> idiomas = idiomaController.listarNomeIdioma();
         adicionarListaIdiomas(idiomas);
     }
+    
+    /**
+     * Preenche o JComboBox idiomas com a lista de nomes de idiomas. Se a lista estiver vazia, exibe uma mensagem informativa no ComboBox.
+     * @param idiomasList A lista de nomes (String) de idiomas disponíveis.
+     */
 
     private void adicionarListaIdiomas(List<String> idiomasList) {
         idiomas.removeAllItems();
@@ -74,6 +97,11 @@ public class TelaCadastroFilme {
             idiomas.addItem("Não existe nenhum idioma cadastrado. Cadastre um no menu de Idioma acima.");
         }
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

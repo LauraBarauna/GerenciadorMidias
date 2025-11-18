@@ -3,7 +3,7 @@ package main.model.idioma;
 import java.io.Serializable;
 
 /**
- * @author Laura
+ * @author Laura Barauna e Yasmin Darlen Schneider
  */
 public class Idioma implements Serializable {
 

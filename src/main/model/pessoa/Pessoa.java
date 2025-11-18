@@ -3,7 +3,7 @@ package main.model.pessoa;
 import java.io.Serializable;
 
 /**
- * @author Laura
+ * @author Laura Barauna e Yasmin Darlen Schneider
  */
 public class Pessoa implements Serializable {
 
@@ -38,7 +38,8 @@ public class Pessoa implements Serializable {
     }
     
     /**
-     * Sobrescreve o método toString() para retornar diretamente o nome. Útil para exibir o objeto Pessoa em logs ou na interface sem chamar explicitamente  método getNome().
+     * Sobrescreve o método toString() para retornar diretamente o nome. Útil para exibir o objeto Pessoa em logs ou na interface sem chamar 
+     * explicitamente  método getNome().
      * @return O nome da pessoa.
      */
     @Override

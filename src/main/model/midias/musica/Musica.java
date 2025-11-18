@@ -7,7 +7,7 @@ import main.model.midias.Midia;
 import main.model.pessoa.Pessoa;
 
 /**
- * @author Yasmin Darlen Schneider e Laura
+ * @author Yasmin Darlen Schneider e Laura Barauna
  */
 public class Musica extends Midia implements Serializable {
 
@@ -43,7 +43,8 @@ public class Musica extends Midia implements Serializable {
     }
 
     /**
-     * Define a duração da música em segundos. Sobrescreve o método para manter a documentação da subclasse, mas chama a implementação da classe pai para validar.
+     * Define a duração da música em segundos. Sobrescreve o método para manter a documentação da subclasse, mas chama a implementação da classe 
+     * pai para validar.
      * @param duracao: O valor da duração em segundos.
      * @throws IllegalArgumentException Se a duração for menor ou igual a zero.
      */

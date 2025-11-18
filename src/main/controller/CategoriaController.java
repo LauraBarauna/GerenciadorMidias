@@ -129,6 +129,11 @@ public class CategoriaController {
                 Character.toUpperCase(tipoCategoria.charAt(0))
         );
     }
+    
+    /**
+     * Retorna a instância do GerenciadorCategoria em uso.
+     * @return O GerenciadorCategoria.
+     */
 
     public GerenciadorCategoria getGerenciador() {
         return gerenciador;

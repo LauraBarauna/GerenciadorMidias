@@ -9,13 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaListarIdioma {
     private JPanel jPanelPrincipal;
     private JButton btnRemoverTudo;
     private JPanel jPanelIdiomas;
 
     private IdiomaController cotroller;
-
+    
+    /**
+     * Construtor da tela de listagem de Idioma. Inicializa o Controller, configura o BoxLayout vertical para a listagem
+     * e anexa o Listener para o botão "Remover Tudo".
+     * @param cotroller A instância do IdiomaController a ser usada.
+     */
 
     public TelaListarIdioma(IdiomaController cotroller) {
         this.cotroller = cotroller;
@@ -23,6 +32,11 @@ public class TelaListarIdioma {
         jPanelIdiomas.setAlignmentX(Component.CENTER_ALIGNMENT);
         removerTudo();
     }
+    
+    /**
+     * Configura o  ActionListener para o botão "Remover Tudo". Antes de remover, verifica se há idiomas para remover e solicita confirmação
+     * via JOptionPane.showInputDialog.
+     */
 
     private void removerTudo() {
         btnRemoverTudo.addActionListener(new ActionListener() {
@@ -54,11 +68,22 @@ public class TelaListarIdioma {
             }
         });
     }
+    
+    /**
+     * Solicita a lista atualizada de nomes de idiomas ao Controller e dispara a renderização da lista. Este método é chamado sempre que a 
+     * lista precisa ser recarregada.
+     */
 
     public void atualizarLista() {
         List<String> idiomas = cotroller.listarNomeIdioma();
         listarIdiomas(idiomas);
     }
+    
+    /**
+     * Renderiza a lista de idiomas no jPanelIdiomas. Para cada idioma, cria uma linha contendo o nome e um botão "Remover",
+     * configurando o Listener para remoção individual.
+     * @param idiomas: A lista de nomes (String) dos idiomas a serem exibidos.
+     */
 
     private void listarIdiomas(List<String> idiomas) {
         jPanelIdiomas.removeAll();
@@ -99,6 +124,11 @@ public class TelaListarIdioma {
             jPanelIdiomas.repaint();
         }
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

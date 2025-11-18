@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaDetalhesMidia {
     private JPanel jPanelPrincipal;
     private JTextField titulo;
@@ -51,6 +55,16 @@ public class TelaDetalhesMidia {
     private String tipoMidia;
 
     private int idMidia;
+    
+    /**
+     * Construtor da Tela de Detalhes de Mídia. Inicializa os Controllers e os sub-painéis de detalhes (Filme e Música),
+     * configura o layout do painel dinâmico e anexa os Listeners aos botões "Salvar" e "Remover".
+     * @param midiaController: Controller de Mídias.
+     * @param pessoaController: Controller de Pessoas.
+     * @param categoriaController: Controller de Categorias.
+     * @param idiomaController: Controller de Idiomas.
+     * @param telaListarMidia: Referência à tela de listagem para atualização.
+     */
 
     public TelaDetalhesMidia(MidiaController midiaController, PessoaController pessoaController,
                              CategoriaController categoriaController, IdiomaController idiomaController, TelaListarMidia telaListarMidia) {
@@ -66,6 +80,11 @@ public class TelaDetalhesMidia {
         salvarAlteracoes();
         removerMidia();
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Remover". Solicita ao MidiaController a remoção da mídia pelo ID, exibe mensagem de sucesso,
+     * atualiza a lista principal e fecha a janela de detalhes.
+     */
 
     private void removerMidia() {
         btnRemover.addActionListener(new ActionListener() {
@@ -78,6 +97,11 @@ public class TelaDetalhesMidia {
             }
         });
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Salvar". Coleta os dados dos campos gerais e dos sub-painéis, cria um novo objeto Mídia
+     * (Filme, Música ou Livro) com o ID original, delega a atualização ao Controller, e fecha a janela.
+     */
 
     private void salvarAlteracoes() {
         btnSalvar.addActionListener(new ActionListener() {
@@ -118,6 +142,11 @@ public class TelaDetalhesMidia {
             }
         });
     }
+    
+    /**
+     * Preenche o ComboBox de categorias com as categorias válidas para o tipo de mídia atual.
+     * @param categorias: A lista de nomes de categorias a serem exibidas.
+     */
 
     public void atualizarListaCategoria(List<String> categorias) {
         this.categorias.removeAllItems();
@@ -126,6 +155,12 @@ public class TelaDetalhesMidia {
         }
 
     }
+    
+    /**
+     * Carrega todas as informações da mídia fornecida nos campos da tela. Este método determina o tipo da mídia, preenche os campos comuns, carrega as 
+     * categorias e, crucialmente, carrega o sub-painel de detalhes específico (Filme, Música ou Livro).
+     * @param midia: O objeto Midia a ser carregado na tela de detalhes.
+     */
 
     public void carregarInfos(Midia midia) {
         if (midia instanceof Filme) {
@@ -171,10 +206,20 @@ public class TelaDetalhesMidia {
         }
 
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;
     }
+    
+    /**
+     * Define a referência do JFrame pai. É necessário para poder fechar a janela programaticamente após salvar ou remover.
+     * @param janela: O JFrame que contém esta tela.
+     */
 
     public void setJanela(JFrame janela) {
         this.janela = janela;

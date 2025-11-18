@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * * @author Yasmin Darlen Schneider e Laura
+ * * @author Yasmin Darlen Schneider e Laura Barauna
  */
 public class Livro extends Midia implements Serializable {
 
@@ -33,8 +33,9 @@ public class Livro extends Midia implements Serializable {
     }
 
     /**
-     * Adiciona um novo autor à lista, verificando se ele já não existe através do nome. Lança uma exceção se houver uma tentativa de incluir um autor com o mesmo nome.
-     * @param autor O objeto {@code Pessoa} a ser incluído como autor.
+     * Adiciona um novo autor à lista, verificando se ele já não existe através do nome. Lança uma exceção se houver uma tentativa de incluir 
+     * um autor com o mesmo nome.
+     * @param autor O objeto Pessoa a ser incluído como autor.
      * @throws AutorDuplicadoException Se um autor com o mesmo nome já estiver cadastrado.
      */
     public void incluirAutor(Pessoa autor) {
@@ -104,7 +105,6 @@ public class Livro extends Midia implements Serializable {
             }
             resultado = resultado + "\n";
         }
-        
         return resultado;
     }
 }

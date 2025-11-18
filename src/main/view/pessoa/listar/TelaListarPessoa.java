@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
 
 public class TelaListarPessoa {
     private JPanel jPanelPrincipal;
@@ -15,6 +18,12 @@ public class TelaListarPessoa {
     private JPanel jPanelPessoas;
 
     private PessoaController controller;
+    
+    /**
+     * Construtor da tela de listagem de Pessoa. Inicializa o Controller, configura o layout do painel de listagem para ser vertical
+     * e anexa o ouvinte de evento (listener) para o botão de remoção em massa.
+     * @param controller: A instância do {@code PessoaController} a ser usada.
+     */
 
     public TelaListarPessoa(PessoaController controller) {
         this.controller = controller;
@@ -22,6 +31,11 @@ public class TelaListarPessoa {
         jPanelPessoas.setAlignmentX(Component.CENTER_ALIGNMENT);
         removerTudo();
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Remover Tudo". Obtém a lista de pessoas, solicita confirmação do usuário e, se afirmativo,
+     * delega a remoção em massa para o Controller e atualiza a lista.
+     */
 
     private void removerTudo() {
         btnRemoverTudo.addActionListener(new ActionListener() {
@@ -53,11 +67,21 @@ public class TelaListarPessoa {
             }
         });
     }
+    
+    /**
+     * Força a atualização completa da lista de pessoas exibida. Delega a busca dos nomes das pessoas para o Controller e chama o método de renderização.
+     */
 
     public void atualizarLista() {
         List<String> pessoas = controller.listarPessoas();
         listarPessoas(pessoas);
     }
+    
+    /**
+     * Renderiza a lista de pessoas no jPanelPessoas. Limpa o painel e cria dinamicamente um JPanel (linha) para cada pessoa,
+     * incluindo um botão de "Remover" com seu respectivo ActionListener.
+     * @param pessoas: A lista de nomes de pessoas (String) a serem exibidas.
+     */
 
     private void listarPessoas(List<String> pessoas) {
         jPanelPessoas.removeAll();
@@ -98,6 +122,11 @@ public class TelaListarPessoa {
             jPanelPessoas.repaint();
         }
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

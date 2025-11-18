@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaDetalhesLivro {
     private JPanel jPanelPrincipal;
     private JPanel jPanelAutoresSelecionados;
@@ -25,6 +29,14 @@ public class TelaDetalhesLivro {
 
     private Livro livro;
     private String titulo;
+    
+    /**
+     * Construtor da Tela de Detalhes de Livro. Inicializa os Controllers, recupera a instância de Livro pelo ID,
+     * configura os layouts verticais e inicia a listagem dos autores.
+     * @param midiaController: O Controller de Mídias (usado para buscar o Livro pelo ID).
+     * @param pessoaController: O Controller de Pessoas (usado para listar autores disponíveis).
+     * @param id: O ID da Mídia (Livro) a ser detalhada.
+     */
 
     public TelaDetalhesLivro(MidiaController midiaController, PessoaController pessoaController, int id) {
         this.pessoaController = pessoaController;
@@ -36,6 +48,11 @@ public class TelaDetalhesLivro {
         layouts();
         atualizarAutoresSelecionados();
     }
+    
+    /**
+     * Configura o layout dos painéis de listagem. Define o BoxLayout verticalmente para jPanelAutoresSelecionados e
+     * jPanelNovosAutores, e associa-os aos seus respectivos JScrollPanes.
+     */
 
     private void layouts() {
         jPanelAutoresSelecionados.setLayout(new BoxLayout(jPanelAutoresSelecionados, BoxLayout.Y_AXIS));
@@ -47,6 +64,11 @@ public class TelaDetalhesLivro {
         jScrollPaneNovosAutores.setViewportView(jPanelNovosAutores);
         jScrollPaneAutores.setViewportView(jPanelAutoresSelecionados);
     }
+    
+    /**
+     * Método principal para sincronizar o estado dos autores. Limpa a lista temporária autoresSelecionados e a preenche com os autores atuais do livro,
+     * chama o método para recalcular os autores novos/disponíveis e, finalmente, renderiza a lista de autores selecionados.
+     */
 
     public void atualizarAutoresSelecionados() {
         autoresSelecionados.clear();
@@ -54,6 +76,12 @@ public class TelaDetalhesLivro {
         atualizarAutoresNovos();
         listarAutoresSelecionados();
     }
+    
+    /**
+     * Calcula quais Pessoas cadastradas estão disponíveis para serem adicionadas como autores (Autores Novos). 
+     * Filtra a lista total de Pessoas, removendo aquelas que já estão em autoresSelecionados.
+     * O resultado é então enviado para o método de renderização.
+     */
 
     private void atualizarAutoresNovos() {
         List<Pessoa> autoresNovos = new ArrayList<>();
@@ -73,7 +101,12 @@ public class TelaDetalhesLivro {
         }
         listarAutoresNovos(autoresNovos);
     }
-
+    
+    /**
+     * Renderiza a lista de autores disponíveis no jPanelNovosAutores. Para cada autor, cria um botão "Adicionar" que, ao ser clicado,
+     * adiciona o autor ao livro e atualiza a interface.
+     * @param autoresNovos A lista de Pessoa disponíveis para serem autores.
+     */
 
     private void listarAutoresNovos(List<Pessoa> autoresNovos) {
         jPanelNovosAutores.removeAll();
@@ -100,6 +133,11 @@ public class TelaDetalhesLivro {
         jPanelNovosAutores.revalidate();
         jPanelNovosAutores.repaint();
     }
+    
+    /**
+     * Renderiza a lista de autores atualmente associados ao livro no jPanelAutoresSelecionados. Para cada autor, cria um botão "Remover" 
+     * que, ao ser clicado, remove o autor da lista temporária e do objeto Livro, e atualiza a interface.
+     */
 
     private void listarAutoresSelecionados() {
         jPanelAutoresSelecionados.removeAll();
@@ -128,10 +166,21 @@ public class TelaDetalhesLivro {
         jPanelAutoresSelecionados.repaint();
 
     }
+    
+    /**
+     * Retorna o painel principal (container) desta sub-tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;
     }
+    
+    /**
+     * Retorna a lista atual de autores que foram selecionados para o livro. Este método é chamado pela TelaDetalhesMidia quando o usuário 
+     * clica em "Salvar" para obter a lista final de autores a serem persistidos.
+     * @return A List de Pessoa dos Autores selecionados.
+     */
 
     public List<Pessoa> getAutoresSelecionados() {
         return autoresSelecionados;

@@ -10,6 +10,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaPrincipal extends JFrame {
     private JPanel jPanelPrincipal;
 
@@ -25,6 +29,15 @@ public class TelaPrincipal extends JFrame {
     private TelaCategoria telaCategoria;
     private TelaIdioma telaIdioma;
     private TelaPessoa telaPessoa;
+    
+    /**
+     * Construtor da tela principal. Recebe as instâncias das telas de navegação de cada módulo, configura a janela,
+     * adiciona os layouts e configura o ouvinte de mudança de aba.
+     * @param telaMidia: Tela principal do módulo Mídias.
+     * @param telaCategoria: Tela principal do módulo Categorias.
+     * @param telaIdioma: Tela principal do módulo Idiomas.
+     * @param telaPessoa: Tela principal do módulo Pessoa.
+     */
 
     public TelaPrincipal(TelaMidia telaMidia, TelaCategoria telaCategoria, TelaIdioma telaIdioma, TelaPessoa telaPessoa) {
         this.telaMidia = telaMidia;
@@ -36,6 +49,11 @@ public class TelaPrincipal extends JFrame {
 
         selecionarMenu();
     }
+    
+    /**
+     * Configura os painéis das abas para usar CardLayout.
+     * Isso garante que a remoção e adição do painel principal de cada módulo ocorra corretamente na troca de abas.
+     */
 
     public void adicionarLayouts() {
         this.midias.setLayout(new CardLayout());
@@ -43,6 +61,10 @@ public class TelaPrincipal extends JFrame {
         this.idiomas.setLayout(new CardLayout());
         this.pessoa.setLayout(new CardLayout());
     }
+    
+    /**
+     * Configura as propriedades básicas da janela (JFrame).
+     */
 
     public void configurarTela() {
         setTitle("Gerenciador de Midias");
@@ -53,6 +75,12 @@ public class TelaPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    
+    /**
+     * Configura o {@code ChangeListener} para o JTabbedPane (menu).
+     * Quando o usuário troca de aba, este listener é acionado para garantir que o painel
+     * correto do módulo seja carregado e que listas de dados em módulos de cadastro (como Mídias) sejam atualizadas.
+     */
 
     public void selecionarMenu() {
         menu.addChangeListener(new ChangeListener() {
@@ -89,6 +117,11 @@ public class TelaPrincipal extends JFrame {
             }
         });
     }
+    
+    /**
+     * Adiciona o painel principal do módulo Mídia à sua respectiva aba.
+     * @param telaMidia: A instância da tela principal de Mídias.
+     */
 
     public void atualizarTelaMidia(TelaMidia telaMidia) {
         midias.removeAll();
@@ -96,6 +129,11 @@ public class TelaPrincipal extends JFrame {
         midias.revalidate();
         midias.repaint();
     }
+    
+    /**
+     * Adiciona o painel principal do módulo Categoria à sua respectiva aba.
+     * @param telaCategoria: A instância da tela principal de Categoria.
+     */
 
     private void atualizarTelaCategoria(TelaCategoria telaCategoria) {
         categorias.removeAll();
@@ -103,6 +141,11 @@ public class TelaPrincipal extends JFrame {
         categorias.revalidate();
         categorias.repaint();
     }
+    
+    /**
+     * Adiciona o painel principal do módulo Idioma à sua respectiva aba.
+     * @param telaIdioma: A instância da tela principal de Idioma.
+     */
 
     private void atualizarTelaIdioma(TelaIdioma telaIdioma) {
         idiomas.removeAll();
@@ -110,6 +153,11 @@ public class TelaPrincipal extends JFrame {
         idiomas.revalidate();
         idiomas.repaint();
     }
+    
+    /**
+     * Adiciona o painel principal do módulo Pessoa à sua respectiva aba.
+     * @param telaPessoa: A instância da tela principal de Pessoa.
+     */
 
     private void atualizarTelaPessoa(TelaPessoa telaPessoa) {
         pessoa.removeAll();

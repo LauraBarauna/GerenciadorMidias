@@ -3,7 +3,7 @@ package main.model.midias;
 import java.io.Serializable;
 
 /**
- * @author Laura
+ * @author Laura Barauna e Yasmin Darlen Schneider
  */
 public class Categoria implements Serializable {
 
@@ -38,7 +38,7 @@ public class Categoria implements Serializable {
     }
     
     /**
-     * Sobrescreve o método toString()} para retornar diretamente o nome da categoria.
+     * Sobrescreve o método toString() para retornar diretamente o nome da categoria.
      * @return O nome da categoria.
      */
     @Override
