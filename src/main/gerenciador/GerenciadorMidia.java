@@ -130,8 +130,8 @@ public class GerenciadorMidia {
 
         Midia midiaRemover = buscarPorId(id);
 
-        if (midiaRemover == null) { // ✅ verificação
-            return false; // mídia não encontrada
+        if (midiaRemover == null) {
+            return false;
         }
 
         String nomeArquivo = gerarNomeArquivo(midiaRemover.getId());
