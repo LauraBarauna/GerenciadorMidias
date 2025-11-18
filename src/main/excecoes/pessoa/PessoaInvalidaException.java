@@ -10,7 +10,7 @@ public class PessoaInvalidaException extends PessoaException {
 	
 	/**
 	 * Construtor que cria a exceção, aceitando uma mensagem detalhada que explica o motivo da invalidez.
-	 * * @param message: A mensagem de erro detalhada sobre o que torna a Pessoa inválida.
+	 * @param message: A mensagem de erro detalhada sobre o que torna a Pessoa inválida.
 	 */
 
 	public PessoaInvalidaException(String message) {

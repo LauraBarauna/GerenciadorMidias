@@ -10,7 +10,7 @@ public class PessoaException extends RuntimeException {
 	
 	/**
 	 * Construtor padrão que aceita uma mensagem detalhada sobre o erro ocorrido.
-	 * * @param message: A mensagem de erro que descreve a exceção da Pessoa.
+	 * @param message: A mensagem de erro que descreve a exceção da Pessoa.
 	 */
 
 	public PessoaException(String message) {

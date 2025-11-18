@@ -10,7 +10,7 @@ public class PessoaDuplicadaException extends PessoaException {
 	
 	/**
 	 * Construtor que cria a exceção com uma mensagem detalhada, especificando o nome da pessoa que causou a duplicidade.
-	 * * @param nome: O nome da Pessoa cuja tentativa de cadastro resultou em duplicidade.
+	 * @param nome: O nome da Pessoa cuja tentativa de cadastro resultou em duplicidade.
 	 */
 
 	public PessoaDuplicadaException(String nome) {

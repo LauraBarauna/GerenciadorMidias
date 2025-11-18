@@ -10,7 +10,7 @@ public class IdiomaInvalidoException extends IdiomaException {
 	
 	/**
 	 * Construtor que cria a exceção, aceitando uma mensagem detalhada que explica o motivo da invalidez.
-	 * * @param message: A mensagem de erro detalhada sobre o que torna o Idioma inválido.
+	 * @param message: A mensagem de erro detalhada sobre o que torna o Idioma inválido.
 	 */
 
 	public IdiomaInvalidoException(String message) {

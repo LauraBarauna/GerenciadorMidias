@@ -12,7 +12,7 @@ public class PessoaNaoEncontradaException extends PessoaException {
 	
 	/**
 	 * Construtor que cria a exceção com uma mensagem detalhada, incluindo o nome da pessoa que não foi encontrada.
-	 * * @param nome: O nome da Pessoa que foi procurada e não existe no sistema.
+	 * @param nome: O nome da Pessoa que foi procurada e não existe no sistema.
 	 */
 
 	public PessoaNaoEncontradaException(String nome) {
