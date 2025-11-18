@@ -101,6 +101,12 @@ public class GerenciadorCategoria {
         }
         return categorias;
     }
+    
+    /**
+     * Retorna a lista completa de categorias para um determinado tipo de mídia.
+     * @param tipo O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
+     * @return A List<Categoria> do tipo especificado, ou null se o tipo for inválido.
+     */
 
     public List<Categoria> encontrarCategorias (char tipo) {
         char tipoUpper = Character.toUpperCase(tipo);
@@ -173,6 +179,15 @@ public class GerenciadorCategoria {
         }
         return true;
     }
+    
+    /**
+     * Lógica central para adicionar uma categoria a uma lista específica. Verifica duplicidade primeiro por referência de objeto (`contains`) 
+     * e depois por comparação de nome (sem case-sensitive). 
+     * @param categorias: A lista de categorias onde a nova categoria será adicionada.
+     * @param categoria: O objeto {@code Categoria} a ser adicionado.
+     * @param tipo: O tipo da lista (parâmetro não utilizado no corpo do método, mas mantido na assinatura).
+     * @return true se for adicionada, e false se for duplicada.
+     */
 
     private boolean criarCategoria(List<Categoria> categorias, Categoria categoria, String tipo)  {
         if (categorias.contains(categoria)) {
@@ -223,26 +238,37 @@ public class GerenciadorCategoria {
     }
 
     /**
-     * @return List<Categoria> para Filmes.
+     * Método auxiliar para limpar uma lista de categorias. Utiliza o método clear() para esvaziar a lista.
+     * @param categorias A lista de categorias a ser limpa.
      */
+    
     private void removerTudo(List<Categoria> categorias) {
         categorias.removeAll(categorias);
     }
+    
+    /**
+     * Retorna a lista de categorias de Filmes.
+     * @return List<Categoria> para Filmes.
+     */
 
     private List<Categoria> getCategoriasFilme() {
         return categoriasFilme;
     }
 
     /**
+     * Retorna a lista de categorias de Músicas.
      * @return List<Categoria> para Músicas.
      */
+
     private List<Categoria> getCategoriasMusica() {
         return categoriasMusica;
     }
 
     /**
+     * Retorna a lista de categorias de Livros.
      * @return List<Categoria> para Livros.
      */
+    
     private List<Categoria> getCategoriasLivro() {
         return categoriasLivro;
     }
