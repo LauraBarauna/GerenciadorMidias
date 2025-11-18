@@ -10,7 +10,7 @@ public class MidiaInvalidaException extends MidiaException {
 	
 	/**
 	 * Construtor que cria a exceção, aceitando uma mensagem detalhada que explica o motivo da invalidez da Mídia.
-	 * * @param message: A mensagem de erro detalhada sobre o que torna a Mídia inválida.
+	 * @param message: A mensagem de erro detalhada sobre o que torna a Mídia inválida.
 	 */
 
 	public MidiaInvalidaException(String message) {
