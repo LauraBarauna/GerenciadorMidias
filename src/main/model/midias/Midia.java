@@ -3,9 +3,9 @@ package main.model.midias;
 import java.io.Serializable;
 
 /**
- * @author Yasmin Darlen Schneider e Laura Barauna
+ * @author Yasmin Darlen Schneider e Laura
  */
-public abstract class Midia implements Serializable {
+public class Midia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     protected int id;
@@ -14,6 +14,7 @@ public abstract class Midia implements Serializable {
     protected String titulo;
     protected int duracao;
     protected Categoria categoria;
+
 
     /**
      * Construtor da classe Midia. Inicializa e valida todos os atributos comuns a todas as mídias.

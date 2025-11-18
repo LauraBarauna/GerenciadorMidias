@@ -1,10 +1,13 @@
 package main.model.idioma;
 
+import java.io.Serializable;
+
 /**
- * @author Laura Barauna
- */ 
-public class Idioma {
-    
+ * @author Laura
+ */
+public class Idioma implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String idioma;
 
     /**

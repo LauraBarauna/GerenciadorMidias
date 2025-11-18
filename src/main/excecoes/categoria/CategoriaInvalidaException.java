@@ -1,7 +1,7 @@
 package main.excecoes.categoria;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class CategoriaInvalidaException extends CategoriaException {
     

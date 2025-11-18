@@ -1,7 +1,7 @@
 package main.excecoes.arquivo;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class ExtensaoInvalidaException extends ArquivoException {
   

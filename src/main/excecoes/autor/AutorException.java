@@ -1,8 +1,8 @@
 package main.excecoes.autor;
 
 /**
- * @author Laura Barauna
- */ 
+ * @author Laura
+ */
 public class AutorException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

@@ -6,7 +6,7 @@ import main.model.midias.Categoria;
 import main.model.midias.Midia;
 
 /**
- * * @author Yasmin Darlen Schneider e Laura Barauna
+ * * @author Yasmin Darlen Schneider e Laura
  */
 public class Filme extends Midia implements Serializable {
 

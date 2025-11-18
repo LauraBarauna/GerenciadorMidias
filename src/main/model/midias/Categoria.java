@@ -3,7 +3,7 @@ package main.model.midias;
 import java.io.Serializable;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class Categoria implements Serializable {
 

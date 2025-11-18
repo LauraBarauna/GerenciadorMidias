@@ -1,7 +1,7 @@
 package main.excecoes.autor;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class AutorNaoEncontradoException extends AutorException {
     

@@ -14,10 +14,6 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author Laura Barauna
- */
-
 public class GerenciadorTela {
     private TelaPrincipal telaPrincipal;
 
@@ -30,7 +26,7 @@ public class GerenciadorTela {
 
     public GerenciadorTela(CategoriaController categoriaController, IdiomaController idiomaController,
                            PessoaController pessoaController, MidiaController midiaController) {
-        this.telaMidia = new TelaMidia(adicionarAcoesMidia(), categoriaController, idiomaController, pessoaController, midiaController);
+        this.telaMidia = new TelaMidia(adicionarAcoes(), categoriaController, idiomaController, pessoaController, midiaController);
         this.telaCategoria = new TelaCategoria(adicionarAcoes(), categoriaController);
         this.telaIdioma = new TelaIdioma(adicionarAcoes(),idiomaController);
         this.telaPessoa = new TelaPessoa(adicionarAcoes(), pessoaController);
@@ -38,15 +34,6 @@ public class GerenciadorTela {
         this.telaPrincipal = new TelaPrincipal(telaMidia, telaCategoria, telaIdioma, telaPessoa);
     }
 
-    private List<String> adicionarAcoesMidia() {
-        return Arrays.asList(
-                "Adicionar",
-                "Listar Todos",
-                "Listar um",
-                "Atualizar",
-                "Remover"
-        );
-    }
 
     private List<String> adicionarAcoes() {
         return Arrays.asList(

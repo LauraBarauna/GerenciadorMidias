@@ -7,7 +7,7 @@ import main.model.midias.Midia;
 import main.model.pessoa.Pessoa;
 
 /**
- * @author Yasmin Darlen Schneider e Laura Barauna
+ * @author Yasmin Darlen Schneider e Laura
  */
 public class Musica extends Midia implements Serializable {
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class GerenciadorCategoria {
     
@@ -149,32 +149,6 @@ public class GerenciadorCategoria {
     }
 
     /**
-     * Atualiza o nome de uma categoria. A categoria é encontrada pelo nome antigo e, se encontrada, seu nome é substituído pelo da categoriaNova.
-     * @param categoria: O nome antigo da categoria a ser atualizada.
-     * @param tipo: O tipo de mídia: 'F' para Filme, 'M' para Música, 'L' para Livro.
-     * @param categoriaNova: O objeto Categoria que contém o novo nome.
-     * @return  true se a categoria foi atualizada com sucesso, e false se não foi encontrada ou se o tipo for inválido.
-     */
-    public boolean atualizarCategoriaPorTipo(String categoria, char tipo, Categoria categoriaNova) {
-        char tipoUpper = Character.toUpperCase(tipo);
-        boolean deuCerto;
-        switch (tipoUpper) {
-            case 'F':
-                deuCerto = atualizarCategoria(this.categoriasFilme, categoria, categoriaNova);
-                break;
-            case 'M':
-                deuCerto = atualizarCategoria(this.categoriasMusica, categoria, categoriaNova);
-                break;
-            case 'L':
-                deuCerto = atualizarCategoria(this.categoriasLivro, categoria, categoriaNova);
-                break;
-            default:
-                return false;
-        }
-        return deuCerto;
-    }
-
-    /**
      * Lógica central para adicionar uma categoria a uma lista específica. Verifica duplicidade pelo nome da categoria, ignorando letras maiúsculas/minúsculas.
      * @param categorias: A lista de categorias onde a nova categoria será adicionada.
      * @param categoria: O objeto {@code Categoria} a ser adicionado.
@@ -230,23 +204,6 @@ public class GerenciadorCategoria {
             }
         }
         return categoriaEncontrada;
-    }
-
-    /**
-     * Lógica central para atualizar o nome de uma categoria. Encontra a categoria pelo nome antigo e usa o setCategoria para aplicar o novo nome do objeto na categoriaNova.
-     * @param categorias: A lista de categorias onde a categoria deve ser atualizada.
-     * @param nome: O nome antigo da categoria.
-     * @param categoriaNova: O objeto Categoria contendo um novo nome.
-     * @return Se true será atualizada, se false não encontrada.
-     */
-    private boolean atualizarCategoria(List<Categoria> categorias, String nome, Categoria categoriaNova) {
-        Categoria categoriaAtualizar = encontrarCategoriaPorNome(categorias, nome);
-        if (categoriaAtualizar == null) {
-            return false;
-        }
-        // Se encontrada, atualiza seu nome
-        categoriaAtualizar.setCategoria(categoriaNova.getCategoria());
-        return true;
     }
 
     /**
