@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Laura Barauna
+ * @author Laura
  */
 public class CategoriaController {
     
@@ -24,8 +24,7 @@ public class CategoriaController {
     }
 
     /**
-     * Adiciona uma nova categoria ao sistema. Recebe o nome e o tipo como String, cria o objeto Categoria e delega a criação para o gerenciador. 
-     * Lança exceção de duplicidade se falhar.
+     * Adiciona uma nova categoria ao sistema. Recebe o nome e o tipo como String, cria o objeto Categoria e delega a criação para o gerenciador. Lança exceção de duplicidade se falhar.
      * @param nomeCategoria: O nome da categoria a ser adicionada.
      * @param tipoCategoria: O tipo de mídia associado ('F', 'M' ou 'L').
      * @throws CategoriaDuplicadaException Se a categoria já existir para o tipo especificado.
@@ -74,7 +73,8 @@ public class CategoriaController {
     /**
      * Remove todas as categorias associadas a um determinado tipo de mídia.
      *
-     * @param tipoCategoria: O tipo de mídia cujas categorias devem ser removidas. Deve ser 'F', 'M' ou 'L'.
+     * @param tipoCategoria O tipo de mídia cujas categorias devem ser removidas.
+     *                      Deve ser 'F', 'M' ou 'L'.
      * @throws RuntimeException Se o tipo de mídia fornecido não existir.
      */
     public void removerTudo(String tipoCategoria) throws RuntimeException {
@@ -117,17 +117,12 @@ public class CategoriaController {
 
         List<String> categoriasString = new ArrayList<>();
 
+
         for (Categoria c : categorias) {
             categoriasString.add(c.getCategoria());
         }
         return categoriasString;
     }
-    
-    /**
-     * Lista todas as categorias cadastradas para um tipo de mídia específico, retornando os objetos Categoria.
-     * @param tipoCategoria: O tipo de mídia associado (String). A primeira letra é usada.
-     * @return Uma lista de objetos Categoria. Retorna uma lista vazia se não houver categorias.
-     */
 
     public List<Categoria> listarCategorias(String tipoCategoria)  {
         return getGerenciador().encontrarCategorias(

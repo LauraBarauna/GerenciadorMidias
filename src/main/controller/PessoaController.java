@@ -91,6 +91,10 @@ public class PessoaController {
      * @return true se havia Pessoas para remover, false caso contrário.
      */
 
+    public List<Pessoa> getPessoas() {
+        return pessoa.getPessoas();
+    }
+
     public boolean removerTodasPessoas() {
         return pessoa.removerTodasPessoas();
     }
