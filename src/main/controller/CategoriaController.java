@@ -124,6 +124,12 @@ public class CategoriaController {
         return categoriasString;
     }
 
+    /**
+     * Lista todas as categorias cadastradas para um tipo de mídia específico, retornando os objetos Categoria.
+     * @param tipoCategoria: O tipo de mídia associado (String). A primeira letra é usada.
+     * @return Uma lista de objetos Categoria. Retorna uma lista vazia se não houver categorias.
+     */
+
     public List<Categoria> listarCategorias(String tipoCategoria)  {
         return getGerenciador().encontrarCategorias(
                 Character.toUpperCase(tipoCategoria.charAt(0))
