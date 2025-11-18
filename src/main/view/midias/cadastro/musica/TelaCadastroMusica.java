@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaCadastroMusica {
     private JPanel jPanelPrincipal;
     private JComboBox<String> artistas;
@@ -23,14 +27,25 @@ public class TelaCadastroMusica {
     private String tituloArquivo;
     private String categoriaArquivo;
     private double tamanhoArquivo;
+    
+    /**
+     * Construtor da tela de cadastro de Música. Inicializa os Controllers, atualiza a lista de artistas disponíveis no ComboBox
+     * e configura o listener para o botão de cadastro.
+     * @param pessoaController: O Controller de Pessoas para listar artistas.
+     * @param midiaController: O Controller de Mídias para realizar o cadastro.
+     */
 
     public TelaCadastroMusica(PessoaController pessoaController, MidiaController midiaController) {
         this.pessoaController = pessoaController;
         this.midiaController = midiaController;
         atualizarListaArtistas();
         cadastrarMusica();
-
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Cadastrar Música". Realiza a validação da duração (segundos), coleta os dados do formulário e os metadados
+     * do arquivo, e delega o cadastro ao MidiaController.
+     */
 
     private void cadastrarMusica() {
         cadastrarMusicaButton.addActionListener(new ActionListener() {
@@ -60,11 +75,20 @@ public class TelaCadastroMusica {
             }
         });
     }
+    
+    /**
+     * Solicita a lista atualizada de Pessoas/Artistas ao Controller e chama o método para preencher o ComboBox.
+     */
 
     public void atualizarListaArtistas() {
         List<String> artistas = pessoaController.listarPessoas();
         adicionarArtistas(artistas);
     }
+    
+    /**
+     * Preenche o JComboBox artistas com a lista de nomes de Pessoas. Se a lista estiver vazia, exibe uma mensagem informativa no ComboBox.
+     * @param artistas A lista de nomes (String) de artistas disponíveis.
+     */
 
     private void adicionarArtistas(List<String> artistas) {
         this.artistas.removeAllItems();
@@ -77,10 +101,16 @@ public class TelaCadastroMusica {
             this.artistas.addItem("Não existe nenhuma pessoa cadastrada. Cadastre um no menu de Pessoa acima.");
         }
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;
     }
+    
 
     public void setTamanhoArquivo(double tamanhoArquivo) {
         this.tamanhoArquivo = tamanhoArquivo;

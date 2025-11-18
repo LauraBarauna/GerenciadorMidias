@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaListarCategoria {
 
     private CategoriaController controller;
@@ -17,6 +21,12 @@ public class TelaListarCategoria {
     private JComboBox tipoMidia;
     private JPanel jPanelCategorias;
     private JButton btnRemoverTudo;
+    
+    /**
+     * Construtor da tela de listagem de Categoria. Inicializa o Controller, configura o layout do painel de listagem, e configura os listeners
+     * para o filtro de tipo de Mídia e para o botão "Remover Tudo".
+     * @param controller: A instância do CategoriaController a ser usada.
+     */
 
     public TelaListarCategoria(CategoriaController controller) {
         this.controller = controller;
@@ -25,13 +35,16 @@ public class TelaListarCategoria {
         pegarTipoMidia();
         removerTudo();
 
-
         String tipoSelecionado = (String) tipoMidia.getSelectedItem();
         if (tipoSelecionado != null) {
             listarCategorias(tipoSelecionado);
         }
-
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Remover Tudo". Obtém o tipo de Mídia selecionado, verifica se há categorias, solicita confirmação
+     * e delega a remoção em massa ao Controller.
+     */
 
     public void removerTudo() {
         btnRemoverTudo.addActionListener(new ActionListener() {
@@ -61,12 +74,13 @@ public class TelaListarCategoria {
                     JOptionPane.showMessageDialog(null, "Você não tem nada para remover");
                     listarCategorias(tipoSelecionado);
                 }
-
-
-
             }
         });
     }
+    
+    /**
+     * Método público para forçar a atualização da lista, usado tipicamente pela Tela Mestra após retornar para esta View.
+     */
 
     public void atualizarLista() {
         String tipo = (String) tipoMidia.getSelectedItem();
@@ -74,6 +88,11 @@ public class TelaListarCategoria {
             listarCategorias(tipo);
         }
     }
+    
+    /**
+     * Configura o ActionListener para o JComboBox de tipos de Mídia. Sempre que o tipo selecionado muda, a lista de 
+     * categorias é recarregada para refletir o novo filtro.
+     */
 
     private void pegarTipoMidia() {
         tipoMidia.addActionListener(new ActionListener() {
@@ -85,6 +104,12 @@ public class TelaListarCategoria {
             }
         });
     }
+    
+    /**
+     * Renderiza a lista de categorias no {@code jPanelCategorias} para o tipo de Mídia fornecido.
+     * Para cada categoria, cria uma linha contendo o nome e um botão "Remover", configurando o Listener para remoção individual.
+     * @param tipo: O tipo de Mídia selecionado (ex. "Filme").
+     */
 
     public void listarCategorias(String tipo) {
         List<String> categorias = controller.listarCategoriasString(tipo);
@@ -113,7 +138,6 @@ public class TelaListarCategoria {
                 linha.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
                 linha.add(btnRemover);
 
-
                 linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // borda pequena
                 jPanelCategorias.add(linha);
             }
@@ -129,9 +153,12 @@ public class TelaListarCategoria {
             jPanelCategorias.revalidate();
             jPanelCategorias.repaint();
         }
-
-
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

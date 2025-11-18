@@ -14,6 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaListarMidia {
     private JPanel jPanelPrincipal;
     private JComboBox tipoMidias;
@@ -31,6 +35,14 @@ public class TelaListarMidia {
     private IdiomaController idiomaController;
 
     private TelaDetalhesMidia detalhes;
+    
+    /**
+     * Construtor da tela de listagem de Mídias. Inicializa os Controllers, a tela de detalhes e configura os layouts e todos os listeners.
+     * @param midiaController: Controller de Mídias.
+     * @param pessoaController: Controller de Pessoas.
+     * @param categoriaController: Controller de Categorias.
+     * @param idiomaController: Controller de Idiomas.
+     */
 
     public TelaListarMidia(MidiaController midiaController, PessoaController pessoaController,
                            CategoriaController categoriaController, IdiomaController idiomaController) {
@@ -46,6 +58,11 @@ public class TelaListarMidia {
         ordenarPorTitulo();
         buscarPorTitulo();
     }
+    
+    /**
+     * Configura o ActionListener para o botão de ordenar por Título.
+     * Chama o método de ordenação do Controller e atualiza a lista exibida.
+     */
 
     private void ordenarPorTitulo() {
         btnOrdenarTitulo.addActionListener(new ActionListener() {
@@ -56,6 +73,11 @@ public class TelaListarMidia {
             }
         });
     }
+    
+    /**
+     * Configura o ActionListener para o botão de ordenar por Duração/Páginas.
+     * Chama o método de ordenação do Controller e atualiza a lista exibida.
+     */
 
     private void ordernarPorDuracao() {
         btnOrdenarDuracao.addActionListener(new ActionListener() {
@@ -66,7 +88,11 @@ public class TelaListarMidia {
             }
         });
     }
-
+    
+    /**
+     * Configura o ActionListener para o botão de Buscar (por Título).
+     * Valida a entrada, chama o método de busca do Controller e exibe a mídia encontrada ou uma mensagem de erro.
+     */
     
     private void buscarPorTitulo() {
         btnBuscar.addActionListener(new ActionListener() {
@@ -86,6 +112,11 @@ public class TelaListarMidia {
             }
         });
     }
+    
+    /**
+     * Configura o ActionListener para o ComboBox de Categorias.
+     * Filtra a lista de mídias pela categoria selecionada e atualiza a exibição.
+     */
 
     private void selecionarCategoria() {
         categorias.addActionListener(new ActionListener() {
@@ -105,7 +136,11 @@ public class TelaListarMidia {
             }
         });
     }
-
+    
+    /**
+     * Preenche o ComboBox de categorias com as categorias válidas para o tipo de mídia selecionado.
+     * @param tipo: O tipo de mídia (ex "FILMES", "LIVROS", "MÚSICAS", "TODOS").
+     */
 
     private void atualizarCategoria(String tipo) {
         List<String> catFilmes = categoriaController.listarCategoriasString("Filme");
@@ -146,6 +181,11 @@ public class TelaListarMidia {
                 break;
         }
     }
+    
+    /**
+     * Configura o ActionListener para o ComboBox de Tipo de Mídia.
+     * Aciona a atualização da lista e das categorias disponíveis com base na seleção.
+     */
 
     private void selecionarTipoMidia() {
         tipoMidias.addActionListener(new ActionListener() {
@@ -174,26 +214,47 @@ public class TelaListarMidia {
             }
         });
     }
+    
+    /**
+     * Atualiza a lista exibida para mostrar apenas Filmes.
+     */
 
     public void atualizarListaFilmes() {
         List<Midia> filmes = midiaController.listarFilmes();
         listarMidias(filmes);
     }
+    
+    /**
+     * Atualiza a lista exibida para mostrar apenas Músicas.
+     */
 
     public void atualizarListaMusica() {
         List<Midia> musicas = midiaController.listarMusicas();
         listarMidias(musicas);
     }
+    
+    /**
+     * Atualiza a lista exibida para mostrar apenas Livros.
+     */
 
     public void atualizarListaLivros() {
         List<Midia> livros = midiaController.listarLivros();
         listarMidias(livros);
     }
+    
+    /**
+     * Atualiza a lista exibida para mostrar todas as Mídias cadastradas.
+     */
 
     public void atualizarListaMidias() {
         List<Midia> midias = midiaController.listarMidias();
         listarMidias(midias);
     }
+    
+    /**
+     * Exibe apenas uma única mídia no painel de listagem (usado após a busca por título).
+     * @param midia: A mídia a ser exibida.
+     */
     
     private void listarUmaMidia(Midia midia) {
         jPanelMidias.removeAll();
@@ -201,6 +262,11 @@ public class TelaListarMidia {
         jPanelMidias.revalidate();
         jPanelMidias.repaint();
     }
+    
+    /**
+     * Cria e adiciona um painel de linha para uma mídia específica. Inclui o título, ID e o botão "Detalhes".
+     * @param midia: A mídia a ser renderizada.
+     */
 
     private void Listar(Midia midia) {
         JPanel linha = new JPanel(new BorderLayout());
@@ -215,6 +281,12 @@ public class TelaListarMidia {
         linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanelMidias.add(linha);
     }
+    
+    /**
+     * Cria o botão "Detalhes" e configura seu ActionListener para abrir uma nova janela com os detalhes da mídia.
+     * @param midia: A mídia cujos detalhes serão exibidos.
+     * @return O botão "Detalhes" configurado.
+     */
 
     private JButton getJButton(Midia midia) {
         JButton btnDetalhes = new JButton("Detalhes");
@@ -234,6 +306,12 @@ public class TelaListarMidia {
         });
         return btnDetalhes;
     }
+    
+    /**
+     * Renderiza a lista de mídias no jPanelMidias. Limpa o painel e itera sobre a lista para criar os componentes de linha.
+     * Se a lista estiver vazia, exibe uma mensagem.
+     * @param midias: A lista de objetos Midia a serem exibidos.
+     */
 
     private void listarMidias(List<Midia> midias) {
         jPanelMidias.removeAll();
@@ -253,6 +331,11 @@ public class TelaListarMidia {
         jPanelMidias.revalidate();
         jPanelMidias.repaint();
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

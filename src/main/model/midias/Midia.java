@@ -36,7 +36,8 @@ public class Midia implements Serializable {
     }
 
     /**
-     * Retorna uma String formatada com os atributos básicos da mídia. Este método é projetado para ser estendido pelas classes filhas para incluir seus atributos específicos.
+     * Retorna uma String formatada com os atributos básicos da mídia. Este método é projetado para ser estendido pelas classes filhas para 
+     * incluir seus atributos específicos.
      * @return Uma String contendo o ID, Local, Tamanho, Título, Duração e Categoria.
      */
     public String exibirAtributos() {
@@ -153,7 +154,7 @@ public class Midia implements Serializable {
     }
 
     /**
-     * Define a duração da mídia. A unidade desta duração é interpretada pela subclasse (Filme=minutos, Musica=segundos, Livro=páginas).
+     * Define a duração da mídia. A unidade desta duração é interpretada pela subclasse, no caso: Filme=minutos, Musica=segundos e Livro=páginas.
      * @param duracao: O valor da duração.
      * @throws IllegalArgumentException Se a duração for menor ou igual a zero.
      */

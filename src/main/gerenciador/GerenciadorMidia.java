@@ -29,7 +29,8 @@ public class GerenciadorMidia {
     }
 
     /**
-     * Verifica e cria o diretório. Se a pasta definida em DIRETORIO_DADOS não existir, ela é criada no diretório raiz do projeto para armazenar os arquivos .tpoo.
+     * Verifica e cria o diretório. Se a pasta definida em DIRETORIO_DADOS não existir, ela é criada no diretório raiz do projeto para armazenar 
+     * os arquivos .tpoo.
      */
     private void criarDiretorioDados() {
         File diretorio = new File(DIRETORIO_DADOS);
@@ -43,14 +44,15 @@ public class GerenciadorMidia {
     /**
      * Gera o caminho de arquivo completo para uma mídia com base no seu ID.
      * * @param id: O identificador único da mídia.
-     * @return Uma String contendo o caminho completo e o nome do arquivo (e.g., "dados_midias/midia_5.tpoo").
+     * @return Uma String contendo o caminho completo e o nome do arquivo (ex. "dados_midias/midia_5.tpoo").
      */
     private String gerarNomeArquivo(int id) {
         return DIRETORIO_DADOS + File.separator + "midia_" + id + EXTENSAO_ARQUIVO;
     }
     
     /**
-     * Calcula o próximo ID disponível e único para uma nova mídia. Garante que o ID gerado será o maior ID existente + 1, evitando problemas ao nomear os arquivos.
+     * Calcula o próximo ID disponível e único para uma nova mídia. Garante que o ID gerado será o maior ID existente + 1, evitando problemas ao 
+     * nomear os arquivos.
      * @return O próximo ID inteiro sequencial disponível.
      */
     private int proximoIdDisponivel() {
@@ -62,7 +64,8 @@ public class GerenciadorMidia {
     }
 
     /**
-     * Salva uma única mídia no arquivo .tpoo individual usando a Serialização e Utiliza o FileOutputStream para escrever no arquivo e o ObjectOutputStream para converter o objeto Java em bytes. Se o arquivo já existe, ele é sobrescrito.
+     * Salva uma única mídia no arquivo .tpoo individual usando a Serialização e Utiliza o FileOutputStream para escrever no arquivo e o ObjectOutputStream para 
+     * converter o objeto Java em bytes. Se o arquivo já existe, ele é sobrescrito.
      * @param midia: O objeto Midia a ser serializado e salvo.
      */
     private void salvarMidia(Midia midia) {
@@ -81,7 +84,8 @@ public class GerenciadorMidia {
     }
 
     /**
-     * Carrega todas as mídias do disco, lendo cada arquivo .tpoo individualmente. Percorre o diretório de dados, utiliza o FileInputStream para ler os bytes e o ObjectInputStream para reconstruir (desserializar) o objeto Java.
+     * Carrega todas as mídias do disco, lendo cada arquivo .tpoo individualmente. Percorre o diretório de dados, utiliza o FileInputStream para ler 
+     * os bytes e o ObjectInputStream para reconstruir (desserializar) o objeto Java.
      */
     private void carregarDados() {
         File diretorio = new File(DIRETORIO_DADOS);
@@ -119,8 +123,8 @@ public class GerenciadorMidia {
     }
 
     /**
-     * Remove uma mídia do sistema E deleta o arquivo .tpoo correspondente (Requisito).
-     * * @param localArquivo: O caminho de arquivo da mídia (usado como chave única para busca).
+     * Remove uma mídia do sistema E deleta o arquivo .tpoo correspondente.
+     * * @param localArquivo: O caminho de arquivo da mídia, usado como chave única para busca.
      * @return true se a remoção e a deleção do arquivo foram bem-sucedidas, false caso contrário.
      */
     public boolean removerMidia(int id) {

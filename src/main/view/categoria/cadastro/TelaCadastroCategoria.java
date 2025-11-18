@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaCadastroCategoria {
 
     private CategoriaController controller;
@@ -18,14 +22,22 @@ public class TelaCadastroCategoria {
     private JButton btnAdicionar;
     private JLabel nomeCategoria;
     private JLabel tipoMidia;
+    
+    /**
+     * Construtor da tela de cadastro de Categoria. Inicializa o Controller e configura os Listeners para o botão de cadastro
+     * e para a tecla ENTER.
+     * @param controller: A instância do CategoriaController a ser usada.
+     */
 
     public TelaCadastroCategoria(CategoriaController controller) {
         this.controller = controller;
         adicionarCategoria();
         adicionarCategoriaEnter();
-
-
     }
+    
+    /**
+     * Configura um KeyListener no campo de texto textFieldNome. Permite que o usuário acione o botão "Adicionar" pressionando a tecla ENTER.
+     */
 
     public void adicionarCategoriaEnter() {
         textFieldNome.addKeyListener(new KeyAdapter() {
@@ -37,6 +49,11 @@ public class TelaCadastroCategoria {
             }
         });
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Adicionar". Realiza a validação básica do nome, coleta os dados (nome e tipo), delega o
+     * cadastro ao Controller, e exibe um feedback ao usuário.
+     */
 
     public void adicionarCategoria() {
         btnAdicionar.addActionListener(new ActionListener() {
@@ -52,12 +69,14 @@ public class TelaCadastroCategoria {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-
-
-
             }
         });
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

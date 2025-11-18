@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaCategoria {
     private JPanel jPanelPrincipal;
     private JComboBox<String> acoesCategoria;
@@ -18,6 +22,13 @@ public class TelaCategoria {
 
     private TelaCadastroCategoria cadastro;
     private TelaListarCategoria listarCategoria;
+    
+    /**
+     * Construtor da Tela de Categoria. Inicializa as sub-telas (cadastro e listar), configura o CardLayout,
+     * preenche o ComboBox de ações e anexa o Listener para troca de tela.
+     * @param acoes: A lista de nomes de ações (Strings) a serem exibidas no ComboBox.
+     * @param controller: A instância do CategoriaController a ser passada para as sub-telas.
+     */
 
     public TelaCategoria(List<String> acoes, CategoriaController controller) {
         this.cadastro = new TelaCadastroCategoria(controller);
@@ -27,10 +38,19 @@ public class TelaCategoria {
         adicionarAcoes(acoes);
         trocarTela();
     }
+    
+    /**
+     * Configura o jPanelAcaoCategoria para usar o CardLayout.
+     */
 
     private void adicionarLayout() {
         this.jPanelAcaoCategoria.setLayout(new CardLayout());
     }
+    
+    /**
+     * Preenche o JComboBox acoesCategoria com as ações disponíveis. Inclui uma verificação de segurança para o JComboBox não ser nulo.
+     * @param acoes: A lista de Strings com os nomes das ações.
+     */
 
     private void adicionarAcoes(List<String> acoes) {
         for (String a : acoes) {
@@ -40,6 +60,10 @@ public class TelaCategoria {
             this.acoesCategoria.addItem(a);
         }
     }
+    
+    /**
+     * Configura o ActionListener para o JComboBox de ações. Quando o usuário seleciona uma ação, este método troca o painel exibido usando o CardLayout.
+     */
 
     private void trocarTela() {
         acoesCategoria.addActionListener(new ActionListener() {
@@ -64,10 +88,12 @@ public class TelaCategoria {
                 trocarTela();
             }
         });
-
-
-
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;

@@ -1,7 +1,7 @@
 package main.excecoes.categoria;
 
 /**
- * @author Laura
+ * @author Laura Barauna
  */
 public class CategoriaNaoEncontradaException extends CategoriaException {
     

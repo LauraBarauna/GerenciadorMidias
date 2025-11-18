@@ -13,6 +13,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Laura Barauna
+ */
+
 public class TelaCadastroLivro {
     private JPanel jPanelPrincipal;
     private JPanel jPanelAutores;
@@ -30,7 +34,12 @@ public class TelaCadastroLivro {
     private String categoriaArquivo;
     private double tamanhoArquivo;
 
-
+    /**
+     * Construtor da tela de cadastro de Livro. Inicializa os Controllers, a lista de autores temporária, configura o layout do painel
+     * de autores e anexa o listener do botão de cadastro.
+     * @param pessoaController: O Controller de Pessoas para listar autores.
+     * @param midiaController: O Controller de Mídias para realizar o cadastro.
+     */
 
     public TelaCadastroLivro(PessoaController pessoaController, MidiaController midiaController) {
         this.listaPessoas = new ArrayList<>();
@@ -41,6 +50,11 @@ public class TelaCadastroLivro {
         jPanelAutores.setAlignmentX(Component.CENTER_ALIGNMENT);
         cadastrarLivro();
     }
+    
+    /**
+     * Configura o ActionListener para o botão "Cadastrar Livro". Realiza a validação do número de páginas, delega o cadastro do Livro ao Controller,
+     * e em seguida, vincula cada Pessoa selecionada na listaPessoas como autor.
+     */
 
     private void cadastrarLivro() {
         cadastrarLivroButton.addActionListener(new ActionListener() {
@@ -73,11 +87,21 @@ public class TelaCadastroLivro {
             }
         });
     }
+    
+    /**
+     * Solicita a lista atualizada de todas as Pessoas cadastradas ao Controller e chama o método para renderizá-las no painel de seleção de autores.
+     */
 
     public void atualizarLista() {
         List<String> autores = this.pessoaController.listarPessoas();
         listarAutores(autores);
     }
+    
+    /**
+     * Renderiza a lista de Pessoas disponíveis no jPanelAutores, permitindo a seleção. Para cada pessoa, cria um botão "Adicionar" que, ao ser clicado,
+     * adiciona a pessoa à listaPessoas temporária, se ainda não estiver lá.
+     * @param pessoasAutores A lista de nomes (String) de pessoas disponíveis para serem autores.
+     */
 
     private void listarAutores(List<String> pessoasAutores) {
         jPanelAutores.removeAll();
@@ -136,10 +160,21 @@ public class TelaCadastroLivro {
         }
 
     }
+    
+    /**
+     * Retorna o painel principal da tela.
+     * @return O  JPanel principal da interface.
+     */
 
     public JPanel getjPanelPrincipal() {
         return jPanelPrincipal;
     }
+    
+    /**
+     * Retorna a lista temporária de Pessoas selecionadas como autores. Embora esta lista seja manipulada internamente, ela é fornecida caso a 
+     * tela mestre precise inspecionar os autores selecionados.
+     * @return A List de Pessoa selecionadas como autores.
+     */
 
     public List<Pessoa> getListaPessoas() {
         return listaPessoas;
