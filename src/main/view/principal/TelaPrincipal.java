@@ -10,14 +10,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-/**
- * @author Laura Barauna
- */
-
 public class TelaPrincipal extends JFrame {
-	private static final long serialVersionUID = 1L;
-
-	private JPanel jPanelPrincipal;
+    private JPanel jPanelPrincipal;
 
     private JTabbedPane menu;
 
@@ -31,14 +25,6 @@ public class TelaPrincipal extends JFrame {
     private TelaCategoria telaCategoria;
     private TelaIdioma telaIdioma;
     private TelaPessoa telaPessoa;
-    
-    /**
-     * Construtor da tela principal. Recebe as instâncias das telas de navegação de cada módulo, configura a janela, adiciona os layouts e configura o ouvinte de mudança de aba.
-     * @param telaMidia: Tela principal do módulo Mídias.
-     * @param telaCategoria: Tela principal do módulo Categorias.
-     * @param telaIdioma: Tela principal do módulo Idiomas.
-     * @param telaPessoa: Tela principal do módulo Pessoa.
-     */
 
     public TelaPrincipal(TelaMidia telaMidia, TelaCategoria telaCategoria, TelaIdioma telaIdioma, TelaPessoa telaPessoa) {
         this.telaMidia = telaMidia;
@@ -47,12 +33,9 @@ public class TelaPrincipal extends JFrame {
         this.telaPessoa = telaPessoa;
         configurarTela();
         adicionarLayouts();
+
         selecionarMenu();
     }
-    
-    /**
-     * Configura os painéis das abas para usar CardLayout. Embora um CardLayout não seja estritamente necessário em um JTabbedPane para exibir um único painel, ele é usado aqui para garantir a remoção e adição correta do painel principal de cada módulo.
-     */
 
     public void adicionarLayouts() {
         this.midias.setLayout(new CardLayout());
@@ -61,10 +44,6 @@ public class TelaPrincipal extends JFrame {
         this.pessoa.setLayout(new CardLayout());
     }
 
-    /**
-     * Configura as propriedades básicas da janela (JFrame).
-     */
-    
     public void configurarTela() {
         setTitle("Gerenciador de Midias");
         setContentPane(this.jPanelPrincipal);
@@ -74,10 +53,6 @@ public class TelaPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-    /**
-     * Configura o ChangeListener para o JTabbedPane (menu). Quando o usuário troca de aba, este listener é acionado para garantir que o painel correto do módulo seja carregado e, no caso de Mídias, para pré-carregar listas de dados (idiomas, artistas, autores) nas sub-telas de cadastro.
-     */
 
     public void selecionarMenu() {
         menu.addChangeListener(new ChangeListener() {
@@ -90,6 +65,7 @@ public class TelaPrincipal extends JFrame {
                 switch (aba) {
                     case "MÍDIAS":
                         String extensao = telaMidia.getCadastro().getExtensaoArquivo();
+
                         if (extensao != null) {
                             telaMidia.getCadastro().listarCategorias(extensao);
                         }
@@ -113,11 +89,6 @@ public class TelaPrincipal extends JFrame {
             }
         });
     }
-    
-    /**
-     * Remove o painel anterior e adiciona o painel principal do módulo Mídia à sua aba.
-     * @param telaMidia: A instância da tela principal de Mídias.
-     */
 
     public void atualizarTelaMidia(TelaMidia telaMidia) {
         midias.removeAll();
@@ -126,22 +97,12 @@ public class TelaPrincipal extends JFrame {
         midias.repaint();
     }
 
-    
-    /**
-     * Remove o painel anterior e adiciona o painel principal do módulo Categoria à sua aba.
-     * @param telaCategoria: A instância da tela principal de Categoria.
-     */
     private void atualizarTelaCategoria(TelaCategoria telaCategoria) {
         categorias.removeAll();
         categorias.add(telaCategoria.getjPanelPrincipal());
         categorias.revalidate();
         categorias.repaint();
     }
-    
-    /**
-     * Remove o painel anterior e adiciona o painel principal do módulo Idioma à sua aba.
-     * @param telaIdioma: A instância da tela principal de Idioma.
-     */
 
     private void atualizarTelaIdioma(TelaIdioma telaIdioma) {
         idiomas.removeAll();
@@ -149,11 +110,6 @@ public class TelaPrincipal extends JFrame {
         idiomas.revalidate();
         idiomas.repaint();
     }
-    
-    /**
-     * Remove o painel anterior e adiciona o painel principal do módulo Pessoa à sua aba.
-     * @param telaPessoa: A instância da tela principal de Pessoa.
-     */
 
     private void atualizarTelaPessoa(TelaPessoa telaPessoa) {
         pessoa.removeAll();

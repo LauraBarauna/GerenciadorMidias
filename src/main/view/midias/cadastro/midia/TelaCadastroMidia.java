@@ -15,10 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-/**
- * @author Laura Barauna
- */
-
 public class TelaCadastroMidia {
     private JPanel jPanelPrincipal;
     private JPanel jPanelMidia;
@@ -48,14 +44,6 @@ public class TelaCadastroMidia {
     private TelaCadastroLivro livro;
 
     private CardLayout layout;
-    
-    /**
-     * Construtor da tela de cadastro de Mídia. Inicializa todos os Controllers e sub-telas, configura o CardLayout e anexa os ouvintes de eventos.
-     * @param categoriaController: Controller para categorias.
-     * @param idiomaController: Controller para idiomas (usado na sub-tela Filme).
-     * @param pessoaController: Controller para pessoas/autores/artistas (usado nas sub-telas Música e Livro).
-     * @param midiaController: Controller para o cadastro da mídia final.
-     */
 
     public TelaCadastroMidia(CategoriaController categoriaController, IdiomaController idiomaController,
                              PessoaController pessoaController, MidiaController midiaController) {
@@ -69,10 +57,6 @@ public class TelaCadastroMidia {
         adicionarPainel();
         continuar();
     }
-    
-    /**
-     * Configura o painel principal para usar CardLayout e adiciona todas as sub-telas como "cartões".
-     */
 
     private void adicionarPainel() {
         jPanelPrincipal.setLayout(layout);
@@ -82,10 +66,6 @@ public class TelaCadastroMidia {
         jPanelPrincipal.add(musica.getjPanelPrincipal(), "musica");
         jPanelPrincipal.add(livro.getjPanelPrincipal(), "livro");
     }
-    
-    /**
-     * Configura o ActionListener para o botão "Adicionar" (Continuar). Este método realiza a validação dos campos iniciais (caminho, categoria, título) e, se válidos, avança para a próxima etapa do cadastro (avancarTela).
-     */
 
     private void continuar() {
         btnAdicionar.addActionListener(new ActionListener() {
@@ -107,10 +87,6 @@ public class TelaCadastroMidia {
             }
         });
     }
-    
-    /**
-     * Configura o ActionListener para o botão "Buscar" arquivo. Abre um JFileChooser, obtém o caminho, tamanho e extensão do arquivo selecionado e chama listarCategorias para atualizar o ComboBox.
-     */
 
     private void buscarCaminhoArquivo() {
         btnBuscar.addActionListener(new ActionListener() {
@@ -132,11 +108,6 @@ public class TelaCadastroMidia {
             }
         });
     }
-    
-    /**
-     * Solicita ao CategoriaController a lista de categorias válidas para a extensão do arquivo. Atualiza o JComboBox com as categorias retornadas ou exibe uma mensagem de erro/aviso.
-     * @param extensao: A extensão de 3 letras do arquivo (e.g., "MP4").
-     */
 
     public void listarCategorias(String extensao) {
         comboBoxCategoria.removeAllItems();
@@ -156,19 +127,11 @@ public class TelaCadastroMidia {
         }
 
     }
-    
-    /**
-     * Redireciona para o painel inicial (midia) e exibe uma mensagem padrão no ComboBox.
-     */
 
     public void telaMidia() {
         comboBoxCategoria.addItem("Importe um arquivo para ver as categorias.");
         layout.show(jPanelPrincipal, "midia");
     }
-    
-    /**
-     * Navega para a tela de cadastro específica (Filme, Música ou Livro) com base na extensão do arquivo, injetando os dados iniciais do arquivo nas sub-telas.
-     */
 
     private void avancarTela() {
         switch (this.extensaoArquivo.toUpperCase()) {
@@ -189,6 +152,7 @@ public class TelaCadastroMidia {
                 getMusica().setExtensaoArquivo(extensaoArquivo);
                 layout.show(jPanelPrincipal, "musica");
                 break;
+            case "PUB":
             case "PDF":
                 getLivro().setCaminhoArquivo(caminhoArquivo);
                 getLivro().setTituloArquivo(tituloArquivo);
